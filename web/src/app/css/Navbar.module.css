@@ -1,0 +1,339 @@
+/* =========================
+   NAVBAR BASE
+========================= */
+
+.nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 72px;
+  z-index: 1000;
+  background: transparent;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.scrolled {
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.inner {
+  max-width: 1320px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* =========================
+   LOGO
+========================= */
+
+.logo img {
+  height: 34px;
+  display: block;
+}
+
+/* =========================
+   MENU
+========================= */
+
+.menu {
+  display: flex;
+  gap: 44px;
+  list-style: none;
+  align-items: center;
+}
+
+.menu li {
+  position: relative;
+}
+
+.menu a,
+.trigger {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1c1c1c;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* subtle underline */
+.menu a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0;
+  height: 1px;
+  background: #b08d57;
+  transition: width 0.25s ease;
+}
+
+.menu a:hover::after {
+  width: 100%;
+}
+
+/* =========================
+   DROPDOWN CORE (REUSED)
+========================= */
+
+.dropdown::after {
+  /* hover buffer */
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: -20px;
+  right: -20px;
+  height: 20px;
+}
+
+/* main dropdown box */
+.dropdownBox {
+  position: absolute;
+  top: calc(100% + 14px);
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+
+  width: 260px;
+  background: #fff;
+  border-radius: 14px;
+  padding: 14px;
+
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.dropdown:hover .dropdownBox {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* dropdown links */
+.dropdownBox a {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #555;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.dropdownBox a:hover {
+  background: #f6f6f5;
+  color: #1c1c1c;
+}
+
+/* =========================
+   NESTED DROPDOWN (PRODUCTS)
+========================= */
+
+.subDropdown {
+  position: relative;
+}
+
+.subTrigger {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #555;
+  cursor: pointer;
+}
+
+.subTrigger:hover {
+  background: #f6f6f5;
+  color: #1c1c1c;
+}
+
+/* nested box — SAME STYLE */
+.subDropdownBox {
+  position: absolute;
+  top: 0;
+  left: calc(100% + 8px);
+
+  width: 240px;
+  background: #fff;
+  border-radius: 14px;
+  padding: 14px;
+
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+/* show nested */
+.subDropdown:hover .subDropdownBox {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* nested links */
+.subDropdownBox a {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #555;
+}
+
+.subDropdownBox a:hover {
+  background: #f6f6f5;
+  color: #1c1c1c;
+}
+
+/* =========================
+   SUB DROPDOWN HOVER FIX
+========================= */
+
+.subDropdown::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -12px;          
+  width: 12px;
+  height: 100%;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+.mobileBtn {
+  display: none;
+  background: none;
+  border: none;
+}
+
+@media (max-width: 1024px) {
+  .menu {
+    display: none;
+  }
+  .mobileBtn {
+    display: block;
+  }
+}
+
+/* FULL SCREEN PANEL */
+.mobilePanel {
+  position: fixed;
+  inset: 0;
+  background: #fff;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+   overflow-y: auto;         
+  -webkit-overflow-scrolling: touch; 
+}
+.mobileLogo {
+  height: 28px;
+  display: block;
+}
+
+/* HEADER */
+.mobileHeader {
+  height: 64px;
+  padding: 0 20px;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 600;
+}
+
+/* MENU */
+.mobileMenu {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.mobileMenu a {
+  font-size: 16px;
+  font-weight: 500;
+  color: #1c1c1c;
+}
+
+/* ACCORDION BUTTON */
+.mobileTrigger {
+  background: none;
+  border: none;
+  padding: 8px 4px;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* FIRST LEVEL */
+.mobileSub {
+  margin-top: 8px;
+  padding: 12px;
+  border-radius: 12px;
+  background: #f7f6f4; 
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* SECOND LEVEL */
+.mobileSubInner {
+  margin-top: 6px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mobileSubInner a {
+  font-size: 15px;
+  color: #555;
+  padding: 6px 4px;
+}
+
+.rotate {
+  transform: rotate(180deg);
+  transition: transform 0.25s ease;
+}
+
+.mobileLinkBtn {
+  background: none;
+  border: none;
+  padding: 6px 4px;
+  font-size: 15px;
+  font-weight: 500;
+  text-align: left;
+  color: #555;
+  cursor: pointer;
+}
+
+.mobileLinkBtn:hover {
+  color: #1c1c1c;
+}

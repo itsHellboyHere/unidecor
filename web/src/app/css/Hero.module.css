@@ -1,0 +1,160 @@
+/* ===== LAYOUT (UNCHANGED & WORKING) ===== */
+
+.wrapper {
+  position: relative;
+  height: 300vh;
+  padding-top: 0px;
+}
+
+.card {
+  position: sticky;
+  top: 100px;
+  width: 92%;
+  max-width: 1400px;
+  margin: 0 auto 160px;
+  border-radius: 28px;
+  overflow: hidden;
+  background: #f6f6f5;
+  box-shadow: 0 40px 120px rgba(0,0,0,.35);
+}
+
+.bg {
+  position: relative;
+  height: 80vh;
+  background-size: cover;
+  background-position: center;
+}
+
+.bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(0,0,0,0.65),
+    rgba(0,0,0,0.25)
+  );
+}
+
+/* ===== CONTENT WRAPPER ===== */
+
+.content {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px;
+  max-width: 620px;
+  color: #fff;
+}
+
+/* ========================================================= */
+/* OPTION A — REAL BENT TEXT (SVG textPath)  ⭐ BEST ⭐ */
+/* ========================================================= */
+
+.bentText {
+  width: 100%;
+  max-width: 900px;
+  margin-bottom: 16px;
+}
+
+.bentText text {
+  font-size: 48px;
+  letter-spacing: 0.22em;
+  fill: rgba(255,255,255,0.16);
+}
+
+/* ========================================================= */
+/* OPTION B — BIG EDITORIAL STRAIGHT TEXT */
+/* ========================================================= */
+
+.heroTitle {
+  font-size: clamp(3.5rem, 6vw, 6rem);
+  font-weight: 900;
+  line-height: 1.05;
+  margin-bottom: 20px;
+  text-shadow: 0 6px 20px rgba(0,0,0,0.35);
+  /* premium interior gradient */
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0.95),
+    rgba(255,255,255,0.55)
+  );
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* ========================================================= */
+/* OPTION C — SUBTITLE */
+/* ========================================================= */
+
+.subtitle {
+  font-size: 1rem;
+  opacity: 0.8;
+  max-width: 420px;
+}
+
+/* ========================================================= */
+/* OPTIONAL DEPTH EFFECT (SAFE) */
+/* ========================================================= */
+
+.heroTitle {
+  transform: perspective(900px) rotateX(6deg);
+  transform-origin: center;
+}
+
+
+/* ================= MOBILE FIX ================= */
+
+@media (max-width: 768px) {
+  .wrapper {
+    height: 260vh;
+  }
+
+  .card {
+    top: 72px;
+    margin-bottom: 120px;
+    border-radius: 22px;
+  }
+
+  .bg {
+    height: 72vh;
+  }
+
+  .bg::after {
+    background: linear-gradient(
+      to bottom,
+      rgba(0,0,0,0.7),
+      rgba(0,0,0,0.35)
+    );
+  }
+
+  .content {
+    padding: 32px 28px;
+    max-width: 100%;
+    justify-content: flex-end;
+  }
+
+  /* Remove bent text on very small screens (optional but recommended) */
+  .bentText {
+    display: none;
+  }
+
+  .heroTitle {
+    font-size: clamp(2.2rem, 7vw, 3.2rem);
+    line-height: 1.1;
+    margin-bottom: 14px;
+
+    /* IMPORTANT: remove 3D tilt on mobile */
+    transform: none;
+    text-shadow: 0 4px 14px rgba(0,0,0,0.45);
+  }
+
+  .subtitle {
+    font-size: 0.95rem;
+    max-width: 100%;
+    opacity: 0.9;
+  }
+}
