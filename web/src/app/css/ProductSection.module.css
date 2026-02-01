@@ -1,0 +1,10 @@
+.section {
+  background: #f6f6f5;
+  padding: 80px 0 120px;
+}
+
+.inner {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 36px;
+}

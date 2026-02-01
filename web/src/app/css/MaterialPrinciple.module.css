@@ -81,9 +81,9 @@ position: -webkit-sticky;
   color: #444;
 }
 
-.spacer {
+/* .spacer {
   height: 20vh;
-}
+} */
 /* MOBILE */
 @media (max-width: 900px) {
   .section {

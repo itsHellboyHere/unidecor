@@ -117,6 +117,7 @@
     top: 72px;
     margin-bottom: 120px;
     border-radius: 22px;
+    box-shadow: 0 24px 72px rgba(0,0,0,.28);
   }
 
   .bg {
@@ -132,11 +133,24 @@
   }
 
   .content {
-    padding: 32px 28px;
+    /* padding: 32px 28px; */
     max-width: 100%;
+    padding-top: 0;
+    padding-bottom: 36px;
     justify-content: flex-end;
   }
-
+.bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(0,0,0,0.22),
+      rgba(0,0,0,0.0) 38%
+    );
+    z-index: 1;
+    pointer-events: none;
+  }
   /* Remove bent text on very small screens (optional but recommended) */
   .bentText {
     display: none;

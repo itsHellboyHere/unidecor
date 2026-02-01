@@ -1,0 +1,190 @@
+/* =========================
+   SECTION WRAPPER
+========================= */
+
+.container {
+  padding: 120px 0;
+  background: #f1ede7;
+}
+
+.inner {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 36px;
+}
+/* =========================
+   CARD
+========================= */
+
+.card {
+  width: 100%;
+  height: 520px;
+  border-radius: 22px;
+  overflow: hidden;
+  background: #000;
+  position: relative;
+}
+
+/* =========================
+   GRID LAYOUT
+========================= */
+
+.segment {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  grid-template-areas:
+    "video1 video1 video1 video2"
+    "video1 video1 video1 video2";
+}
+
+/* =========================
+   VIDEO AREAS
+========================= */
+
+.videoOne {
+  grid-area: video1;
+  position: relative;
+  overflow: hidden;
+}
+
+.videoTwo {
+  grid-area: video2;
+  position: relative;
+  overflow: hidden;
+  border-left: 1px solid rgba(255,255,255,0.08);
+}
+
+/* =========================
+   VIDEO
+========================= */
+
+.videoContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.1s ease;
+}
+
+.videoOne:hover .video,
+.videoTwo:hover .video {
+  transform: scale(1.025);
+}
+
+/* =========================
+   GRADIENT OVERLAY
+========================= */
+
+.videoContainer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0.65)
+  );
+  transition: opacity 0.35s ease;
+}
+
+.videoOne:hover .videoContainer::after,
+.videoTwo:hover .videoContainer::after {
+  opacity: 0.35;
+}
+
+/* =========================
+   TEXT OVERLAY
+========================= */
+
+.overlay {
+  position: absolute;
+  bottom: 44px;
+  left: 44px;
+  z-index: 2;
+  color: #fff;
+}
+
+.kicker {
+  display: block;
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  opacity: 0.85;
+  margin-bottom: 6px;
+}
+
+.title {
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+/* =========================
+   BORDER ACCENT (SUBTLE)
+========================= */
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 22px;
+  border: 1px solid rgba(255,255,255,0.15);
+  pointer-events: none;
+}
+
+
+.inner {
+  max-width: 1320px;
+  width: 100%;
+  padding: 0 36px;
+}
+
+.sectionKicker {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
+
+  font-size: 12px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #8a7f74;
+}
+
+.sectionKicker::before {
+  content: "";
+  width: 28px;
+  height: 1px;
+  background: rgba(138, 127, 116, 0.6);
+}
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 900px) {
+  .card {
+    height: 640px;
+  }
+
+  .segment {
+    grid-template-areas:
+      "video1"
+      "video2";
+    grid-template-rows: 1fr 1fr;
+  }
+
+  .overlay {
+    bottom: 28px;
+    left: 28px;
+  }
+
+  .title {
+    font-size: 26px;
+  }
+}

@@ -11,6 +11,7 @@
 
   --accent: #b08d57; /* premium wood / bronze */
   --border-soft: rgba(0,0,0,0.08);
+  --navbar-height: 72px;
 }
 
 * {
@@ -27,6 +28,8 @@ body {
   font-family: var(--font-primary), system-ui, sans-serif;
   background: var(--bg);
   color: var(--text-main);
+  padding-top: var(--navbar-height);
+  overflow-x: hidden;
 }
 
 a {

@@ -1,0 +1,43 @@
+// app/components/icons/featureIcons.js
+import {
+  Shield,
+  Droplets,
+  Flame,
+  Sparkles,
+  Leaf,
+  Hammer,
+  Layers,
+  Sun,
+  Wind,
+  Construction,
+  House,
+  WavesArrowDownIcon,
+  ShieldCheckIcon,
+  Sprout,
+  Martini,
+  ShieldOff,
+  Heater,
+  // Sparkles,
+} from "lucide-react";
+
+export const featureIconMap = {
+  scratch: Shield,
+  water: Droplets,
+  heat: Flame,
+  durable: Hammer,
+  eco: Leaf,
+  // design: Sparkles,
+  layers: Layers,
+  uv: Sun,
+  ventilation: Wind,
+  maintenance:Construction,
+  ease:House,
+  resistance:WavesArrowDownIcon,
+  check:ShieldCheckIcon,
+  eco:Sprout,
+  glass:Martini,
+  stars:Sparkles,
+  shield:ShieldOff,
+  heat:Heater,
+  // can grow this to 30–40 safely
+};

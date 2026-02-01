@@ -9,6 +9,7 @@ export const navbarQuery = `
     _id,
     title,
     slug,
+
     "children": *[
       _type == "category" &&
       showInMenu == true &&
@@ -16,7 +17,17 @@ export const navbarQuery = `
     ] | order(order asc) {
       _id,
       title,
-      slug
+      slug,
+
+      "children": *[
+        _type == "category" &&
+        showInMenu == true &&
+        parent._ref == ^._id
+      ] | order(order asc) {
+        _id,
+        title,
+        slug
+      }
     }
   },
 

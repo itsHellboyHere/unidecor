@@ -1,0 +1,171 @@
+/* =========================
+   SECTION
+========================= */
+
+.section {
+  /* background: #f1ede7; */
+  background: #ffffff;
+  position: relative;
+}
+
+/* .section::before {
+  content: "";
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  width: 120px;
+  height: 1px;
+  background: rgba(0,0,0,0.08);
+  transform: translateX(-50%);
+} */
+
+.inner {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 96px 36px;
+  text-align: center;
+}
+
+/* =========================
+   HEADINGS
+========================= */
+
+.kicker {
+  display: inline-block;
+  font-size: 12px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #8a7f74;
+  margin-bottom: 14px;
+}
+
+.title {
+  font-size: 30px;
+  font-family: var(--font-accent);
+  margin-bottom: 40px;
+  color: #1c1c1c;
+}
+
+/* =========================
+   CARD
+========================= */
+
+.card {
+  max-width: 720px;
+  position: relative;
+  margin: 0 auto;
+  background: #f1ede7;
+  border-radius: 22px;
+  padding: 36px 48px;
+  box-shadow: 
+    0 20px 60px rgba(60, 50, 40, 0.08);
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s ease;
+    will-change: opacity, transform;
+}
+
+.card::before {
+  content: "“";
+  position: absolute;
+  top: 18px;
+  left: 22px;
+  font-size: 64px;
+  line-height: 1;
+  color: rgba(0,0,0,0.025);
+  font-family: var(--font-accent);
+}
+
+/* Animation states */
+.enter {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.exit {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+/* =========================
+   TEXT
+========================= */
+
+.text {
+  font-size: 16px;
+  line-height: 1.75;
+  /* color: #444; */
+  color: rgba(0,0,0,0.78);
+  margin-bottom: 28px;
+}
+
+/* =========================
+   USER
+========================= */
+
+.user {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+.user img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%; /* ✅ perfect */
+  object-fit: cover;
+}
+
+.user strong {
+  font-size: 14px;
+  font-weight:  600;
+  color: #1c1c1c;
+}
+
+.user span {
+  display: block;
+  font-size: 12.5px;
+  color: #777;
+  letter-spacing: 0.02em;
+}
+
+.dots {
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.15);
+}
+
+.dot.active {
+  background: rgba(0,0,0,0.45);
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 900px) {
+  .inner {
+    padding: 64px 24px 72px;
+  }
+
+  .title {
+    font-size: 26px;
+  }
+
+  .card {
+    padding: 28px 24px;
+  }
+
+  .text {
+    font-size: 15px;
+  }
+}

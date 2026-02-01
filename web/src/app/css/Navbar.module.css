@@ -12,6 +12,7 @@
   transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
+
 .scrolled {
   background: rgba(255, 255, 255, 0.96);
   backdrop-filter: blur(14px);
@@ -40,19 +41,62 @@
 /* =========================
    MENU
 ========================= */
-
 .menu {
   display: flex;
   gap: 44px;
   list-style: none;
   align-items: center;
 }
-
-.menu li {
+.menu a,
+.trigger {
   position: relative;
 }
 
-.menu a,
+.menu li { position: relative; }
+/* Top-level links ONLY */
+.menu > li > a::after,
+.menu > li > .trigger::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -6px;
+  width: 0;
+  height: 1px;
+  background: #1c1c1c;
+  transform: translateX(-50%);
+  transition: width 0.28s ease;
+}
+
+.menu > li > a:hover::after,
+.menu > li.dropdown:hover > .trigger::after {
+  width: 100%;
+}
+/* =========================
+   ACTIVE NAV LINK
+========================= */
+
+/* =========================
+   ACTIVE NAV LINK – PREMIUM
+========================= */
+
+.activeLink {
+  font-weight: 500;
+  color: #1c1c1c;
+}
+
+.activeLink::after {
+  width: 28px !important;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    #1c1c1c,
+    transparent
+  );
+  bottom: -8px;
+}
+
+
 .trigger {
   font-size: 14px;
   font-weight: 500;
@@ -65,152 +109,182 @@
   gap: 6px;
 }
 
-/* subtle underline */
-.menu a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -6px;
-  width: 0;
-  height: 1px;
-  background: #b08d57;
-  transition: width 0.25s ease;
-}
-
-.menu a:hover::after {
-  width: 100%;
-}
-
-/* =========================
-   DROPDOWN CORE (REUSED)
-========================= */
-
-.dropdown::after {
-  /* hover buffer */
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: -20px;
-  right: -20px;
-  height: 20px;
-}
-
-/* main dropdown box */
+/* MAIN DROPDOWN */
 .dropdownBox {
   position: absolute;
   top: calc(100% + 14px);
   left: 50%;
   transform: translateX(-50%) translateY(8px);
-
-  width: 260px;
+  width: 180px;
   background: #fff;
-  border-radius: 14px;
-  padding: 14px;
-
-  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.12);
-  border: 1px solid rgba(0, 0, 0, 0.06);
-
+  border-radius: 12px;
+  padding: 10px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.05);
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.25s ease, transform 0.25s ease;
+  transition: all 0.25s ease;
+}
+.dropdown{
+  position: relative;
+}
+/* Invisible hover bridge */
+.dropdown::before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 18px;
+  background: transparent;
 }
 
-.dropdown:hover .dropdownBox {
+.dropdownBox a::after,
+.inspirationBox a::after {
+  display: none !important;
+}
+
+.dropdown:hover > .dropdownBox {
   opacity: 1;
   visibility: visible;
   transform: translateX(-50%) translateY(0);
 }
 
-/* dropdown links */
-.dropdownBox a {
-  display: block;
-  padding: 10px 12px;
-  border-radius: 8px;
-  font-size: 14px;
-  color: #555;
-  transition: background 0.2s ease, color 0.2s ease;
-}
-
-.dropdownBox a:hover {
-  background: #f6f6f5;
-  color: #1c1c1c;
-}
-
-/* =========================
-   NESTED DROPDOWN (PRODUCTS)
-========================= */
-
-.subDropdown {
+/* SUB DROPDOWNS (LEVEL 2 & 3) */
+.subDropdown, .subDropdownLevel3 {
   position: relative;
 }
 
 .subTrigger {
-  display: block;
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: space-between;
   padding: 10px 12px;
   border-radius: 8px;
   font-size: 14px;
   color: #555;
-  cursor: pointer;
+  text-decoration: none;
+}
+.subTrigger::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 0;
+  height: 1px;
+  background: #1c1c1c;
+  transform: translateY(-50%);
+  transition: width 0.25s ease;
 }
 
 .subTrigger:hover {
   background: #f6f6f5;
   color: #1c1c1c;
 }
+.subTrigger:hover::before {
+  width: 10px;
+}
 
-/* nested box — SAME STYLE */
-.subDropdownBox {
-  position: absolute;
+.subDropdownBox, .subDropdownBoxLevel3 {
+position: absolute;
   top: 0;
-  left: calc(100% + 8px);
-
-  width: 240px;
+  left: calc(100% + 6px);
+  width: 150px;              /* 🔥 REDUCED WIDTH */
   background: #fff;
-  border-radius: 14px;
-  padding: 14px;
-
-  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.12);
+  border-radius: 10px;       /* slightly smaller radius */
+  padding: 8px;              /* tighter padding */
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
   border: 1px solid rgba(0, 0, 0, 0.06);
-
   opacity: 0;
   visibility: hidden;
-  transform: translateY(8px);
-  transition: opacity 0.25s ease, transform 0.25s ease;
+  transform: translateX(8px);
+  transition: all 0.18s ease;
 }
 
-/* show nested */
-.subDropdown:hover .subDropdownBox {
+/* The Fix: If 3 levels is too wide, we push the 3rd box to the LEFT */
+.subDropdownLevel3:hover > .subDropdownBoxLevel3 {
   opacity: 1;
   visibility: visible;
-  transform: translateY(0);
+  transform: translateX(0);
 }
 
-/* nested links */
+/* Use this specifically for the furthest right items if needed */
+.subDropdown:hover > .subDropdownBox {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+}
+/* =========================
+   PRODUCT LEVEL DIFFERENTIATION
+========================= */
+
+/* Level 2 items */
 .subDropdownBox a {
-  display: block;
-  padding: 10px 12px;
-  border-radius: 8px;
-  font-size: 14px;
-  color: #555;
+  font-weight: 500;
 }
 
-.subDropdownBox a:hover {
-  background: #f6f6f5;
-  color: #1c1c1c;
+/* Level 3 container */
+.subDropdownBoxLevel3 {
+  background: #fcfcfb;
+  border: 1px solid rgba(0,0,0,0.04);
+}
+
+/* Level 3 links */
+.subDropdownBoxLevel3 a {
+  font-size: 13.5px;
+  padding: 8px 10px;
+  color: #666;
+}
+
+/* Subtle left guide */
+.subDropdownBoxLevel3 {
+  position: absolute;
+}
+
+.subDropdownBoxLevel3::before {
+  content: "";
+  position: absolute;
+  left: -6px;
+  top: 14px;
+  bottom: 14px;
+  width: 1px;
+  background: rgba(0,0,0,0.08);
+}
+.sideArrow {
+  opacity: 0.5;
 }
 
 /* =========================
-   SUB DROPDOWN HOVER FIX
+   INSPIRATION – FIXED & PREMIUM
 ========================= */
 
-.subDropdown::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: -12px;          
-  width: 12px;
-  height: 100%;
+.inspirationBox {
+  width: 300px;
+  padding: 16px;
 }
+
+.inspirationBox a {
+  display: block;
+  padding: 14px 16px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #1c1c1c;
+  background: #fafafa;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.inspirationBox a + a {
+  margin-top: 10px;
+}
+
+.inspirationBox a:hover {
+  background: #f2f2f1;
+  transform: translateX(2px);
+}
+
 
 /* =========================
    MOBILE
@@ -336,4 +410,14 @@
 
 .mobileLinkBtn:hover {
   color: #1c1c1c;
+}
+
+.mobileLevel3 {
+  margin-top: 4px;
+  padding-left: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-left: 1px solid #ddd;
+  margin-left: 10px;
 }

@@ -1,5 +1,10 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import styles from "@/app/css/FeautredProducts.module.css";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+
 const FEATURED_PRODUCTS = [
   {
     slug: "laminates",
@@ -35,25 +40,64 @@ const FEATURED_PRODUCTS = [
 
 
 
-import Link from "next/link";
-import styles from "@/app/css/FeautredProducts.module.css";
-
 export default function FeaturedProducts() {
+  const [index, setIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+  const [animateKey, setAnimateKey] = useState(0); 
+  
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth <= 780);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+
+  const visibleCount = isMobile ? 1 : 3;
+  const maxIndex = FEATURED_PRODUCTS.length - visibleCount;
+
+  const visibleItems = FEATURED_PRODUCTS.slice(
+    index,
+    index + visibleCount
+  );
+
+  const goNext = () => {
+    setIndex(i => Math.min(i + visibleCount, maxIndex));
+    setAnimateKey(k => k + 1); 
+  };
+
+  const goPrev = () => {
+    setIndex(i => Math.max(i - visibleCount, 0));
+    setAnimateKey(k => k + 1); 
+  };
+
   return (
     <section className={styles.section}>
       <div className={styles.inner}>
 
-        <header className={styles.header}>
-          <span className={styles.kicker}>Our Range</span>
-          <h2 className={styles.title}>Signature Material Range</h2>
-        </header>
+        <div className={styles.headerRow}>
+          <div className={styles.header}>
+            <span className={styles.kicker}>Our Range</span>
+            <h2 className={styles.title}>Curated Products</h2>
+          </div>
 
-        <div className={styles.grid}>
-          {FEATURED_PRODUCTS.map((item) => (
+          <div className={styles.navButtons}>
+            <button onClick={goPrev} disabled={index === 0}>
+              <ArrowLeft size={22} />
+            </button>
+            <button onClick={goNext} disabled={index >= maxIndex}>
+              <ArrowRight size={22} />
+            </button>
+          </div>
+        </div>
+
+        {/* GRID */}
+        <div className={styles.grid} key={animateKey}>
+          {visibleItems.map(item => (
             <Link
               key={item.slug}
               href={`/products/${item.slug}`}
-              className={styles.wrapperCard}
+              className={`${styles.wrapperCard} ${styles.enterFromRight}`}
             >
               <div className={styles.productCard}>
                 <div

@@ -1,0 +1,205 @@
+/* ===============================
+   SECTION
+================================ */
+.section {
+  background: #f6f6f5;
+  /* padding: 120px 0; */
+}
+
+.inner {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 36px;
+}
+
+.heading {
+  font-size: clamp(2.2rem, 3.5vw, 3rem);
+  font-weight: 700;
+  margin-bottom: 56px;
+}
+
+/* ===============================
+   GRID
+================================ */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+}
+
+/* ===============================
+   CARD
+================================ */
+.card {
+  position: relative;
+  aspect-ratio: 1 / 1; /* square on desktop */
+  border-radius: 18px;
+  overflow: hidden;
+  background: #e9e6df;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 48px rgba(0,0,0,0.18);
+}
+
+/* ===============================
+   IMAGE
+================================ */
+.image {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  filter: grayscale(1) saturate(0.9);
+  transition: transform 0.9s ease, filter 0.4s ease;
+  will-change: transform;
+}
+
+.card:hover .image {
+  filter: grayscale(0) saturate(1);
+  transform: scale(1.06);
+}
+
+/* ===============================
+   OVERLAY
+================================ */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.6),
+    rgba(0,0,0,0.15)
+  );
+}
+
+/* ===============================
+   CONTENT
+================================ */
+.content {
+  position: absolute;
+  bottom: 18px;
+  left: 18px;
+  right: 18px;
+  color: #fff;
+}
+
+.title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+  line-height: 1.25;
+}
+
+.meta {
+  display: flex;
+  gap: 10px;
+  font-size: 0.75rem;
+  opacity: 0.9;
+}
+
+.meta span {
+  padding-right: 10px;
+  border-right: 1px solid rgba(255,255,255,0.4);
+}
+
+.meta span:last-child {
+  border-right: none;
+}
+
+/* ===============================
+   EMPTY STATE
+================================ */
+.empty {
+  padding: 80px 0;
+  text-align: center;
+  color: #666;
+}
+
+/* ===============================
+   TABLET ≤ 1024px
+================================ */
+@media (max-width: 1024px) {
+  .section {
+    padding: 96px 0;
+  }
+
+  .inner {
+    padding: 0 28px;
+  }
+
+  .heading {
+    margin-bottom: 40px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .card {
+    aspect-ratio: 5 / 6; /* slightly taller */
+    border-radius: 16px;
+  }
+
+  .content {
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+  }
+
+  .image {
+    filter: grayscale(0.4) saturate(0.95);
+  }
+}
+
+/* ===============================
+   MOBILE ≤ 768px
+================================ */
+@media (max-width: 768px) {
+  .section {
+    padding: 72px 0;
+  }
+
+  .inner {
+    padding: 0 20px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+
+  .card {
+    aspect-ratio: 3 / 4;
+    border-radius: 14px;
+  }
+
+  .title {
+    font-size: 0.95rem;
+  }
+
+  .meta {
+    font-size: 0.7rem;
+  }
+}
+
+/* ===============================
+   SMALL PHONES ≤ 420px
+================================ */
+@media (max-width: 420px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .card {
+    aspect-ratio: 4 / 5;
+  }
+}

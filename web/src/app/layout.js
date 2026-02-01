@@ -2,7 +2,9 @@
 import { Manrope, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar.server";
-
+import WhatsAppFloat from "./components/WhatsAppFloat";
+import { getNavbarData } from "./lib/sanity/navbar";
+import FooterServer from "./components/Footer.server";
 
 
 const manrope = Manrope({
@@ -22,12 +24,15 @@ export const metadata = {
   description: "Premium laminates & interior surfaces",
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const navigation = await getNavbarData();
   return (
     <html lang="en">
       <body className={`${manrope.variable} ${playfair.variable}`}>
        <Navbar />
         {children}
+        <WhatsAppFloat/>
+        <FooterServer data={navigation} />
       </body>
     </html>
   );
