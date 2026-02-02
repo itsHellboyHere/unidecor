@@ -1,0 +1,195 @@
+.container {
+  background: #fdfbf7;
+  color: #333230;
+  min-height: 100vh;
+  /* font-family: 'Inter', sans-serif; */
+  overflow-x: hidden;
+  perspective: 1500px;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 24px;
+  background: radial-gradient(circle at center, #ffffff 0%, #f9f6f1 100%);
+}
+
+.title {
+  font-size: clamp(2.6rem, 6vw, 4.5rem);
+  font-weight: 900;
+  color: #1a1a1a;
+  letter-spacing: -1.5px;
+  line-height: 1.05;
+}
+
+.subtitle {
+  font-size: 1.15rem;
+  color: #7a746e;
+  max-width: 640px;
+  margin: 1.25rem auto 0;
+}
+
+/* =========================
+   SECTION WRAPPER
+========================= */
+
+.section {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 96px 36px;
+}
+
+/* =========================
+   STATS BAR
+========================= */
+
+.statsBar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 28px;
+  margin-top: -60px;
+  position: relative;
+  z-index: 2;
+}
+
+.statCard {
+  background: #ffffff;
+  padding: 36px 28px;
+  border-radius: 22px;
+  text-align: center;
+  box-shadow: 0 12px 40px rgba(181, 155, 124, 0.1);
+  border: 1px solid rgba(181, 155, 124, 0.12);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.statCard:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 50px rgba(181, 155, 124, 0.18);
+}
+
+.statNumber {
+  display: block;
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: #c5a059;
+  margin-bottom: 6px;
+}
+
+/* =========================
+   GRID
+========================= */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 40px;
+}
+
+/* =========================
+   3D CARD
+========================= */
+
+.card3d {
+  background: #ffffff;
+  padding: 48px 40px;
+  border-radius: 28px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.12s ease;
+  box-shadow: 0 14px 40px rgba(0,0,0,0.04);
+  border: 1px solid rgba(0,0,0,0.04);
+}
+
+.card3d:hover {
+  border-color: rgba(197, 160, 89, 0.25);
+}
+
+/* =========================
+   CARD CONTENT
+========================= */
+
+.iconWrapper {
+  width: 56px;
+  height: 56px;
+  background: #fdfbf7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  color: #c5a059;
+  margin-bottom: 28px;
+  transform: translateZ(40px);
+}
+
+.cardTitle {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 14px;
+  transform: translateZ(30px);
+}
+
+.cardText {
+  color: #6b6661;
+  line-height: 1.75;
+  font-size: 0.95rem;
+  transform: translateZ(20px);
+}
+
+/* =========================
+   CTA BUTTON
+========================= */
+
+.button {
+  background: #c5a059;
+  color: white;
+  padding: 14px 36px;
+  border-radius: 999px;
+  border: none;
+  font-weight: 600;
+  margin-top: 28px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.button:hover {
+  background: #333230;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px) {
+  .section {
+    padding: 64px 24px;
+  }
+
+  .hero {
+    min-height: 60vh;
+  }
+
+  .card3d {
+    padding: 32px 26px;
+  }
+
+  .grid {
+    gap: 28px;
+  }
+
+  .statCard {
+    padding: 28px 22px;
+  }
+
+  .statNumber {
+    font-size: 2rem;
+  }
+}
