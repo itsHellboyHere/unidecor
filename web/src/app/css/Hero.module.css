@@ -1,4 +1,3 @@
-/* ===== LAYOUT (UNCHANGED & WORKING) ===== */
 
 .wrapper {
   position: relative;
@@ -50,9 +49,6 @@
   color: #fff;
 }
 
-/* ========================================================= */
-/* OPTION A — REAL BENT TEXT (SVG textPath)  ⭐ BEST ⭐ */
-/* ========================================================= */
 
 .bentText {
   width: 100%;
@@ -67,7 +63,7 @@
 }
 
 /* ========================================================= */
-/* OPTION B — BIG EDITORIAL STRAIGHT TEXT */
+/*  BIG EDITORIAL STRAIGHT TEXT */
 /* ========================================================= */
 
 .heroTitle {

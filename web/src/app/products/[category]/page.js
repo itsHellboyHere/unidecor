@@ -52,7 +52,7 @@ export default async function CategoryPage({ params, searchParams }) {
         subheading={categoryData.hero?.subheading}
         size="large"
       />
-
+      <div style={{ position: 'relative', zIndex: 2}}>
       <PageIntro
         kicker={`About ${categoryData.title}`}
         content={categoryData.description}
@@ -88,6 +88,7 @@ export default async function CategoryPage({ params, searchParams }) {
     }}
   />
 )}
+</div>
     </>
   );
 }

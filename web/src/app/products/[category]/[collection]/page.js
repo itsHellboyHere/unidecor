@@ -31,7 +31,7 @@ export default async function CollectionPage({ params }) {
           size="medium"
         />
       )}
-
+       <div style={{ position: 'relative', zIndex: 2}}>
       {/* INTRO */}
       {data.description && (
         <PageIntro
@@ -66,6 +66,7 @@ export default async function CollectionPage({ params }) {
           products={data.products}
         />
       )}
+      </div>
     </>
   );
 }

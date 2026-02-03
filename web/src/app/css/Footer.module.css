@@ -5,6 +5,8 @@
 .footer {
   background: #f7f6f4;
   border-top: 1px solid rgba(0,0,0,0.06);
+  position: relative;
+  z-index: 2;
 }
 
 .inner {
