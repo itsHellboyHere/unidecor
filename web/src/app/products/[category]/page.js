@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { sanityClient } from "@/app/lib/sanity.client";
-
+// products[category]/page.js
 import { categoryPageQuery } from "@/app/lib/queries/categoryPageQuery";
 import { productFiltersQuery } from "@/app/lib/queries/productFiltersQuery";
 import { productsQuery } from "@/app/lib/queries/productsQuery";
