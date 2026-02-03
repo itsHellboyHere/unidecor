@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef } from "react";
+import React, { useRef} from "react";
 import { motion ,useScroll, useTransform} from "framer-motion";
 import {
   Rocket,
@@ -10,6 +10,8 @@ import {
   Box,
 } from "lucide-react";
 import styles from "@/app/css/About.module.css";
+import Magnetic from "./Magnetic";
+import Link from "next/link";
 
 /* =========================
    3D TILT CARD
@@ -58,32 +60,78 @@ const TiltCard = ({ children }) => {
 /* =========================
    PARALLAX WRAPPER
 ========================= */
-const ParallaxSection = ({ children, zIndex, bgColor = "transparent" }) => {
+const ParallaxSection = ({
+  children,
+  zIndex,
+  bgColor = "transparent",
+  extraScroll = 0.6,
+  active = true, 
+  mobileActive = false,
+}) => {
   const containerRef = useRef(null);
-  
-  // Tracking the scroll of this specific container
+  const wrapperRef = useRef(null);
+  const [trackHeight, setTrackHeight] = React.useState("auto");
+  const [isMobile, setIsMobile] = React.useState(false);
+
+  React.useEffect(() => {
+    const checkScreen = () => setIsMobile(window.innerWidth <= 768);
+    checkScreen();
+    window.addEventListener("resize", checkScreen);
+    return () => window.removeEventListener("resize", checkScreen);
+  }, []);
+
+  const shouldAnimate = active && (!isMobile || mobileActive);
+
+  React.useEffect(() => {
+    if (!wrapperRef.current || !shouldAnimate) {
+      setTrackHeight("auto");
+      return;
+    }
+
+    const observer = new ResizeObserver(([entry]) => {
+      const contentHeight = entry.contentRect.height;
+      const viewport = window.innerHeight;
+      // If content is taller than viewport, we need to ensure the 
+      // track is at least long enough to scroll through the whole thing
+      const total = Math.max(contentHeight + (viewport * extraScroll), contentHeight);
+      setTrackHeight(`${total}px`);
+    });
+
+    observer.observe(wrapperRef.current);
+    return () => observer.disconnect();
+  }, [extraScroll, shouldAnimate, isMobile]);
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
   });
 
-  // Pull Effect: The current section shrinks and fades out 
-  // while the NEXT section (with higher zIndex) slides over it.
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.7]);
-  const opacity = useTransform(scrollYProgress, [0, 1], [0.9, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, shouldAnimate ? 0.7 : 1]);
+  const opacity = useTransform(scrollYProgress, [0, 1], [1, shouldAnimate ? 0 : 1]);
 
   return (
-    <div ref={containerRef} className={styles.parallaxContainer} style={{position:"relative"}}>
+    <div
+      ref={containerRef}
+      className={styles.parallaxContainer}
+      style={{
+        minHeight: shouldAnimate ? trackHeight : "auto",
+        position: "relative",
+      }}
+    >
       <motion.div
+        ref={wrapperRef}
         className={styles.parallaxWrapper}
-        style={{ 
-          scale, 
-          opacity, 
-          zIndex, 
+        style={{
+          scale: shouldAnimate ? scale : 1,
+          opacity: shouldAnimate ? opacity : 1,
+          zIndex,
           backgroundColor: bgColor,
-      
-          position: "sticky",
-          top: 0 
+          position: shouldAnimate ? "sticky" : "relative",
+          top: 0,
+          height: shouldAnimate ? "100vh" : "auto", 
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: shouldAnimate ? "center" : "flex-start"
         }}
       >
         {children}
@@ -93,16 +141,16 @@ const ParallaxSection = ({ children, zIndex, bgColor = "transparent" }) => {
 };
 
 
-
 /* =========================
-   ABOUT PAGE
+  ABOUT PAGE
 ========================= */
 const AboutPage = () => {
+ 
   return (
     <main className={styles.container}>
       
       {/* 1. HERO SECTION */}
-      <ParallaxSection zIndex={1}>
+      <ParallaxSection zIndex={1} extraScroll={0.3} mobileActive={true}>
         <section className={styles.hero}>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -122,7 +170,7 @@ const AboutPage = () => {
       </ParallaxSection>
 
       {/* 2. STATS & IDENTITY (Pulls over Hero) */}
-      <ParallaxSection zIndex={2} bgColor="#fdfbf7">
+      <ParallaxSection zIndex={2} bgColor="#fdfbf7" >
         <div className={styles.section}>
           <div className={styles.statsBar}>
             {[
@@ -138,8 +186,8 @@ const AboutPage = () => {
               </motion.div>
             ))}
           </div>
-
-          <div className={styles.grid} style={{ marginTop: "100px" }}>
+            
+          <div className={styles.grid} style={{ marginTop: "100px"}}>
             <TiltCard>
               <div className={styles.iconWrapper}><Rocket size={30} /></div>
               <h3 className={styles.cardTitle}>Our Identity</h3>
@@ -155,7 +203,7 @@ const AboutPage = () => {
       </ParallaxSection>
 
       {/* 3. BELIEFS */}
-      <ParallaxSection zIndex={3} bgColor="#ffffff">
+      <ParallaxSection zIndex={3} bgColor="#ffffff" mobileActive={true}>
         <section className={styles.section} style={{ textAlign: "center" }}>
           <h2 className={styles.cardTitle} style={{ fontSize: "2.4rem" }}>What We Believe</h2>
           <p className={styles.subtitle} style={{ marginBottom: "4rem" }}>
@@ -179,21 +227,39 @@ const AboutPage = () => {
       </ParallaxSection>
 
       {/* 4. FINAL CTA (End of scroll) */}
-       <ParallaxSection zIndex={3} bgColor="#ffffff">
-      <section className={styles.section} style={{ textAlign: "center", position: "relative", zIndex: 4, background: "#fdfbf7" }}>
-        <motion.div
-          whileHover={{ scale: 1.01 }}
-          className={styles.card3d}
-          style={{ background: "#333230", color: "white", padding: "80px 40px" }}
-        >
-          <h2 style={{ fontSize: "2.5rem" }}>Explore the Unidecor Collection</h2>
-          <p style={{ opacity: 0.8, marginTop: "1rem", maxWidth: "500px", margin: "1rem auto" }}>
-            Download our latest surface catalogue and technical overview.
-          </p>
-          <button className={styles.button}>View Catalogue</button>
-        </motion.div>
-      </section>
-</ParallaxSection>
+<ParallaxSection zIndex={4} bgColor="#ffffff" mobileActive={true}>
+        <section className={styles.section} style={{ textAlign: "center" }}>
+          <motion.div
+            whileHover={{ scale: 1.01 }}
+            className={styles.card3d}
+            style={{ 
+              background: "#333230", 
+              color: "white", 
+              padding: "80px 40px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center" 
+            }}
+          >
+            <h2 style={{ fontSize: "2.5rem" }}>Explore the Unidecor Collection</h2>
+            <p style={{ opacity: 0.8, marginTop: "1rem", maxWidth: "500px", margin: "1rem auto" }}>
+              Download our latest surface catalogue and technical overview.
+            </p>
+
+        
+            <Magnetic strength={0.4}>
+              <Link href={"/catalogue"}>
+              <button className={styles.button}
+             
+              >
+                View Catalogue
+              </button>
+              </Link>
+            </Magnetic>
+            
+          </motion.div>
+        </section>
+      </ParallaxSection>
     </main>
   );
 };

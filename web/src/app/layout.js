@@ -29,6 +29,7 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${manrope.variable} ${playfair.variable}`}>
+        {/* <CustomCursor/> */}
        <Navbar />
         {children}
         <WhatsAppFloat/>
