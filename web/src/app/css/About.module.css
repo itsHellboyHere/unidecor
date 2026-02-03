@@ -8,7 +8,8 @@
 
 /* The track that defines the scroll distance */
 .parallaxContainer {
-  height: 100vh;
+  /* height: 100vh; */
+  min-height: 100vh;
   position: relative;
 
 }
@@ -43,7 +44,7 @@
   width: 100%;
 }
 
-/* ... keep the rest of your card and button styles as they were ... */
+
 
 .title {
   font-size: clamp(2.6rem, 6vw, 4.5rem);
@@ -196,7 +197,15 @@
   .section {
     padding: 64px 24px;
   }
-
+  .parallaxContainer{
+    height: auto;
+    min-height: 120vh;
+  }
+  .parallaxWrapper{
+    justify-content: flex-start;
+    padding-top: 8opx;
+    padding-bottom: 40px;
+  }
   .hero {
     min-height: 60vh;
   }

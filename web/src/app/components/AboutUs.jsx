@@ -73,7 +73,7 @@ const ParallaxSection = ({ children, zIndex, bgColor = "transparent" }) => {
   const opacity = useTransform(scrollYProgress, [0, 1], [0.9, 0]);
 
   return (
-    <div ref={containerRef} className={styles.parallaxContainer}>
+    <div ref={containerRef} className={styles.parallaxContainer} style={{position:"relative"}}>
       <motion.div
         className={styles.parallaxWrapper}
         style={{ 
