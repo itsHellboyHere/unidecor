@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { motion } from "framer-motion";
 import styles from "@/app/css/CollectionGrid.module.css";
 import { urlFor } from "@/app/lib/sanity.image";
 
@@ -9,44 +12,55 @@ export default function CollectionGrid({ kicker, title, items, baseSlug }) {
     <section className={styles.section}>
       <div className={styles.inner}>
 
-        {/* HEADER */}
-        <div className={styles.header}>
+        {/* HEADER: Minimalist Architectural Alignment */}
+        <motion.div 
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className={styles.header}
+        >
           {kicker && <span className={styles.kicker}>{kicker}</span>}
           <h2 className={styles.title}>{title}</h2>
-        </div>
+        </motion.div>
 
-        {/* GRID */}
+        {/* GRID: High Vertical Breathing Room */}
         <div className={styles.grid}>
-          {items.map((item) => {
+          {items.map((item, i) => {
             const imageUrl = item.hero?.image
-              ? urlFor(item.hero.image).width(900).height(600).url()
+              ? urlFor(item.hero.image).width(800).height(1000).url()
               : null;
 
             return (
-              <Link
+              <motion.div
                 key={item._id}
-                href={`${baseSlug}/${item.slug.current}`}
-                className={styles.card}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
               >
-                {/* IMAGE */}
-                {imageUrl && (
-                  <div
-                    className={styles.image}
-                    style={{ backgroundImage: `url(${imageUrl})` }}
-                  />
-                )}
+                <Link
+                  href={`${baseSlug}/${item.slug.current}`}
+                  className={styles.card}
+                >
+                  <div className={styles.imageWrap}>
+                    {imageUrl && (
+                      <div
+                        className={styles.image}
+                        style={{ backgroundImage: `url(${imageUrl})` }}
+                      />
+                    )}
+                    <div className={styles.overlay} />
+                  </div>
 
-                {/* GRADIENT */}
-                <div className={styles.overlay} />
-
-                {/* TEXT */}
-                <div className={styles.content}>
-                  <h3 className={styles.cardTitle}>
-                    {item.title}
-                    <span className={styles.arrow}> →</span>
-                  </h3>
-                </div>
-              </Link>
+                  {/* CONTENT: Detached architectural label */}
+                  <div className={styles.content}>
+                    <h3 className={styles.cardTitle}>
+                      {item.title}
+                    </h3>
+                    <span className={styles.arrow}>→</span>
+                  </div>
+                </Link>
+              </motion.div>
             );
           })}
         </div>
