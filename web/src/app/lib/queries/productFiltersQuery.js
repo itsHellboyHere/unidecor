@@ -11,3 +11,18 @@ export const productFiltersQuery = `
   )
 }
 `;
+
+export const productFiltersByCollectionQuery = `
+{
+  "finishes": array::unique(
+    *[_type == "product" && collection._ref == $collectionId].finish
+  ),
+  "sizes": array::unique(
+    *[_type == "product" && collection._ref == $collectionId].size
+  ),
+  "designCodes": array::unique(
+    *[_type == "product" && collection._ref == $collectionId].designCode
+  )
+}
+`;
+

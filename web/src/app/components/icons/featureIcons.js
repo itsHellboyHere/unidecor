@@ -1,4 +1,5 @@
 // app/components/icons/featureIcons.js
+import { percent } from "framer-motion";
 import {
   Shield,
   Droplets,
@@ -17,6 +18,9 @@ import {
   Martini,
   ShieldOff,
   Heater,
+  Scale,
+  IndianRupee,
+  Percent,
   // Sparkles,
 } from "lucide-react";
 
@@ -39,5 +43,8 @@ export const featureIconMap = {
   stars:Sparkles,
   shield:ShieldOff,
   heat:Heater,
-  // can grow this to 30–40 safely
+  lightweight: Scale,
+  cost:IndianRupee,
+  percent:Percent,
+ 
 };
