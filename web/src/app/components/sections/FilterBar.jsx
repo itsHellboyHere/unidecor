@@ -56,8 +56,8 @@ function FilterBar({ filters }) {
                         {/* Ensure text is wrapped and z-indexed */}
                         <span className={styles.pillText}>{value}</span>
                         {isActive && (
-                          <motion.div 
-                            layoutId="activeGlow" 
+                          <motion.div
+                            layoutId="activeGlow"
                             className={styles.glow}
                             transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                           />
@@ -71,22 +71,22 @@ function FilterBar({ filters }) {
           })}
         </div>
 
-<AnimatePresence>
-  {hasFilters && (
-    <motion.button
-      initial={{ opacity: 0, x: 10 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: 10 }}
-      className={styles.clearBtn}
-      onClick={() => {
-        router.replace(pathname, { scroll: false });
-        router.refresh();
-      }}
-    >
-      <X size={14} /> <span>Clear All</span>
-    </motion.button>
-  )}
-</AnimatePresence>
+        <AnimatePresence>
+          {hasFilters && (
+            <motion.button
+              initial={{ opacity: 0, x: 10 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 10 }}
+              className={styles.clearBtn}
+              onClick={() => {
+                router.replace(pathname, { scroll: false });
+                router.refresh();
+              }}
+            >
+              <X size={14} /> <span>Clear All</span>
+            </motion.button>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );

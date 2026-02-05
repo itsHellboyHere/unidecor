@@ -1,16 +1,25 @@
 import { notFound } from "next/navigation";
 import { sanityClient } from "@/app/lib/sanity.client";
+
 import { collectionPageQuery } from "@/app/lib/queries/collectionPageQuery";
+import { productFiltersByCollectionQuery } from "@/app/lib/queries/productFiltersQuery";
+import { productsByCollectionQuery } from "@/app/lib/queries/productsQuery";
 
 import PageHero from "@/app/components/hero/PageHero";
 import PageIntro from "@/app/components/sections/PageIntro";
 import KeyFeatures from "@/app/components/sections/KeyFeatures";
 import CollectionGrid from "@/app/components/sections/CollectionGrid";
-import ProductGrid from "@/app/components/products/ProductGrid";
+import ProductsSection from "@/app/components/products/ProductsSection";
 
-export default async function CollectionPage({ params }) {
+export default async function CollectionPage({ params, searchParams }) {
   const { collection } = await params;
+  const sp = await searchParams;
 
+  const finish = sp?.finish ?? null;
+  const size = sp?.size ?? null;
+  const designCode = sp?.designCode ?? null;
+
+  // STRUCTURE
   const data = await sanityClient.fetch(collectionPageQuery, {
     slug: collection,
   });
@@ -18,11 +27,27 @@ export default async function CollectionPage({ params }) {
   if (!data) notFound();
 
   const hasChildren = data.children?.length > 0;
-  const hasProducts = data.hasProducts && data.products?.length > 0;
-  // console.log(data)
+  const isTerminalCollection = data.hasProducts === true;
+
+  // 2️ FILTER OPTIONS (ONLY IF TERMINAL)
+  const filters = isTerminalCollection
+    ? await sanityClient.fetch(productFiltersByCollectionQuery, {
+        collectionId: data._id,
+      })
+    : null;
+
+  //  PRODUCTS (URL-DRIVEN)
+  const products = isTerminalCollection
+    ? await sanityClient.fetch(productsByCollectionQuery, {
+        collectionId: data._id,
+        finish,
+        size,
+        designCode,
+      })
+    : [];
+
   return (
     <>
-      {/* HERO */}
       {data.hero && (
         <PageHero
           image={data.hero.image}
@@ -31,41 +56,45 @@ export default async function CollectionPage({ params }) {
           size="medium"
         />
       )}
-       <div style={{ position: 'relative', zIndex: 2}}>
-      {/* INTRO */}
-      {data.description && (
-        <PageIntro
-          kicker={`About ${data.title}` }
-          content={data.description}
-        />
-      )}
 
-      {/* KEY FEATURES */}
-      {data.keyFeatures?.length > 0 && (
-        <KeyFeatures
-          kicker="Key Features"
-          title={ data.keyFeaturesTitle ||"Designed for Performance & Style"}
-          features={data.keyFeatures}
-        />
-      )}
+      <div style={{ position: "relative", zIndex: 2 }}>
+        {data.description && (
+          <PageIntro
+            kicker={`About ${data.title}`}
+            content={data.description}
+          />
+        )}
 
-      {/* CHILD COLLECTIONS */}
-      {hasChildren && (
-        <CollectionGrid
-          kicker="Explore Range"
-          title={`Discover ${data.title}`}
-          items={data.children}
-          baseSlug=""
-        />
-      )}
+        {data.keyFeatures?.length > 0 && (
+          <KeyFeatures
+            kicker="Key Features"
+            title={data.keyFeaturesTitle || "Designed for Performance & Style"}
+            features={data.keyFeatures}
+          />
+        )}
 
-      {/* PRODUCTS */}
-      {hasProducts && (
-        <ProductGrid
-          title={`${data.title} Products`}
-          products={data.products}
-        />
-      )}
+        {/* CHILD COLLECTIONS */}
+        {!isTerminalCollection && hasChildren && (
+          <CollectionGrid
+            kicker="Explore Range"
+            title={`Discover ${data.title}`}
+            items={data.children}
+            baseSlug=""
+          />
+        )}
+
+        {/* PRODUCTS + FILTERS */}
+        {isTerminalCollection && (
+          <ProductsSection
+            title={`${data.title} Products`}
+            products={products}
+            filters={{
+              Finish: filters?.finishes,
+              Size: filters?.sizes,
+              "Design Code": filters?.designCodes,
+            }}
+          />
+        )}
       </div>
     </>
   );
