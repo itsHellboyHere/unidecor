@@ -42,13 +42,13 @@ export default function NotFound() {
           <div className={styles.verseLinks}>
             <p>Explore our collections:</p>
             <div className={styles.linkGrid}>
-              <Link href="/laminates/acrylic-laminates">
+              <Link href="/products/laminates/acrylic-laminates">
                 <Layers size={16} /> <span>Acrylics</span>
               </Link>
-              <Link href="/wall-panel/louver-panel">
+              <Link href="/products/wall-panel/louver-panel">
                 <Grid size={16} /> <span>Louvers</span>
               </Link>
-              <Link href="/laminates/pvc-laminates">
+              <Link href="/products/laminates/pvc-laminates">
                 <Box size={16} /> <span>PVC</span>
               </Link>
             </div>

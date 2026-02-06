@@ -12,7 +12,7 @@ export default function SocialLinks() {
       <a href="#" aria-label="Facebook">
         <FaFacebook size={18} />
       </a>
-      <a href="#" aria-label="WhatsApp">
+      <a href="https://wa.me/919810166841" target="_blank"  rel="noopener noreferrer" aria-label="WhatsApp">
         <FaWhatsapp size={18} />
       </a>
     </div>

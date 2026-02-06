@@ -52,7 +52,7 @@ export default function ContactForm() {
       <div className={styles.container}>
 
         {/* LEFT */}
-        <div style={styles.leftSide}>
+        <div className={styles.leftSide}>
           <span className={styles.kicker}>
             {contextType === "product" ? "Product Inquiry" : "Direct Partnership"}
           </span>
