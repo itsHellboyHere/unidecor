@@ -1,7 +1,7 @@
 .section {
   background: #f1ede7;
   padding: 140px 0;
-  min-height: 120vh;
+  min-height: 110vh;
 }
 .section::after {
   content: "";

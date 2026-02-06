@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 
 export const metadata = {
-  title: "Quality Assurance & Process | Unidecor",
+  title: "Quality Assurance & Process",
   description:
     "Discover Unidecor’s quality assurance process—from supplier vetting and inspections to after-sales support. Premium decorative surfaces backed by 20+ years of experience.",
 };

@@ -4,9 +4,9 @@ import { useEffect, useRef, useState } from "react";
 import styles from "@/app/css/StatsStrip.module.css";
 
 const STATS = [
-  { label: "Years of Experience", value:5, suffix: "+" },
+  { label: "Years of Experience", value:20, suffix: "+" },
   { label: "Interior Products", value: 102, suffix: "+" },
-  { label: "Dealer Network", value: 300, suffix: "+" },
+  { label: "Dealer Network", value: 100, suffix: "+" },
   { label: "Cities Served", value: 50, suffix: "+" },
 ];
 
