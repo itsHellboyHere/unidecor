@@ -20,10 +20,49 @@ const playfair = Playfair_Display({
 });
 
 export const metadata = {
-  title: "Unidecor",
-  description: "Premium laminates & interior surfaces",
-};
+  metadataBase: new URL("https://www.theunidecor.com"),
 
+  title: {
+    default: "Unidecor | Premium Laminates & Interior Surfaces",
+    template: "%s | Unidecor",
+  },
+
+  description:
+    "Unidecor offers premium laminates, louvers, acrylic surfaces, and interior materials backed by 20+ years of industry expertise.",
+
+  keywords: [
+    "laminates",
+    "acrylic laminates",
+    "interior surfaces",
+    "decorative laminates",
+    "louvers",
+    "interior materials",
+    "Unidecor",
+  ],
+
+  openGraph: {
+    type: "website",
+    siteName: "Unidecor",
+    url: "https://www.theunidecor.com",
+    images: [
+      {
+        url: "/og-default.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Unidecor – Premium Interior Surfaces",
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
 export default async function RootLayout({ children }) {
   const navigation = await getNavbarData();
   return (

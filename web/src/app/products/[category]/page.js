@@ -11,6 +11,55 @@ import KeyFeatures from "@/app/components/sections/KeyFeatures";
 import CollectionGrid from "@/app/components/sections/CollectionGrid";
 import ProductsSection from "@/app/components/products/ProductsSection";
 
+export async function generateMetadata({ params }) {
+  const { category } = await params;
+
+  const data = await sanityClient.fetch(categoryPageQuery, {
+    slug: category,
+  });
+
+  if (!data) {
+    return {
+      title: "Category Not Found | Unidecor",
+    };
+  }
+
+  const title =
+    data.seo?.title ||
+    `${data.title} | Premium Interior Surfaces`;
+
+  const description =
+    data.seo?.description ||
+    `Explore ${data.title} by Unidecor. Premium laminates and interior surface solutions backed by 20+ years of expertise.`;
+
+  const image = data.hero?.image?.asset?.url;
+
+  return {
+    title,
+    description,
+
+    alternates: {
+      canonical: `/products/${data.slug.current}`,
+    },
+
+    openGraph: {
+      title,
+      description,
+      url: `/products/${data.slug.current}`,
+      images: image
+        ? [
+            {
+              url: image,
+              width: 1200,
+              height: 630,
+              alt: data.title,
+            },
+          ]
+        : undefined,
+    },
+  };
+}
+
 export default async function CategoryPage({ params, searchParams }) {
   const { category } = await params;
   const sp = await searchParams;

@@ -7,7 +7,7 @@ import { urlFor } from "@/app/lib/sanity.image";
 
 export default function CollectionGrid({ kicker, title, items, baseSlug }) {
   if (!items || items.length === 0) return null;
-
+console.log("base-slug "+baseSlug);
   return (
     <section className={styles.section}>
       <div className={styles.inner}>
