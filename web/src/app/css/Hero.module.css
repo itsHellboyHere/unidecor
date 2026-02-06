@@ -100,7 +100,38 @@
   transform: perspective(900px) rotateX(6deg);
   transform-origin: center;
 }
+.exploreBtn {
+  margin-top: 32px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: fit-content;
+  padding: 12px 24px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 100px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
+}
 
+.card:hover .exploreBtn {
+  background: #fff;
+  color: #000;
+  transform: translateX(8px);
+}
+
+@media (max-width: 768px) {
+  .exploreBtn {
+    margin-top: 24px;
+    padding: 10px 18px;
+    font-size: 0.72rem;
+    margin-left: -3px;
+  }
+}
 
 /* ================= MOBILE FIX ================= */
 
