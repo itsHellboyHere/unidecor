@@ -16,11 +16,12 @@ import {
   ShieldCheckIcon,
   Sprout,
   Martini,
-  ShieldOff,
+  ShieldOffIcon,
   Heater,
   Scale,
   IndianRupee,
   Percent,
+  ShieldOff,
   // Sparkles,
 } from "lucide-react";
 
@@ -46,5 +47,5 @@ export const featureIconMap = {
   lightweight: Scale,
   cost:IndianRupee,
   percent:Percent,
- 
+  anti:ShieldOffIcon,
 };

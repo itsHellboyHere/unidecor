@@ -34,6 +34,7 @@ export default function FooterClient({ data }) {
             <li><Link href="/">Home</Link></li>
             <li><Link href="/about-us">Our Identity</Link></li>
             <li><Link href="/contact">Contact</Link></li>
+             <li><Link href="/quality-standards">Quality Standard</Link></li>
             <li><Link href="/downloads">Downloads</Link></li>
           </ul>
         </div>

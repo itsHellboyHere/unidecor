@@ -15,7 +15,7 @@ export default async function CategoryPage({ params, searchParams }) {
   const { category } = await params;
   const sp = await searchParams;
 
-  // 🔒 ALWAYS pass params (null if missing)
+  
   const finish = sp?.finish ?? null;
   const size = sp?.size ?? null;
   const designCode = sp?.designCode ?? null;

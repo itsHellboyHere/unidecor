@@ -1,0 +1,152 @@
+.wrapper {
+  background: #fdfbf7;
+  padding-top: 100px;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 36px 120px;
+}
+
+/* HERO */
+.hero {
+  text-align: center;
+  margin-bottom: 120px;
+}
+
+.kicker {
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  font-weight: 800;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+
+.title {
+  font-size: clamp(2.8rem, 5vw, 4rem);
+  font-weight: 300;
+  margin: 24px 0 18px;
+  line-height: 1.1;
+}
+
+.subtitle {
+  font-size: 1.05rem;
+  max-width: 640px;
+  margin: 0 auto;
+  color: #6f6a64;
+  line-height: 1.7;
+}
+
+/* SECTIONS */
+.section,
+.sectionAlt {
+  margin-bottom: 100px;
+}
+
+.sectionAlt {
+  background: #ffffff;
+  padding: 80px 64px;
+  border-radius: 24px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.04);
+}
+
+.sectionTitle {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 24px;
+  color: #1a1a1a;
+}
+
+.text {
+  max-width: 720px;
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #5f5b56;
+}
+
+/* PROCESS GRID */
+.processGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 36px;
+  margin-top: 40px;
+}
+
+.processItem {
+  background: #fdfbf7;
+  padding: 32px;
+  border-radius: 20px;
+  border: 1px solid #eee;
+}
+
+.processIcon {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(197, 160, 89, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #c5a059;
+  margin-bottom: 18px;
+}
+
+.processItem h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.processItem p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #666;
+}
+
+/* LISTS */
+.checkList,
+.supportList {
+  max-width: 760px;
+  list-style: none;
+  padding: 0;
+}
+
+.checkList li,
+.supportList li {
+  position: relative;
+  padding-left: 28px;
+  margin-bottom: 16px;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.checkList li::before,
+.supportList li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #c5a059;
+  font-size: 22px;
+  line-height: 1;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .wrapper {
+    padding-top: 80px;
+  }
+
+  .container {
+    padding: 0 22px 80px;
+  }
+
+  .sectionAlt {
+    padding: 48px 24px;
+  }
+
+  .hero {
+    margin-bottom: 80px;
+  }
+}
