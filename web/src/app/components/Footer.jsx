@@ -34,7 +34,7 @@ export default function FooterClient({ data }) {
             <li><Link href="/">Home</Link></li>
             <li><Link href="/about-us">Our Identity</Link></li>
             <li><Link href="/contact">Contact</Link></li>
-             <li><Link href="/quality-standards">Quality Standard</Link></li>
+            <li><Link href="/quality-standards">Quality Standard</Link></li>
             <li><Link href="/downloads">Downloads</Link></li>
           </ul>
         </div>
@@ -68,9 +68,8 @@ export default function FooterClient({ data }) {
                     >
                       <span>{cat.title}</span>
                       <span
-                        className={`${styles.chevron} ${
-                          isOpen ? styles.open : ""
-                        }`}
+                        className={`${styles.chevron} ${isOpen ? styles.open : ""
+                          }`}
                       />
                     </button>
                   ) : (
@@ -85,9 +84,8 @@ export default function FooterClient({ data }) {
                   {/* CHILDREN — ALWAYS RENDER */}
                   {hasChildren && (
                     <ul
-                      className={`${styles.subTree} ${
-                        isOpen ? styles.subTreeOpen : ""
-                      }`}
+                      className={`${styles.subTree} ${isOpen ? styles.subTreeOpen : ""
+                        }`}
                     >
                       {cat.children.map(sub => (
                         <li key={sub._id}>
@@ -124,12 +122,12 @@ export default function FooterClient({ data }) {
         <div className={styles.col}>
           <h4 className={styles.heading}>Contact</h4>
           <ul className={styles.contact}>
-            <li><strong>Phone:</strong> +91 98765 43210</li>
+            <li><strong>Phone:</strong> +91 98101 66841</li>
             <li><strong>Email:</strong> info@unidecor.com</li>
             <li>
               <strong>Address:</strong><br />
-              Unidecor Industries<br />
-              New Delhi, India
+              Head Office: 236, <br />
+              New Arya Nagar, Ghaziabad, UP
             </li>
           </ul>
         </div>
@@ -137,7 +135,13 @@ export default function FooterClient({ data }) {
       </div>
 
       <div className={styles.bottom}>
-        © {new Date().getFullYear()} Unidecor. All rights reserved.
+        <div className={styles.bottomContent}>
+          <span>© {new Date().getFullYear()} Unidecor. All rights reserved.</span>
+          <span className={styles.separator}>|</span>
+          <span className={styles.developer}>
+            Developed by <a href="https://creatormonk.in" target="_blank" rel="noopener noreferrer">creatormonk.in</a>
+          </span>
+        </div>
       </div>
     </footer>
   );

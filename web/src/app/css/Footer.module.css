@@ -179,12 +179,49 @@
 
 /* FOOTER BOTTOM */
 
+
+
 .bottom {
   border-top: 1px solid rgba(0,0,0,0.06);
   padding: 22px;
   text-align: center;
   font-size: 13px;
   color: #777;
+}
+
+.bottomContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap; 
+}
+
+.developer a {
+  color: #1c1c1c; 
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.developer a:hover {
+  color: #555;
+  text-decoration: underline;
+}
+
+.separator {
+  color: rgba(0,0,0,0.1);
+}
+
+/* Mobile Tweak */
+@media (max-width: 600px) {
+  .separator {
+    display: none; 
+  }
+  .bottomContent {
+    flex-direction: column;
+    gap: 4px;
+  }
 }
 
 /* MOBILE */
