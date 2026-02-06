@@ -29,7 +29,7 @@ export default function FooterClient({ data }) {
 
         {/* QUICK LINKS */}
         <div className={styles.col}>
-          <h4 className={styles.heading}>Quick Links</h4>
+          <h4 className={styles.heading}>Company</h4>
           <ul className={styles.links}>
             <li><Link href="/">Home</Link></li>
             <li><Link href="/about-us">Our Identity</Link></li>
@@ -41,7 +41,7 @@ export default function FooterClient({ data }) {
 
         {/* PRODUCTS */}
         <div className={styles.col}>
-          <h4 className={styles.heading}>Products</h4>
+          <h4 className={styles.heading}>Collections</h4>
 
           <ul className={styles.productTree}>
             {products.map(cat => {
@@ -120,7 +120,7 @@ export default function FooterClient({ data }) {
 
         {/* CONTACT */}
         <div className={styles.col}>
-          <h4 className={styles.heading}>Contact</h4>
+          <h4 className={styles.heading}>Get in Touch</h4>
           <ul className={styles.contact}>
             <li><strong>Phone:</strong> +91 98101 66841</li>
             <li><strong>Email:</strong> info@unidecor.com</li>
