@@ -1,15 +1,30 @@
+// lib/queries/subCollectionPageQuery.js
 export const subCollectionPageQuery = `
 *[_type == "productCollection" && slug.current == $slug][0]{
   _id,
   title,
+  slug,
+  hasProducts,
 
-  "products": *[
-    _type == "product" &&
-    collection._ref == ^._id
-  ]{
-    _id,
-    name,
-    slug
+  hero{
+    heading,
+    subheading,
+    image{
+      asset->{ url, metadata { lqip } }
+    }
+  },
+
+  description,
+
+  keyFeaturesTitle,
+  keyFeatures[]{
+    label,
+    icon
+  },
+
+  seo{
+    title,
+    description
   }
 }
 `;

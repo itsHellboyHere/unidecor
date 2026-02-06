@@ -9,10 +9,17 @@ export default function ProductsSection({
   title,
   filters = {},
 }) {
-  const shouldShowFilters = Object.values(filters).some(
-    values => values?.length > 1
+  const cleanedFilters = Object.fromEntries(
+    Object.entries(filters)
+      .map(([group, values]) => [
+        group,
+        (values || []).filter(v => v !== null && v !== "")
+      ])
+      .filter(([, values]) => values.length > 0)
   );
-  console.log(filters)
+
+  const shouldShowFilters = Object.keys(cleanedFilters).length > 0;
+  // console.log(filters)
   return (
     <section className={styles.section}>
       <div className={styles.inner}>

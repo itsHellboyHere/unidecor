@@ -1,0 +1,139 @@
+.wrapper {
+  background: #fbfbfb;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  overflow: hidden;
+  position: relative;
+}
+
+.container {
+  max-width: 1200px;
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 80px;
+  align-items: center;
+}
+
+/* VISUAL AREA */
+.visualArea {
+  display: flex;
+  justify-content: center;
+  perspective: 1000px;
+}
+
+.floatingPanel {
+  font-size: 12rem;
+  font-weight: 900;
+  color: #fff;
+  background: #111;
+  width: 340px;
+  height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px; /* Architectural sharp corner */
+  box-shadow: 0 50px 100px rgba(0,0,0,0.15);
+  position: relative;
+}
+
+.floatingPanel::after {
+  content: "UNIDECOR";
+  position: absolute;
+  bottom: 30px;
+  font-size: 10px;
+  letter-spacing: 0.5em;
+  opacity: 0.4;
+}
+
+/* CONTENT AREA */
+.kicker {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 24px;
+  display: block;
+}
+
+.title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 300;
+  line-height: 1.1;
+  color: #111;
+  margin-bottom: 24px;
+  letter-spacing: -0.02em;
+}
+
+.title span { font-weight: 600; }
+
+.desc {
+  font-size: 18px;
+  color: #666;
+  line-height: 1.7;
+  margin-bottom: 48px;
+  max-width: 500px;
+}
+
+.actions { margin-bottom: 64px; }
+
+.primaryBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: #111;
+  color: #fff;
+  padding: 18px 36px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 13px;
+  transition: all 0.3s ease;
+}
+
+.primaryBtn:hover {
+  background: var(--accent);
+  transform: translateX(-5px);
+}
+
+/* VERSE LINKS */
+.verseLinks p {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #bbb;
+  margin-bottom: 20px;
+  letter-spacing: 0.1em;
+}
+
+.linkGrid {
+  display: flex;
+  gap: 24px;
+}
+
+.linkGrid a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: #888;
+  font-size: 14px;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.linkGrid a:hover { color: var(--accent); }
+
+/* MOBILE */
+@media (max-width: 1000px) {
+  .container { grid-template-columns: 1fr; text-align: center; }
+  .visualArea { order: -1; }
+  .desc { margin: 0 auto 48px; }
+  .linkGrid { justify-content: center; }
+  .floatingPanel { width: 240px; height: 320px; font-size: 8rem; }
+}

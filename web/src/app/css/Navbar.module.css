@@ -166,7 +166,7 @@
   color: #555;
   text-decoration: none;
 }
-.subTrigger::before {
+/* .subTrigger::before {
   content: "";
   position: absolute;
   left: 0;
@@ -176,15 +176,15 @@
   background: #1c1c1c;
   transform: translateY(-50%);
   transition: width 0.25s ease;
-}
+} */
 
 .subTrigger:hover {
   background: #f6f6f5;
   color: #1c1c1c;
 }
-.subTrigger:hover::before {
+/* .subTrigger:hover::before {
   width: 10px;
-}
+} */
 
 .subDropdownBox, .subDropdownBoxLevel3 {
 position: absolute;

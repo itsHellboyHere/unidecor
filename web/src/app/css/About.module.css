@@ -230,3 +230,12 @@
     gap: 24px;
   }
 }
+
+/* =========================
+   MOBILE OVERLAP FIX
+========================= */
+@media (max-width: 768px) {
+  .mobileSectionOffset {
+    margin-top: 80px;
+  }
+}

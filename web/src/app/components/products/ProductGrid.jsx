@@ -9,7 +9,7 @@ export default function ProductGrid({ title, products = [] }) {
   if (!products.length) {
     return (
       <div className={styles.empty}>
-        <p>No products found in this selection.</p>
+        <p>No products found in this section.</p>
       </div>
     );
   }
@@ -32,7 +32,7 @@ export default function ProductGrid({ title, products = [] }) {
               }}
               viewport={{ once: true, margin: "-80px" }}
             >
-              <Link href={`/products/${product.slug.current}`} className={styles.card}>
+              <Link href={`/product/${product.slug.current}`} className={styles.card}>
                 <div className={styles.imageWrap}>
                   {product.image?.url && (
                     <Image
@@ -49,7 +49,7 @@ export default function ProductGrid({ title, products = [] }) {
                   {/* Clean Technical Badges */}
                   <div className={styles.metaOverlay}>
                     <span className={styles.designCode}>{product.designCode}</span>
-                    <span className={styles.finishTag}>{product.finish}</span>
+                    {product.finish && <span className={styles.finishTag}>{product.finish}</span>}
                   </div>
                 </div>
 

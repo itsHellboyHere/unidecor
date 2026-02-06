@@ -1,0 +1,287 @@
+.wrapper {
+  background: #ffffff;
+}
+
+/* CONTAINER */
+.container {
+  max-width: 1480px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+/* NAV */
+.nav {
+  height: 84px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #eee;
+
+}
+
+.backLink {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #777;
+}
+
+.brandTag {
+  font-size: 10px;
+  letter-spacing: 0.35em;
+  font-weight: 900;
+  color: #111;
+}
+
+/* LAYOUT */
+.layout {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 120px;
+  padding: 90px 0;
+}
+
+/* VISUAL */
+.visualSide {
+  position: relative;
+}
+
+.imageFrame {
+  position: relative;
+  aspect-ratio: 2 / 3;
+  background: #f4f3f1;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+/* subtle geometric accent */
+.shapeAccent {
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 160px;
+  height: 160px;
+  border-radius: 32px;
+  background: rgba(197,160,89,0.12);
+  z-index: 1;
+}
+
+.mainImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: relative;
+  z-index: 2;
+}
+
+.glossOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    110deg,
+    rgba(255,255,255,0.18),
+    transparent 45%
+  );
+  z-index: 3;
+}
+
+.batchNote {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  right: 24px;
+  background: rgba(0,0,0,0.72);
+  color: #fff;
+  padding: 14px 18px;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  z-index: 4;
+}
+
+/* CONTENT */
+.contentSide {
+position: sticky;
+  top: calc(var(--navbar-height));
+  align-self: self-start;
+}
+
+.header {
+  margin-bottom: 48px;
+}
+
+.series {
+  display: inline-block;
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #c5a059;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.title {
+  font-size: clamp(2.6rem, 4vw, 3.6rem);
+  font-weight: 300;
+  line-height: 1.15;
+  margin-bottom: 10px;
+  color: #111;
+}
+
+.code {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #999;
+}
+
+/* DESCRIPTION */
+.description {
+  font-size: 17px;
+  line-height: 1.9;
+  color: #555;
+  margin: 48px 0 40px;
+  max-width: 520px;
+}
+
+.description p + p {
+  margin-top: 16px;
+}
+
+/* KEY SPECS */
+.keySpecs {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 56px;
+  flex-wrap: wrap;
+}
+
+.specChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-radius: 999px;
+  background: rgba(0,0,0,0.035);
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+}
+
+.specChip svg {
+  color: #c5a059;
+}
+
+.specChip span {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.specChip strong {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #999;
+}
+
+/* SPECS */
+.specGrid {
+  display: grid;
+  gap: 26px;
+  margin-bottom: 72px;
+}
+
+.specItem {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+}
+
+.specIconWrap {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #c5a059;
+  border-radius: 50%;
+  background: rgba(197,160,89,0.08);
+  flex-shrink: 0;
+}
+
+.specText {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.specLabel {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #aaa;
+}
+
+.specValue {
+  font-size: 14px;
+  font-weight: 700;
+  color: #111;
+}
+
+/* ACTIONS */
+.actions {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+}
+
+.primaryBtn {
+  background: #111;
+  color: #fff;
+  padding: 18px 38px;
+  font-weight: 700;
+  font-size: 13px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.25s ease;
+}
+
+.primaryBtn:hover {
+  background: #c5a059;
+  color: #000;
+}
+
+.secondaryBtn {
+  background: transparent;
+  border: 1px solid #e5e5e5;
+  padding: 18px 30px;
+  font-weight: 600;
+  font-size: 13px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #555;
+}
+
+/* MOBILE */
+@media (max-width: 1024px) {
+  .layout {
+    grid-template-columns: 1fr;
+    gap: 80px;
+    padding: 48px 0;
+  }
+
+  .contentSide {
+    position: relative;
+    top: auto;
+  }
+
+  .container {
+    padding: 0 22px;
+  }
+}

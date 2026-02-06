@@ -23,7 +23,7 @@ export default async function CollectionPage({ params, searchParams }) {
   const data = await sanityClient.fetch(collectionPageQuery, {
     slug: collection,
   });
-
+  
   if (!data) notFound();
 
   const hasChildren = data.children?.length > 0;
@@ -35,7 +35,7 @@ export default async function CollectionPage({ params, searchParams }) {
         collectionId: data._id,
       })
     : null;
-
+console.log("filter ",filters);
   //  PRODUCTS (URL-DRIVEN)
   const products = isTerminalCollection
     ? await sanityClient.fetch(productsByCollectionQuery, {

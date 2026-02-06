@@ -58,7 +58,7 @@ const observer = new IntersectionObserver(
           className={`${styles.videoWrap} ${styles.revealVideo}`}
         >
           <iframe
-            src="https://www.youtube.com/embed/G4Tl3vmHxPo?controls=0&playsinline=1"
+            src="https://www.youtube.com/embed/K4DyBUG242c?si=m9MSTRUmlrVAMfQp?controls=0&playsinline=1"
             loading="lazy"
             allowFullScreen
           />
