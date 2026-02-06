@@ -5,6 +5,10 @@ export const collectionPageQuery = `
   slug,
   hasProducts,
 
+  category->{
+    slug
+  },
+
   hero{
     heading,
     subheading,
@@ -14,7 +18,8 @@ export const collectionPageQuery = `
   },
 
   description,
- keyFeaturesTitle,
+
+  keyFeaturesTitle,
   keyFeatures[]{
     label,
     icon

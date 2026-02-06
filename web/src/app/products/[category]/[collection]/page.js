@@ -11,6 +11,63 @@ import KeyFeatures from "@/app/components/sections/KeyFeatures";
 import CollectionGrid from "@/app/components/sections/CollectionGrid";
 import ProductsSection from "@/app/components/products/ProductsSection";
 
+
+
+
+export async function generateMetadata({ params }) {
+  const { collection } = await params;
+
+  const data = await sanityClient.fetch(collectionPageQuery, {
+    slug: collection,
+  });
+
+  if (!data) return {};
+
+  const title =
+    data.seo?.title ||
+    `${data.title} | ${data.category?.title || "Products"} | Unidecor`;
+
+  const description =
+    data.seo?.description ||
+    data.description?.[0]?.children?.[0]?.text ||
+    `Explore ${data.title} by Unidecor. Premium surfaces designed for modern interiors.`;
+
+  const url = `https://www.theunidecor.com/products/${data.category?.slug?.current}/${data.slug.current}`;
+
+  return {
+    title,
+    description,
+
+    openGraph: {
+      title,
+      description,
+      url,
+      siteName: "Unidecor",
+      images: data.hero?.image
+        ? [
+            {
+              url: data.hero.image.asset.url,
+              width: 1200,
+              height: 630,
+              alt: data.title,
+            },
+          ]
+        : [],
+      type: "website",
+    },
+
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: data.hero?.image?.asset?.url
+        ? [data.hero.image.asset.url]
+        : [],
+    },
+  };
+}
+
+
 export default async function CollectionPage({ params, searchParams }) {
   const { collection } = await params;
   const sp = await searchParams;
@@ -23,7 +80,7 @@ export default async function CollectionPage({ params, searchParams }) {
   const data = await sanityClient.fetch(collectionPageQuery, {
     slug: collection,
   });
-  
+
   if (!data) notFound();
 
   const hasChildren = data.children?.length > 0;
@@ -32,18 +89,18 @@ export default async function CollectionPage({ params, searchParams }) {
   // 2️ FILTER OPTIONS (ONLY IF TERMINAL)
   const filters = isTerminalCollection
     ? await sanityClient.fetch(productFiltersByCollectionQuery, {
-        collectionId: data._id,
-      })
+      collectionId: data._id,
+    })
     : null;
-console.log("filter ",filters);
+  // console.log("filter ",filters);
   //  PRODUCTS (URL-DRIVEN)
   const products = isTerminalCollection
     ? await sanityClient.fetch(productsByCollectionQuery, {
-        collectionId: data._id,
-        finish,
-        size,
-        designCode,
-      })
+      collectionId: data._id,
+      finish,
+      size,
+      designCode,
+    })
     : [];
 
   return (
@@ -79,7 +136,7 @@ console.log("filter ",filters);
             kicker="Explore Range"
             title={`Discover ${data.title}`}
             items={data.children}
-            baseSlug=""
+            baseSlug={`/products/${data.category.slug.current}/${data.slug.current}`}
           />
         )}
 
