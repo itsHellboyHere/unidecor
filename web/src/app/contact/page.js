@@ -1,5 +1,10 @@
-import ContactForm from "./comp/ContactForm"
+import { Suspense } from "react";
+import ContactForm from "./comp/ContactForm";
 
 export default function ContactPage() {
-  return <ContactForm />;
+  return (
+    <Suspense fallback={null}>
+      <ContactForm />
+    </Suspense>
+  );
 }
