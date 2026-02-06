@@ -1,122 +1,119 @@
-/* =========================
-   SECTION
-========================= */
-
 .section {
-   background:
-    radial-gradient(
-      1200px 400px at 50% -200px,
-      rgba(0,0,0,0.03),
-      transparent
-    ),
-    #f7f6f4;
-  padding: 120px 0;
+  padding: 100px 0;
+  background-color: #f6f6f5; /* Matching your Hero/CTA theme */
+  overflow: hidden;
 }
 
-.inner {
-  max-width: 1320px;
-  margin: 0 auto;
-  padding: 0 36px;
+.header {
+  max-width: 1400px;
+  margin: 0 auto 60px;
+  padding: 0 40px;
 }
-
-/* =========================
-   KICKER
-========================= */
 
 .kicker {
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #a39990;
   display: flex;
   align-items: center;
-  gap: 14px;
-  margin-bottom: 32px;
-
-  font-size: 12px;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: #8a7f74;
+  gap: 20px;
 }
 
-.kicker::before {
+.kicker::after {
   content: "";
-  width: 28px;
+  flex: 1;
   height: 1px;
-  background: rgba(138, 127, 116, 0.6);
+  background: rgba(0, 0, 0, 0.06);
 }
 
-/* =========================
-   MARQUEE
-========================= */
-
+/* MARQUEE CORE */
 .marquee {
-  overflow: hidden;
   position: relative;
+  display: flex;
+  user-select: none;
+  /* Fades out the edges for a premium look */
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 15%,
+    black 85%,
+    transparent
+  );
 }
 
-/* Moving track */
 .track {
   display: flex;
-  gap: 16px;
-  width: max-content;
-  animation: scroll 36s linear infinite;
+  gap: 40px; 
+  animation: scroll 40s linear infinite;
 }
 
 .marquee:hover .track {
   animation-play-state: paused;
 }
 
-/* =========================
-   CARD
-========================= */
+/* CARD DESIGN */
+.attributeCard {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 24px 40px;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  text-decoration: none;
+  min-width: 280px;
+}
 
-.card {
-  padding: 14px 22px;
-  border-radius: 999px;
+.typeTag {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #8a7f74;
+  font-weight: 600;
+}
+
+.label {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #1a1a1a;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.arrow {
+  font-size: 1.2rem;
+  opacity: 0;
+  transform: translate(-10px, 10px);
+  transition: all 0.4s ease;
+}
+
+/* HOVER EFFECTS */
+.attributeCard:hover {
   background: #ffffff;
-
-  font-size: 14px;
-  font-weight: 400;
-  color: #1c1c1c;
-  white-space: nowrap;
-
-  border: 1px solid rgba(0,0,0,0.08);
-
-  transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease,
-    background 0.25s ease,
-    border-color 0.25s ease;
+  border-color: rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
 }
 
-.card:hover {
-  transform: translateY(-2px);
-  background: #f1ede7;
-
-
-  border-color: transparent;
-
-  box-shadow:
-    0 1px 0 rgba(0,0,0,0.04),
-    0 8px 20px rgba(0,0,0,0.08);
+.attributeCard:hover .arrow {
+  opacity: 1;
+  transform: translate(0, 0);
 }
-
-/* =========================
-   ANIMATION
-========================= */
 
 @keyframes scroll {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
+  from { transform: translateX(0); }
+  to { transform: translateX(-33.33%); }
 }
 
-/* =========================
-   MOBILE
-========================= */
-
 @media (max-width: 768px) {
-  .track {
-    animation-duration: 50s;
+  .section { padding: 60px 0; }
+  .attributeCard {
+    min-width: 220px;
+    padding: 20px 30px;
   }
+  .label { font-size: 1.2rem; }
 }

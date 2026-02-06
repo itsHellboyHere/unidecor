@@ -8,13 +8,13 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 const FEATURED_PRODUCTS = [
   {
     slug: "laminates",
-    title: "Decorative Laminates",
+    title: "Laminates",
     image: "/featured/laminates.webp",
   },
   {
-    slug: "wall-laminates",
-    title: "Wall Laminates",
-    image: "/featured/wall-laminates.webp",
+    slug: "laminates/decorative-laminates",
+    title: "Decorative Laminates",
+    image: "/featured/decorative.webp",
   },
   {
     slug: "plywood",
@@ -22,12 +22,12 @@ const FEATURED_PRODUCTS = [
     image: "/featured/plywood.webp",
   },
   {
-    slug: "wpc-boards",
-    title: "WPC Boards",
+    slug: "aminates/acrylic-laminates",
+    title: "Acrylic Laminates",
     image: "/featured/wpc.webp",
   },
   {
-    slug: "wall-panels",
+    slug: "wall-panel",
     title: "Wall Panels",
     image: "/featured/wall-panels.webp",
   },

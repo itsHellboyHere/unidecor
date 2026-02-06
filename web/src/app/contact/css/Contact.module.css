@@ -1,7 +1,8 @@
 .wrapper {
   background: #fbfbfb;
-  padding-top: 80px;
+  padding-top: 35px;
   min-height: 100vh;
+  margin-bottom: 30px;
 }
 
 .container {
@@ -21,7 +22,11 @@
   color: var(--accent);
   text-transform: uppercase;
 }
-
+.leftSide{
+  position: sticky;
+  top: calc(var(--navbar-height) + 5px);
+  align-self: self-start;
+}
 .title {
   font-size: clamp(2.4rem, 4vw, 3rem);
   font-weight: 300;
@@ -125,8 +130,8 @@
   background: #fff;
   border: 1px solid #f0f0f0;
   padding: 32px;
-  position: sticky;
-  top: 100px;
+  /* position: sticky;
+  top: 100px; */
   border-radius: 12px;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
 }
@@ -283,5 +288,9 @@
 
   .ctaBlock {
     padding: 20px;
+  }
+  .leftSide{
+    position: relative;
+    top: auto;
   }
 }
