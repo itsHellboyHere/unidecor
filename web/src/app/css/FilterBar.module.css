@@ -2,7 +2,7 @@
   width: 100%;
   margin-bottom: 20px; /* Reduced from 60px to fix white space */
   position: relative;
-  z-index: 100;
+  z-index: 2;
 }
 
 .glassWrapper {

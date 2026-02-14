@@ -1,13 +1,13 @@
 export const productFiltersQuery = `
 {
   "finishes": array::unique(
-    *[_type == "product" && collection->category._ref == $categoryId].finish
+    *[_type == "product" && collection->category._ref == $categoryId && defined(finish)].finish
   ),
   "sizes": array::unique(
-    *[_type == "product" && collection->category._ref == $categoryId].size
+    *[_type == "product" && collection->category._ref == $categoryId && defined(size)].size
   ),
   "designCodes": array::unique(
-    *[_type == "product" && collection->category._ref == $categoryId].designCode
+    *[_type == "product" && collection->category._ref == $categoryId && defined(designCode)].designCode
   )
 }
 `;
@@ -15,14 +15,13 @@ export const productFiltersQuery = `
 export const productFiltersByCollectionQuery = `
 {
   "finishes": array::unique(
-    *[_type == "product" && collection._ref == $collectionId].finish
+    *[_type == "product" && collection._ref == $collectionId && defined(finish)].finish
   ),
   "sizes": array::unique(
-    *[_type == "product" && collection._ref == $collectionId].size
+    *[_type == "product" && collection._ref == $collectionId && defined(size)].size
   ),
   "designCodes": array::unique(
-    *[_type == "product" && collection._ref == $collectionId].designCode
+    *[_type == "product" && collection._ref == $collectionId && defined(designCode)].designCode
   )
 }
 `;
-

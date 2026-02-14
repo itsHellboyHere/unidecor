@@ -1,5 +1,3 @@
-// lib/queries/productDetailQuery.js
-
 export const productDetailQuery = `
 *[_type == "product" && slug.current == $slug][0]{
   _id,
@@ -10,6 +8,12 @@ export const productDetailQuery = `
   finish,
 
   description,
+  highlights,
+  keyFeatures,
+  coverage,
+  coverageNote,
+  packing,
+  application,
 
   "heroImage": images[isHero == true][0].asset->{
     url,

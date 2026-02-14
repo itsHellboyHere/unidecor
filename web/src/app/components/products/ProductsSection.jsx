@@ -26,7 +26,7 @@ export default function ProductsSection({
 
         {/* FILTER BAR */}
         {shouldShowFilters && (
-          <FilterBar filters={filters} />
+          <FilterBar filters={cleanedFilters} />
         )}
 
         {/* PRODUCT GRID */}

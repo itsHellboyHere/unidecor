@@ -6,7 +6,7 @@ const slides = [
     title: "Premium Interior Surfaces",
     subtitle: "Laminates, wall panels & decorative finishes",
     image: "/laminates.webp",
-    link: "/products/laminates",
+    link: "/products/laminates#collections",
   },
   {
     title: "Material Systems & Catalogues",
@@ -18,7 +18,7 @@ const slides = [
     title: "Designed for Indian Homes",
     subtitle: "Kitchen hardware and complete interior products",
     image: "/kitchen.webp",
-    link: "/inspiration/kitchen",
+    link: "/inspiration",
   },
 ];
 

@@ -24,11 +24,12 @@ export default function ProductGrid({ title, products = [] }) {
             <motion.div
               key={product._id}
               initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              // whileInView={{ opacity: 1, y: 0 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{
                 duration: 0.45,
                 delay: (i % 4) * 0.06,
-                ease: [0.22, 1, 0.36, 1], 
+                ease: [0.22, 1, 0.36, 1],
               }}
               viewport={{ once: true, margin: "-80px" }}
             >
@@ -48,7 +49,9 @@ export default function ProductGrid({ title, products = [] }) {
 
                   {/* Clean Technical Badges */}
                   <div className={styles.metaOverlay}>
-                    <span className={styles.designCode}>{product.designCode}</span>
+                    {product.designCode && (
+                      <span className={styles.designCode}>{product.designCode}</span>
+                    )}
                     {product.finish && <span className={styles.finishTag}>{product.finish}</span>}
                   </div>
                 </div>
@@ -59,7 +62,9 @@ export default function ProductGrid({ title, products = [] }) {
                   </div>
 
                   <div className={styles.cardFooter}>
-                    <span className={styles.sizeLabel}>{product.size || "8ft × 4ft"}</span>
+{product.size && (
+  <span className={styles.sizeLabel}>{product.size}</span>
+)}
                     <div className={styles.action}>
                       <span className={styles.viewLink}>View Details</span>
                       <svg width="14" height="14" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">

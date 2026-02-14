@@ -58,16 +58,7 @@ export default function QualityStandardsPage() {
               title="Incoming Inspection"
               text="Every batch inspected for thickness, finish, and color consistency."
             />
-            <ProcessItem
-              icon={<ShieldCheck />}
-              title="Sample Testing"
-              text="Regular testing for moisture resistance, adhesion, and durability."
-            />
-            <ProcessItem
-              icon={<Boxes />}
-              title="Storage Standards"
-              text="Climate-controlled warehousing to prevent damage or deformation."
-            />
+      
             <ProcessItem
               icon={<PackageCheck />}
               title="Packaging Quality"

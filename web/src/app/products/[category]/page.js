@@ -10,6 +10,7 @@ import PageIntro from "@/app/components/sections/PageIntro";
 import KeyFeatures from "@/app/components/sections/KeyFeatures";
 import CollectionGrid from "@/app/components/sections/CollectionGrid";
 import ProductsSection from "@/app/components/products/ProductsSection";
+import { ScrollToHash } from "@/app/components/ScrollToHash";
 
 export async function generateMetadata({ params }) {
   const { category } = await params;
@@ -95,12 +96,25 @@ export default async function CategoryPage({ params, searchParams }) {
 
   return (
     <>
+    <ScrollToHash/>
       <PageHero
         image={categoryData.hero?.image}
         heading={categoryData.hero?.heading || categoryData.title}
         subheading={categoryData.hero?.subheading}
         size="large"
       />
+      {/* PRODUCTS → ONLY for terminal categories */}
+{isTerminalCategory && (
+  <ProductsSection
+    title={`${categoryData.title} Products`}
+    products={products}
+    filters={{
+      Finish: filters.finishes,
+      Size: filters.sizes,
+      "Design Code": filters.designCodes,
+    }}
+  />
+)}
       <div style={{ position: 'relative', zIndex: 2}}>
       <PageIntro
         kicker={`About ${categoryData.title}`}
@@ -125,18 +139,7 @@ export default async function CategoryPage({ params, searchParams }) {
   />
 )}
 
-{/* PRODUCTS → ONLY for terminal categories */}
-{isTerminalCategory && (
-  <ProductsSection
-    title={`${categoryData.title} Products`}
-    products={products}
-    filters={{
-      Finish: filters.finishes,
-      Size: filters.sizes,
-      "Design Code": filters.designCodes,
-    }}
-  />
-)}
+
 </div>
     </>
   );

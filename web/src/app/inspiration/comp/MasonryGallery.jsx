@@ -2,13 +2,12 @@
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight, Plus, Minus } from "lucide-react";
-import styles from "@/app/css/DepartMentGallery.module.css";
+import styles from "../css/MasonryGallery.module.css";
 
-export default function DepartmentGallery({ subtitle, title, items = [] }) {
+export default function MasonryGallery({ title, subtitle, items = [] }) {
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [zoom, setZoom] = useState(1);
 
-  // Reset zoom on image change or close
   const resetZoom = () => setZoom(1);
 
   const showNext = useCallback(() => {
@@ -21,13 +20,24 @@ export default function DepartmentGallery({ subtitle, title, items = [] }) {
     setSelectedIndex((prev) => (prev - 1 + items.length) % items.length);
   }, [items.length]);
 
-  // Keyboard Navigation
+  const handleZoomIn = (e) => {
+    e.stopPropagation();
+    setZoom((prev) => Math.min(prev + 0.5, 3)); 
+  };
+
+  const handleZoomOut = (e) => {
+    e.stopPropagation();
+    setZoom((prev) => Math.max(prev - 0.5, 1)); 
+  };
+
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (selectedIndex === null) return;
       if (e.key === "ArrowRight") showNext();
       if (e.key === "ArrowLeft") showPrev();
       if (e.key === "Escape") setSelectedIndex(null);
+      if (e.key === "+") setZoom(z => Math.min(z + 0.5, 3));
+      if (e.key === "-") setZoom(z => Math.max(z - 0.5, 1));
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
@@ -35,38 +45,35 @@ export default function DepartmentGallery({ subtitle, title, items = [] }) {
 
   return (
     <section className={styles.section}>
-      <div className={styles.header}>
+      <header className={styles.header}>
         {subtitle && <span className={styles.subtitle}>{subtitle}</span>}
-        <h2 className={styles.title}>{title}</h2>
-      </div>
+        <h1 className={styles.title}>{title}</h1>
+      </header>
 
-      <div className={styles.grid}>
-        {items.map((img, index) => (
+      <div className={styles.masonryContainer}>
+        {items.map((item, index) => (
           <motion.div
-            key={img.id}
-            className={`${styles.galleryItem} ${styles[`item${index + 1}`]}`}
-            initial={{ opacity: 0, scale: 0.94 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: index * 0.05 }}
+            key={item.id}
+            className={styles.masonryItem}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: (index % 3) * 0.1 }}
             onClick={() => {
               resetZoom();
               setSelectedIndex(index);
             }}
           >
-            <img
-              src={img.src}
-              alt={img.title}
-              className={styles.image}
-              loading="lazy"
-            />
-            <div className={styles.overlay}>
-              <span className={styles.caption}>{img.title}</span>
+            <div className={styles.imageWrapper}>
+              <img src={item.src} alt={item.title} className={styles.image} loading="lazy" />
+              <div className={styles.overlay}>
+                <div className={styles.category}>{item.category}</div>
+                <h3 className={styles.captionTitle}>{item.title}</h3>
+              </div>
             </div>
           </motion.div>
         ))}
       </div>
 
-      {/* LIGHTBOX MODAL */}
       <AnimatePresence>
         {selectedIndex !== null && (
           <motion.div 
@@ -75,16 +82,15 @@ export default function DepartmentGallery({ subtitle, title, items = [] }) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            {/* Controls */}
             <div className={styles.topControls}>
-              <button className={styles.controlBtn} onClick={(e) => { e.stopPropagation(); setZoom(z => Math.min(z + 0.5, 3)); }}>
-                <Plus size={22} />
+              <button className={styles.controlBtn} onClick={handleZoomIn} title="Zoom In">
+                <Plus size={24} />
               </button>
-              <button className={styles.controlBtn} onClick={(e) => { e.stopPropagation(); setZoom(z => Math.max(z - 0.5, 1)); }}>
-                <Minus size={22} />
+              <button className={styles.controlBtn} onClick={handleZoomOut} title="Zoom Out">
+                <Minus size={24} />
               </button>
-              <button className={styles.controlBtn} onClick={() => setSelectedIndex(null)}>
-                <X size={22} />
+              <button className={styles.controlBtn} onClick={() => setSelectedIndex(null)} title="Close">
+                <X size={24} />
               </button>
             </div>
 
@@ -92,21 +98,30 @@ export default function DepartmentGallery({ subtitle, title, items = [] }) {
               <ChevronLeft size={40} />
             </button>
 
-            {/* Content Scales as a whole */}
+        
             <motion.div 
               key={selectedIndex}
               className={styles.lightboxContent}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0, scale: zoom }}
               exit={{ opacity: 0, y: -10 }}
-              transition={{ scale: { type: "spring", stiffness: 300, damping: 30 } }}
+              transition={{ 
+                scale: { type: "spring", stiffness: 300, damping: 30 },
+                opacity: { duration: 0.3 }
+              }}
               onClick={(e) => e.stopPropagation()}
             >
-              <img 
-                src={items[selectedIndex].src} 
-                alt={items[selectedIndex].title} 
-                className={styles.lightboxImage}
-              />
+              <div className={styles.imageContainer}>
+                <img 
+                  src={items[selectedIndex].src} 
+                  alt={items[selectedIndex].title} 
+                  className={styles.lightboxImage}
+                />
+              </div>
+              <div className={styles.lightboxInfo}>
+                <span className={styles.lightboxCategory}>{items[selectedIndex].category}</span>
+                <h3 className={styles.lightboxTitle}>{items[selectedIndex].title}</h3>
+              </div>
             </motion.div>
 
             <button className={styles.navBtnNext} onClick={(e) => { e.stopPropagation(); showNext(); }}>

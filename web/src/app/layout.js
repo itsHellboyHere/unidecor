@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar.server";
 import WhatsAppFloat from "./components/WhatsAppFloat";
 import { getNavbarData } from "./lib/sanity/navbar";
 import FooterServer from "./components/Footer.server";
+import CampaignBanner from "./components/CampaignBanner";
 
 
 const manrope = Manrope({
@@ -70,6 +71,7 @@ export default async function RootLayout({ children }) {
       <body className={`${manrope.variable} ${playfair.variable}`}>
         {/* <CustomCursor/> */}
        <Navbar />
+       {/* <CampaignBanner/> */}
         {children}
         <WhatsAppFloat/>
         <FooterServer data={navigation} />

@@ -26,26 +26,47 @@ export default function ContactForm() {
   const [status, setStatus] = useState(null);
   const [errors, setErrors] = useState({});
 
-  async function handleSubmit(e) {
-    e.preventDefault();
-    setPending(true);
-    setErrors({});
-    setStatus(null);
+async function handleSubmit(e) {
+  e.preventDefault();
+  setPending(true);
+  setErrors({});
+  setStatus(null);
 
-    const formData = new FormData(e.target);
-    const result = await sendInquiry(formData);
+  const formData = new FormData(e.target);
+  const result = await sendInquiry(formData);
 
-    setPending(false);
+  setPending(false);
 
-    if (result.success) {
-      setStatus("success");
-      e.target.reset();
-    } else if (result.errors) {
-      setErrors(result.errors);
-    } else {
-      setStatus("error");
-    }
+  if (result.success) {
+    setStatus("success");
+
+    //  WhatsApp message
+    const message = `
+New Inquiry from Unidecor Website:
+
+Name: ${formData.get("name")}
+Role: ${formData.get("role")}
+Email: ${formData.get("email")}
+Phone: ${formData.get("phone")}
+Context: ${formData.get("contextType")}
+Product: ${formData.get("productTitle") || "General"}
+
+Message:
+${formData.get("message")}
+`;
+
+  const encodedMessage = encodeURIComponent(message);
+
+const whatsappNumber = "917004671676";
+window.location.href = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+
+    e.target.reset();
+  } else if (result.errors) {
+    setErrors(result.errors);
+  } else {
+    setStatus("error");
   }
+}
 
   return (
     <main className={styles.wrapper}>
@@ -149,7 +170,7 @@ export default function ContactForm() {
               <MapPin size={20} />
               <div>
                 <strong>Experience Center</strong>
-                <span>City 1 236, New Arya Nagar, Ghaziabad, UP</span>
+                <span>236, New Arya Nagar, Ghaziabad, UP</span>
               </div>
             </div>
           </div>

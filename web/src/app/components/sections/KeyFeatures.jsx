@@ -4,8 +4,9 @@ import { useEffect, useRef, useState } from "react";
 import styles from "@/app/css/KeyFeatures.module.css";
 import { featureIconMap } from "@/app/components/icons/featureIcons";
 
-export default function KeyFeatures({ kicker = "Key Features",
-  title ,
+export default function KeyFeatures({ 
+  kicker = "Key Features",
+  title,
   features,
 }) {
   const itemsRef = useRef([]);
@@ -20,11 +21,10 @@ export default function KeyFeatures({ kicker = "Key Features",
           }
         });
       },
-      { threshold: 0.3 }
+      { threshold: 0.1 }
     );
 
     itemsRef.current.forEach(el => el && observer.observe(el));
-
     return () => observer.disconnect();
   }, []);
 
@@ -34,13 +34,13 @@ export default function KeyFeatures({ kicker = "Key Features",
     <section className={styles.section}>
       <div className={styles.inner}>
 
-        {/* LEFT */}
+        {/* LEFT AREA */}
         <div className={styles.sticky}>
           {kicker && <span className={styles.kicker}>{kicker}</span>}
           <h2 className={styles.title}>{title}</h2>
         </div>
 
-        {/* RIGHT */}
+        {/* RIGHT AREA - Horizontal Grid */}
         <div className={styles.list}>
           {features.map((item, index) => {
             const Icon = featureIconMap[item.icon];
@@ -51,17 +51,17 @@ export default function KeyFeatures({ kicker = "Key Features",
                 key={index}
                 ref={el => (itemsRef.current[index] = el)}
                 className={`${styles.item} ${isVisible ? styles.itemVisible : ""}`}
-                style={{ transitionDelay: `${index * 120}ms` }}
+                style={{ transitionDelay: `${index * 50}ms` }}
               >
-                {Icon && <Icon size={28} strokeWidth={1.5} />}
-                <h3>{item.label}</h3>
+                {Icon && <Icon size={24} strokeWidth={1.5} />}
+                <div className={styles.itemContent}>
+                  <h3>{item.label}</h3>
+                </div>
               </div>
             );
           })}
         </div>
-
       </div>
-      <div className={styles.spacer} />
     </section>
   );
 }

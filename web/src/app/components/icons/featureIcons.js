@@ -22,6 +22,8 @@ import {
   IndianRupee,
   Percent,
   ShieldOff,
+  ThumbsUp,
+  Birdhouse,
   // Sparkles,
 } from "lucide-react";
 
@@ -48,4 +50,6 @@ export const featureIconMap = {
   cost:IndianRupee,
   percent:Percent,
   anti:ShieldOffIcon,
+  premium:ThumbsUp,
+  wood:Birdhouse,
 };

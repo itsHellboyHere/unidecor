@@ -1,7 +1,6 @@
 .section {
   background: #f1ede7;
-  padding: 140px 0;
-  min-height: 90vh;
+  padding: 80px 0; /* Reduced from 140px */
 }
 
 .inner {
@@ -9,15 +8,13 @@
   margin: 0 auto;
   padding: 0 36px;
   display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: 80px;
+  grid-template-columns: 1fr 1.4fr; /* Adjusted for better horizontal space */
+  gap: 60px;
 }
 
-/* LEFT */
+/* LEFT - Same design as requested */
 .sticky {
- position: -webkit-sticky;
-  position: sticky;
-  top: 150px;
+  position: relative; /* Removed sticky for a shorter section */
   padding-left: 20px;
   align-self: start;
   border-left: 2px solid rgba(176, 141, 87, 0.3);
@@ -26,118 +23,83 @@
 .sticky::before {
   content: "";
   position: absolute;
-  left: -24px;
+  left: -2px; /* Fixed alignment to border-left */
   top: 0;
   width: 2px;
-  height: 120px;
-  background: linear-gradient(
-    to bottom,
-    var(--accent),
-    transparent
-  );
+  height: 80px;
+  background: linear-gradient(to bottom, var(--accent), transparent);
 }
 
 .kicker {
-  font-size: 13px;
-  letter-spacing: 0.18em;
+  font-size: 12px;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--accent);
-  margin-bottom: 16px;
+  margin-bottom: 12px;
   display: inline-block;
 }
 
 .title {
-  font-size: clamp(2.6rem, 4vw, 3.4rem);
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
   font-weight: 700;
   line-height: 1.1;
 }
 
-/* RIGHT */
+/* RIGHT - Redesigned for Left-Aligned Icons & Shortness */
 .list {
-  display: flex;
-  flex-direction: column;
-  gap: 96px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 columns to keep it short */
+  gap: 32px 40px;
 }
 
 .item {
-  padding-bottom: 48px;
-  border-bottom: 1px solid rgba(0,0,0,0.08);
-
+  display: flex;
+  align-items: flex-start; /* Aligns icon with top of text */
+  gap: 16px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
   opacity: 0;
-  transform: translateY(28px);
-  transition:
-    opacity 0.8s ease,
-    transform 0.8s ease;
+  transform: translateX(20px); /* Slide in from side instead of bottom */
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-.item h3 {
-  font-size: 1.4rem;
-  font-weight: 600;
-   letter-spacing: -0.01em;
-  margin-bottom: 12px;
-}
-
-.item p {
-  font-size: 1rem;
-  line-height: 1.7;
-  color: #444;
-}
 .itemVisible {
   opacity: 1;
-  transform: translateY(0);
-}
-.item svg {
-  margin-bottom: 12px;
-  color: var(--accent);
-  opacity: 0.9;
-  transition: transform 0.6s ease, opacity 0.6s ease;
+  transform: translateX(0);
 }
 
-.itemVisible svg {
-  transform: translateY(-2px);
-  opacity: 1;
+.item svg {
+  flex-shrink: 0;
+  /* margin-top: 4px;  */
+  color: var(--accent);
+  opacity: 0.9;
 }
-/* .spacer {
-  height: 30vh;
-} */
+
+.itemContent h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0;
+  line-height: 1.4;
+}
+
 /* MOBILE */
 @media (max-width: 900px) {
   .section {
-    padding: 72px 0;
-    /* height: auto; */
-    min-height: unset;
+    padding: 60px 0;
   }
 
   .inner {
     grid-template-columns: 1fr;
-    gap: 42px;
-    padding: 0 20px;
-  }
-
-  .sticky {
-    position: relative;
-    top: auto;
-    padding-left: 14px;
-    margin-bottom: 14px;
-    
-  }
-  .title{
-    font-size: clamp(2rem, 6vw, 2.4rem);
-  }
-  .sticky::before {
-    display: none;
-  }
-.item {
-    padding-bottom: 10px;
-  }
-
-  .item svg {
-    margin-bottom: 4px;
-  }
-  .list {
     gap: 40px;
   }
-  .spacer{
-    display: none;
+
+  .list {
+    grid-template-columns: 1fr; 
+    gap: 24px;
+  }
+
+  .sticky::before {
+    height: 60px;
   }
 }

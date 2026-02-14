@@ -93,7 +93,7 @@ export default function ProductDescription({ product }) {
                             </div>
                         )}
 
-                      
+
                         {/* SIZE AND FINISH */}
                         {(product.size || product.finish) && (
                             <div className={styles.keySpecs}>
@@ -131,7 +131,47 @@ export default function ProductDescription({ product }) {
                                 ))}
                             </div>
                         )}
-
+                        {product.highlights?.length > 0 && (
+                            <div className={styles.highlightSection}>
+                                <h3 className={styles.subHeading}>Highlights</h3>
+                                <ul className={styles.highlightList}>
+                                    {product.highlights.map((item, i) => (
+                                        <li key={i}>{item}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
+                        {product.coverage && (
+                            <div className={styles.coverageBlock}>
+                                <h3 className={styles.subHeading}>Coverage</h3>
+                                <p>{product.coverage}</p>
+                                {product.coverageNote && (
+                                    <small className={styles.coverageNote}>
+                                        {product.coverageNote}
+                                    </small>
+                                )}
+                            </div>
+                        )}
+                        {product.packing?.length > 0 && (
+                            <div className={styles.packingBlock}>
+                                <h3 className={styles.subHeading}>Available Packing</h3>
+                                <div className={styles.packingChips}>
+                                    {product.packing.map((size, i) => (
+                                        <span key={i} className={styles.packingChip}>
+                                            {size}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+                        {/* {product.application?.length > 0 && (
+  <div className={styles.applicationBlock}>
+    <h3 className={styles.subHeading}>Application</h3>
+    {product.application.map((block, i) => (
+      <p key={i}>{block.children?.[0]?.text}</p>
+    ))}
+  </div>
+)} */}
                         {/* ACTIONS */}
                         <div className={styles.actions}>
                             <Link

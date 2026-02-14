@@ -1,7 +1,9 @@
 /* ProductSection.module.css */
 .section {
   background: #f6f6f5;
-  padding: 60px 0 100px; /* Reduced top padding to close the gap */
+  position: relative;
+  z-index: 2;
+  padding: 60px 0 100px; 
 }
 
 .inner {

@@ -1,0 +1,138 @@
+.banner {
+  position: fixed;
+  top: var(--nav-height);
+  left: 0;
+  width: 100%;
+  z-index: 2000;
+
+  background: #1c1c1c;
+  color: #ffffff;
+
+  font-size: 14px;
+  line-height: 1.4;
+
+  padding: 10px 0;
+    overflow: hidden;
+  backdrop-filter: blur(6px);
+}
+
+/* CONTAINER */
+.inner {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+/* TEXT */
+.inner span {
+  flex: 1;
+  font-weight: 400;
+  letter-spacing: 0.2px;
+  white-space: normal;
+}
+
+/* ACTIONS */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+}
+
+/* CTA */
+.cta {
+  background: #ffffff;
+  color: #000000;
+
+  padding: 6px 18px;
+  border-radius: 40px;
+
+  font-weight: 500;
+  font-size: 13px;
+  text-decoration: none;
+
+  transition: all 0.25s ease;
+}
+
+.cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* CLOSE BUTTON */
+.close {
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 18px;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.close:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+/* ============================= */
+/* TABLET (1024px ↓) */
+/* ============================= */
+@media (max-width: 1024px) {
+  .inner {
+    padding: 0 24px;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .banner {
+    padding: 12px 0;
+  }
+
+  .inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    /* justify-content: center; */
+    /* align-items: center; */
+  }
+
+  .inner span {
+    font-size: 13px;
+    font-family: var(--font-primary);
+  }
+
+  .actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .cta {
+    font-size: 12px;
+    padding: 6px 14px;
+  }
+}
+
+/* ============================= */
+/* SMALL MOBILE (480px ↓) */
+/* ============================= */
+@media (max-width: 480px) {
+  .inner {
+    padding: 0 18px;
+  }
+
+  .inner span {
+    font-size: 12.5px;
+  }
+
+  .cta {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+}

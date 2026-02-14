@@ -25,7 +25,7 @@ export async function generateMetadata({ params }) {
 
   const title =
     data.seo?.title ||
-    `${data.title} | ${data.category?.title || "Products"} | Unidecor`;
+    `${data.title} | ${data.category?.title || "Products"}`;
 
   const description =
     data.seo?.description ||

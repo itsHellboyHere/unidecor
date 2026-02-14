@@ -9,14 +9,15 @@ export default function CollectionGrid({ kicker, title, items, baseSlug }) {
   if (!items || items.length === 0) return null;
 console.log("base-slug "+baseSlug);
   return (
-    <section className={styles.section}>
+    <section className={styles.section} id="collections">
       <div className={styles.inner}>
 
         {/* HEADER: Minimalist Architectural Alignment */}
         <motion.div 
           initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          // whileInView={{ opacity: 1, y: 0 }}
+          animate={{opacity:1,y:0}}
+          // viewport={{ once: true }}
           className={styles.header}
         >
           {kicker && <span className={styles.kicker}>{kicker}</span>}

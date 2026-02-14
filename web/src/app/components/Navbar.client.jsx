@@ -117,12 +117,13 @@ export default function NavbarClient({ data }) {
             </li>
 
             <li className={styles.dropdown}>
-              <button
-                className={`${styles.trigger} ${isActive("/inspiration") ? styles.activeLink : ""
-                  }`}
+              {/* DESKTOP INSPIRATION - CHANGED TO LINK */}
+              <Link
+                href="/inspiration"
+                className={`${styles.trigger} ${isActive("/inspiration") ? styles.activeLink : ""}`}
               >
                 Inspiration <ChevronDown size={14} />
-              </button>
+              </Link>
               <div className={`${styles.dropdownBox} ${styles.inspirationBox}`}>
                 {inspiration.map((item) => (
                   <Link key={item._id} href={`/inspiration/${item.slug.current}`}>{item.title}</Link>
@@ -163,8 +164,6 @@ export default function NavbarClient({ data }) {
         </div>
       </nav>
 
-      {/* MOBILE PANEL */}
-      {/* MOBILE PANEL */}
       {mobileOpen && (
         <div className={styles.mobilePanel}>
           <div className={styles.mobileHeader}>
@@ -202,7 +201,6 @@ export default function NavbarClient({ data }) {
 
                   return (
                     <div key={lvl1._id}>
-                      {/* LEVEL 1 */}
                       <div className={styles.mobileRow}>
                         <button
                           className={styles.mobileLinkBtn}
@@ -230,7 +228,6 @@ export default function NavbarClient({ data }) {
                         )}
                       </div>
 
-                      {/* LEVEL 2 */}
                       {activeProduct === lvl1._id && hasChildren && (
                         <div className={styles.mobileSubInner}>
                           {lvl1.children.map((lvl2) => {
@@ -271,7 +268,6 @@ export default function NavbarClient({ data }) {
                                   )}
                                 </div>
 
-                                {/* LEVEL 3 */}
                                 {activeSubProduct === lvl2._id && hasLevel3 && (
                                   <div className={styles.mobileLevel3}>
                                     {lvl2.children.map((lvl3) => (
@@ -300,17 +296,24 @@ export default function NavbarClient({ data }) {
               </div>
             )}
 
-            {/* INSPIRATION */}
-            <button
-              className={styles.mobileTrigger}
-              onClick={() => setOpenInspiration(!openInspiration)}
-            >
-              Inspiration
-              <ChevronDown
-                size={18}
-                className={openInspiration ? styles.rotate : ""}
-              />
-            </button>
+            {/* INSPIRATION MOBILE - UPDATED SPLIT ROW */}
+            <div className={styles.mobileRowMain}>
+              <button
+                className={styles.mobileTriggerText}
+                onClick={() => navigateMobile("/inspiration")}
+              >
+                Inspiration
+              </button>
+              <button
+                className={styles.chevronBtnMain}
+                onClick={() => setOpenInspiration(!openInspiration)}
+              >
+                <ChevronDown
+                  size={18}
+                  className={openInspiration ? styles.rotate : ""}
+                />
+              </button>
+            </div>
 
             {openInspiration && (
               <div className={styles.mobileSub}>
@@ -327,6 +330,7 @@ export default function NavbarClient({ data }) {
                 ))}
               </div>
             )}
+
             <button
               className={styles.mobileLinkBtn}
               onClick={() => navigateMobile("/about-us")}

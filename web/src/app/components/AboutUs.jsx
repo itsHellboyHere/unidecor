@@ -162,13 +162,13 @@ const AboutPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <span className={styles.kicker}>ESTABLISHED 2026</span>
+            {/* <span className={styles.kicker}>ESTABLISHED 2026</span> */}
             <h1 className={styles.title}>
               Built on Experience. Designed for Tomorrow.
             </h1>
             <p className={styles.subtitle}>
-              Unidecor is a premium surface solutions brand delivering laminates
-              and decorative materials for modern interiors—backed by 20+ years
+              UNIDECOR is an one stop solution for your all home based needs, delivering 
+              decorative materials for modern interiors—backed by 10+ years
               of deep industry expertise.
             </p>
           </motion.div>
@@ -180,8 +180,8 @@ const AboutPage = () => {
         <div className={styles.section}>
           <div className={styles.statsBar}>
             {[
-              { label: "Industry Experience", val: "20+ Years", icon: <Sparkles /> },
-              { label: "Product Portfolio", val: "500+ SKUs", icon: <ShieldCheck /> },
+              { label: "Industry Experience", val: "10+ Years", icon: <Sparkles /> },
+              // { label: "Product Portfolio", val: "500+ SKUs", icon: <ShieldCheck /> },
               { label: "Service Coverage", val: "Pan-India", icon: <Zap /> },
               { label: "Delivery Promise", val: "24–72 Hrs", icon: <Heart /> },
             ].map((item, i) => (

@@ -1,7 +1,6 @@
 /* =========================
    NAVBAR BASE
 ========================= */
-
 .nav {
   position: fixed;
   top: 0;
@@ -10,10 +9,7 @@
   z-index: 1000;
   background: transparent;
   transition: background 0.3s ease, box-shadow 0.3s ease;
-    /* font-size: 16px;
-  font-weight: 500; */
 }
-
 
 .scrolled {
   background: rgba(255, 255, 255, 0.96);
@@ -31,31 +27,28 @@
   justify-content: space-between;
 }
 
-/* =========================
-   LOGO
-========================= */
-
+/* LOGO */
 .logo img {
   height: 34px;
   display: block;
 }
 
-/* =========================
-   MENU
-========================= */
+/* MENU */
 .menu {
   display: flex;
   gap: 44px;
   list-style: none;
   align-items: center;
 }
+
 .menu a,
 .trigger {
   position: relative;
+  text-decoration: none; /* Ensure link trigger has no underline */
 }
 
 .menu li { position: relative; }
-/* Top-level links ONLY */
+
 .menu > li > a::after,
 .menu > li > .trigger::after {
   content: "";
@@ -73,14 +66,8 @@
 .menu > li.dropdown:hover > .trigger::after {
   width: 100%;
 }
-/* =========================
-   ACTIVE NAV LINK
-========================= */
 
-/* =========================
-   ACTIVE NAV LINK – PREMIUM
-========================= */
-
+/* ACTIVE NAV LINK */
 .activeLink {
   font-weight: 500;
   color: #1c1c1c;
@@ -89,15 +76,9 @@
 .activeLink::after {
   width: 28px !important;
   height: 1px;
-  background: linear-gradient(
-    to right,
-    transparent,
-    #1c1c1c,
-    transparent
-  );
+  background: linear-gradient(to right, transparent, #1c1c1c, transparent);
   bottom: -8px;
 }
-
 
 .trigger {
   font-size: 14px;
@@ -127,10 +108,9 @@
   visibility: hidden;
   transition: all 0.25s ease;
 }
-.dropdown{
-  position: relative;
-}
-/* Invisible hover bridge */
+
+.dropdown { position: relative; }
+
 .dropdown::before {
   content: "";
   position: absolute;
@@ -152,10 +132,8 @@
   transform: translateX(-50%) translateY(0);
 }
 
-/* SUB DROPDOWNS (LEVEL 2 & 3) */
-.subDropdown, .subDropdownLevel3 {
-  position: relative;
-}
+/* SUB DROPDOWNS */
+.subDropdown, .subDropdownLevel3 { position: relative; }
 
 .subTrigger {
   display: flex;
@@ -168,34 +146,20 @@
   color: #555;
   text-decoration: none;
 }
-/* .subTrigger::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 50%;
-  width: 0;
-  height: 1px;
-  background: #1c1c1c;
-  transform: translateY(-50%);
-  transition: width 0.25s ease;
-} */
 
 .subTrigger:hover {
   background: #f6f6f5;
   color: #1c1c1c;
 }
-/* .subTrigger:hover::before {
-  width: 10px;
-} */
 
 .subDropdownBox, .subDropdownBoxLevel3 {
-position: absolute;
+  position: absolute;
   top: 0;
   left: calc(100% + 6px);
-  width: 150px;              /* 🔥 REDUCED WIDTH */
+  width: 150px;
   background: #fff;
-  border-radius: 10px;       /* slightly smaller radius */
-  padding: 8px;              /* tighter padding */
+  border-radius: 10px;
+  padding: 8px;
   box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
   border: 1px solid rgba(0, 0, 0, 0.06);
   opacity: 0;
@@ -204,68 +168,20 @@ position: absolute;
   transition: all 0.18s ease;
 }
 
-/* The Fix: If 3 levels is too wide, we push the 3rd box to the LEFT */
-.subDropdownLevel3:hover > .subDropdownBoxLevel3 {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(0);
-}
-
-/* Use this specifically for the furthest right items if needed */
+.subDropdownLevel3:hover > .subDropdownBoxLevel3,
 .subDropdown:hover > .subDropdownBox {
   opacity: 1;
   visibility: visible;
   transform: translateX(0);
 }
-/* =========================
-   PRODUCT LEVEL DIFFERENTIATION
-========================= */
 
-/* Level 2 items */
-.subDropdownBox a {
-  font-weight: 500;
-}
+/* LEVELS */
+.subDropdownBox a { font-weight: 500; }
 
-/* Level 3 container */
-.subDropdownBoxLevel3 {
-  background: #fcfcfb;
-  border: 1px solid rgba(0,0,0,0.04);
-}
+.sideArrow { opacity: 0.5; }
 
-/* Level 3 links */
-.subDropdownBoxLevel3 a {
-  font-size: 13.5px;
-  padding: 8px 10px;
-  color: #666;
-}
-
-/* Subtle left guide */
-.subDropdownBoxLevel3 {
-  position: absolute;
-}
-
-.subDropdownBoxLevel3::before {
-  content: "";
-  position: absolute;
-  left: -6px;
-  top: 14px;
-  bottom: 14px;
-  width: 1px;
-  background: rgba(0,0,0,0.08);
-}
-.sideArrow {
-  opacity: 0.5;
-}
-
-/* =========================
-   INSPIRATION – FIXED & PREMIUM
-========================= */
-
-.inspirationBox {
-  width: 300px;
-  padding: 16px;
-}
-
+/* INSPIRATION */
+.inspirationBox { width: 300px; padding: 16px; }
 .inspirationBox a {
   display: block;
   padding: 14px 16px;
@@ -277,37 +193,17 @@ position: absolute;
   text-decoration: none;
   transition: background 0.2s ease, transform 0.15s ease;
 }
+.inspirationBox a + a { margin-top: 10px; }
+.inspirationBox a:hover { background: #f2f2f1; transform: translateX(2px); }
 
-.inspirationBox a + a {
-  margin-top: 10px;
-}
-
-.inspirationBox a:hover {
-  background: #f2f2f1;
-  transform: translateX(2px);
-}
-
-
-/* =========================
-   MOBILE
-========================= */
-
-.mobileBtn {
-  display: none;
-  background: none;
-  border: none;
-}
+/* MOBILE */
+.mobileBtn { display: none; background: none; border: none; }
 
 @media (max-width: 1024px) {
-  .menu {
-    display: none;
-  }
-  .mobileBtn {
-    display: block;
-  }
+  .menu { display: none; }
+  .mobileBtn { display: block; }
 }
 
-/* FULL SCREEN PANEL */
 .mobilePanel {
   position: fixed;
   inset: 0;
@@ -315,15 +211,11 @@ position: absolute;
   z-index: 9999;
   display: flex;
   flex-direction: column;
-   overflow-y: auto;         
-  -webkit-overflow-scrolling: touch; 
-}
-.mobileLogo {
-  height: 28px;
-  display: block;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
-/* HEADER */
+.mobileLogo { height: 28px; display: block; }
 .mobileHeader {
   height: 64px;
   padding: 0 20px;
@@ -331,95 +223,140 @@ position: absolute;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-weight: 600;
 }
 
-/* MENU */
 .mobileMenu {
   padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 14px;
   flex: 1;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
 }
 
-.mobileMenu a {
-  font-size: 16px;
-  font-weight: 500;
-  color: #1c1c1c;
-}
-
-/* ACCORDION BUTTON */
 .mobileTrigger {
-  background: none;
-  border: none;
-  padding: 8px 4px;
-  font-size: 16px;
-  font-weight: 500;
-  text-align: left;
+  background: none; border: none; padding: 8px 4px;
+  font-size: 16px; font-weight: 500; text-align: left;
+  display: flex; justify-content: space-between; align-items: center;
+}
+
+/* NEW MOBILE SPLIT ROW */
+.mobileRowMain {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  cursor: pointer;
+  justify-content: space-between;
 }
 
-/* FIRST LEVEL */
+.mobileTriggerText {
+  background: none; border: none; padding: 8px 4px;
+  font-size: 16px; font-weight: 500; text-align: left;
+  flex: 1; color: #1c1c1c;
+}
+
+.chevronBtnMain {
+  background: none; border: none; padding: 10px;
+  display: flex; align-items: center; justify-content: center;
+}
+
 .mobileSub {
-  margin-top: 8px;
-  padding: 12px;
-  border-radius: 12px;
-  background: #f7f6f4; 
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  margin-top: 8px; padding: 12px; border-radius: 12px;
+  background: #f7f6f4; display: flex; flex-direction: column; gap: 10px;
 }
 
-/* SECOND LEVEL */
 .mobileSubInner {
-  margin-top: 6px;
-  padding: 10px 12px;
-  border-radius: 10px;
-  background: #ffffff;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  margin-top: 6px; padding: 10px 12px; border-radius: 10px;
+  background: #ffffff; box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  display: flex; flex-direction: column; gap: 8px;
 }
 
-.mobileSubInner a {
-  font-size: 15px;
-  color: #555;
-  padding: 6px 4px;
-}
-
-.rotate {
-  transform: rotate(180deg);
-  transition: transform 0.25s ease;
-}
-
+.rotate { transform: rotate(180deg); transition: transform 0.25s ease; }
 .mobileLinkBtn {
-  background: none;
-  border: none;
-  padding: 6px 4px;
-  font-size: 15px;
-  font-weight: 500;
-  text-align: left;
-  color: #555;
-  cursor: pointer;
-}
-
-.mobileLinkBtn:hover {
-  color: #1c1c1c;
+  background: none; border: none; padding: 6px 4px;
+  font-size: 15px; font-weight: 500; text-align: left; color: #555;
 }
 
 .mobileLevel3 {
-  margin-top: 4px;
-  padding-left: 15px;
+  margin-top: 4px; padding-left: 15px; display: flex;
+  flex-direction: column; gap: 8px; border-left: 1px solid #ddd; margin-left: 10px;
+}
+
+
+/* =====================================
+   LEVEL 3 DROPDOWN – REFINED DESIGN
+   (Desktop Only – Safe Override)
+===================================== */
+
+.subDropdownBoxLevel3 {
+  position: absolute;
+  top: 0;
+  left: calc(100% + 12px);
+
+  min-width: 200px;
+  padding: 14px 14px;
+
+  background: #ffffff;
+  border-radius: 14px;
+
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08);
+
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  border-left: 1px solid #ddd;
-  margin-left: 10px;
+  gap: 6px;
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(10px);
+transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+            transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.subDropdownLevel3::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -16px;
+  width: 22px;
+  height: 100%;
+  background: transparent;
+}
+/* Show animation */
+.subDropdownLevel3:hover > .subDropdownBoxLevel3 {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+}
+
+/* Level 3 Links */
+.subDropdownBoxLevel3 a {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #444;
+
+  padding: 8px 12px;
+  border-radius: 8px;
+
+  transition: background 0.18s ease, transform 0.15s ease, color 0.18s ease;
+}
+
+.subDropdownBoxLevel3 a:hover {
+  background: #f6f6f5;
+  transform: translateX(3px);
+  color: #1c1c1c;
+}
+
+/* Elegant vertical divider */
+.subDropdownBoxLevel3::before {
+  content: "";
+  position: absolute;
+  left: -10px;
+  top: 20%;
+  bottom: 20%;
+  width: 1px;
+  background: rgba(0, 0, 0, 0.06);
+}
+.subDropdownBoxLevel3 {
+  pointer-events: none;
+}
+
+.subDropdownLevel3:hover > .subDropdownBoxLevel3 {
+  pointer-events: auto;
 }

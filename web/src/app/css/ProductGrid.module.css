@@ -1,7 +1,8 @@
 .section {
   background: #fbfbfb;
   padding: 60px 0 120px;
-
+  position: relative;
+  z-index: 2;
 }
 
 .inner {

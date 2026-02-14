@@ -104,8 +104,9 @@
 
 /* CONTENT */
 .contentSide {
-position: sticky;
-  top: calc(var(--navbar-height));
+  position: sticky;
+  /* top: calc(var(--navbar-height) - 20px); */
+  top: var(--navbar-height);
   align-self: self-start;
 }
 
@@ -267,7 +268,63 @@ position: sticky;
   gap: 10px;
   color: #555;
 }
+.subHeading {
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  font-weight: 700;
+  color: #111;
+}
 
+.highlightSection {
+  margin-bottom: 60px;
+}
+
+.highlightList {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.highlightList li {
+  font-size: 15px;
+  color: #444;
+}
+
+.coverageBlock {
+  margin-bottom: 60px;
+}
+
+.coverageNote {
+  display: block;
+  margin-top: 12px;
+  font-size: 12px;
+  color: #999;
+}
+
+.packingBlock {
+  margin-bottom: 60px;
+}
+
+.packingChips {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.packingChip {
+  background: rgba(0,0,0,0.05);
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.applicationBlock {
+  margin-bottom: 60px;
+}
 /* MOBILE */
 @media (max-width: 1024px) {
   .layout {
