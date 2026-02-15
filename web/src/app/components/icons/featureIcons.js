@@ -24,6 +24,8 @@ import {
   ShieldOff,
   ThumbsUp,
   Birdhouse,
+  SlidersHorizontal,
+  SlidersVertical,
   // Sparkles,
 } from "lucide-react";
 
@@ -52,4 +54,6 @@ export const featureIconMap = {
   anti:ShieldOffIcon,
   premium:ThumbsUp,
   wood:Birdhouse,
+  slide:SlidersHorizontal,
+  slide2:SlidersVertical,
 };

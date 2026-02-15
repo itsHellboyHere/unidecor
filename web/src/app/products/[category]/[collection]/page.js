@@ -113,7 +113,18 @@ export default async function CollectionPage({ params, searchParams }) {
           size="medium"
         />
       )}
-
+        {/* PRODUCTS + FILTERS */}
+        {isTerminalCollection && (
+          <ProductsSection
+            title={`${data.title} Products`}
+            products={products}
+            filters={{
+              Finish: filters?.finishes,
+              Size: filters?.sizes,
+              "Design Code": filters?.designCodes,
+            }}
+          />
+        )}
       <div style={{ position: "relative", zIndex: 2 }}>
         {data.description && (
           <PageIntro
@@ -140,18 +151,7 @@ export default async function CollectionPage({ params, searchParams }) {
           />
         )}
 
-        {/* PRODUCTS + FILTERS */}
-        {isTerminalCollection && (
-          <ProductsSection
-            title={`${data.title} Products`}
-            products={products}
-            filters={{
-              Finish: filters?.finishes,
-              Size: filters?.sizes,
-              "Design Code": filters?.designCodes,
-            }}
-          />
-        )}
+
       </div>
     </>
   );
