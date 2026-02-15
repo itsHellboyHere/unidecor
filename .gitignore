@@ -6,3 +6,9 @@ node_modules
 .sanity
 dist
 
+
+# Sanity dataset exports
+backups/
+production-export-*/
+*.tar.gz
+*.tar
