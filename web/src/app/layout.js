@@ -29,7 +29,7 @@ export const metadata = {
   },
 
   description:
-    "Unidecor offers premium laminates, louvers, acrylic surfaces, and interior materials backed by 20+ years of industry expertise.",
+    "Unidecor offers premium laminates, louvers, acrylic surfaces, and interior materials backed by 10+ years of industry expertise.",
 
   keywords: [
     "laminates",

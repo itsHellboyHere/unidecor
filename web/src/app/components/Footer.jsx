@@ -19,7 +19,7 @@ export default function FooterClient({ data }) {
 
         {/* BRAND */}
         <div className={styles.col}>
-          <img src="/logo.png" alt="Unidecor" className={styles.logo} />
+          <img src="/logo-footer.png" alt="Unidecor" className={styles.logo} />
           <p className={styles.brandText}>
             Premium decorative surfaces crafted for modern interiors,
             combining durability, design, and performance.
