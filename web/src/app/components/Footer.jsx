@@ -122,7 +122,8 @@ export default function FooterClient({ data }) {
         <div className={styles.col}>
           <h4 className={styles.heading}>Get in Touch</h4>
           <ul className={styles.contact}>
-            <li><strong>Phone:</strong> +91 98101 66841</li>
+            <li><strong>Gaurav Jain:</strong> +91 8527555909</li>
+                <li><strong>Sunayana Jain:</strong> +91 8527355586 </li>
             <li><strong>Email:</strong> info@unidecor.com</li>
             <li>
               <strong>Address:</strong><br />
