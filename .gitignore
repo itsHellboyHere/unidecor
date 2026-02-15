@@ -12,3 +12,6 @@ backups/
 production-export-*/
 *.tar.gz
 *.tar
+# Ignore all archive files in any subfolder
+*.tar.gz
+unidecor-cms/*.tar.gz
