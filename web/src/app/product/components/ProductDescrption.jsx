@@ -16,12 +16,17 @@ export default function ProductDescription({ product }) {
     const categorySlug = product.collection?.category?.slug?.current;
     const collectionSlug = product.collection?.slug?.current;
 
-    const backHref =
-        categorySlug && collectionSlug
-            ? `/products/${categorySlug}/${collectionSlug}`
-            : categorySlug
-                ? `/products/${categorySlug}`
-                : "/products";
+const isDirectCategory =
+  categorySlug && collectionSlug && categorySlug === collectionSlug;
+
+const backHref =
+  isDirectCategory
+    ? `/products/${categorySlug}`
+    : categorySlug && collectionSlug
+      ? `/products/${categorySlug}/${collectionSlug}`
+      : categorySlug
+        ? `/products/${categorySlug}`
+        : "/products";
 
     return (
         <main className={styles.wrapper}>
