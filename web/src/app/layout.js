@@ -22,7 +22,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata = {
-  metadataBase: new URL("https://www.theunidecor.com"),
+  metadataBase: new URL("https://theunidecor.com"),
 
   title: {
     default: "Unidecor | Premium Laminates & Interior Surfaces",
@@ -45,7 +45,7 @@ export const metadata = {
   openGraph: {
     type: "website",
     siteName: "Unidecor",
-    url: "https://www.theunidecor.com",
+    url: "https://theunidecor.com",
     images: [
       {
         url: "/og-default.jpg",

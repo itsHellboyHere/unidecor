@@ -1,7 +1,7 @@
 import { sanityClient } from "@/app/lib/sanity.client";
 
 export default async function sitemap() {
-  const baseUrl = "https://www.theunidecor.com";
+const baseUrl = "https://theunidecor.com";
 
   /* -----------------------------
      STATIC ROUTES

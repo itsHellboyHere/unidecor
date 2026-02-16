@@ -16,7 +16,7 @@ export const metadata = {
     title: "Contact Unidecor | Interior Surface Solutions",
     description:
       "Have a question or project in mind? Contact Unidecor for expert guidance on laminates, wall panels, and premium interior materials.",
-    url: "https://www.unidecor.com/contact",
+    url: "https://theunidecor.com/contact",
     siteName: "Unidecor",
     images: [
       {

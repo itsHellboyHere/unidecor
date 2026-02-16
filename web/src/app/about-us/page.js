@@ -16,7 +16,7 @@ export const metadata = {
     title: "About Unidecor | Premium Interior Surface Solutions",
     description:
       "Learn about Unidecor’s vision, craftsmanship, and commitment to high-quality interior surface solutions for homes and commercial spaces.",
-    url: "https://www.unidecor.com/about-us",
+    url: "https://theunidecor.com/about-us",
     siteName: "Unidecor",
     images: [
       {

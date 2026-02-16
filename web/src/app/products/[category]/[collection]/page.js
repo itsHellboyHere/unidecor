@@ -32,7 +32,7 @@ export async function generateMetadata({ params }) {
     data.description?.[0]?.children?.[0]?.text ||
     `Explore ${data.title} by Unidecor. Premium surfaces designed for modern interiors.`;
 
-  const url = `https://www.theunidecor.com/products/${data.category?.slug?.current}/${data.slug.current}`;
+  const url = `https://theunidecor.com/products/${data.category?.slug?.current}/${data.slug.current}`;
 
   return {
     title,
