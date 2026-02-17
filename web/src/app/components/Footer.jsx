@@ -124,7 +124,7 @@ export default function FooterClient({ data }) {
           <ul className={styles.contact}>
             <li><strong>Gaurav Jain:</strong> +91 8527555909</li>
                 <li><strong>Sunayana Jain:</strong> +91 8527355586 </li>
-            <li><strong>Email:</strong> info@unidecor.com</li>
+            <li><strong>Email:</strong> info@theunidecor.com</li>
             <li>
               <strong>Address:</strong><br />
               Head Office: 236, <br />

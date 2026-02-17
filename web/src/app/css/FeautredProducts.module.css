@@ -9,17 +9,12 @@
   padding: 0 36px;
 }
 
-/* HEADER */
-.headerRow {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  margin-bottom: 64px;
-}
+/* ================= HEADER ================= */
 
 .header {
   position: relative;
   padding-left: 24px;
+  margin-bottom: 64px;
 }
 
 .header::before {
@@ -50,58 +45,16 @@
   font-weight: 700;
 }
 
+/* ================= GRID ================= */
 
-
-/* NAV BUTTONS  */
-.navButtons {
-  display: flex;
-  gap: 16px;
-  align-items: center;
-}
-
-.navButtons button {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  border: 1px solid rgba(0,0,0,0.14);
-  background: #ffffff;
-  color: #1e1e1e;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  cursor: pointer;
-  transition:
-    background 0.25s ease,
-    border-color 0.25s ease,
-    transform 0.25s ease,
-    box-shadow 0.25s ease;
-}
-
-.navButtons button:hover:not(:disabled) {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: #fff;
-  transform: translateY(-2px);
-  box-shadow: 0 10px 24px rgba(0,0,0,0.18);
-}
-
-.navButtons button:disabled {
-  opacity: 0.35;
-  cursor: not-allowed;
-  box-shadow: none;
-  transform: none;
-}
-
-/* GRID */
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 56px;
 }
 
-/* CARD WRAPPER */
+/* ================= CARD ================= */
+
 .wrapperCard {
   background: #e9e6df;
   border-radius: 28px;
@@ -113,7 +66,6 @@
   transform: translateY(-6px);
 }
 
-/* CARD */
 .productCard {
   position: relative;
   height: 320px;
@@ -122,7 +74,6 @@
   box-shadow: 0 30px 80px rgba(0,0,0,0.18);
 }
 
-/* IMAGE */
 .image {
   position: absolute;
   inset: 0;
@@ -169,39 +120,56 @@
   transform: scale(1.1);
 }
 
-/* MOBILE ≤ 780px */
+/* ================= TABLET (iPad) ================= */
+
+@media (max-width: 1100px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+  }
+
+  .productCard {
+    height: 300px;
+  }
+}
+
+/* ================= MOBILE ================= */
+
 @media (max-width: 780px) {
   .section {
     padding: 88px 0;
   }
-  .navButtons{
-    align-self: flex-start;
-  }
-.navButtons button {
-    width: 48px;
-    height: 48px;
-  }
+
   .inner {
     padding: 0 20px;
   }
 
-  .headerRow {
-    flex-direction: column;
-    align-items: center;
-    gap: 24px;
+  .header {
+    margin-bottom: 40px;
   }
 
+  /* Horizontal scroll layout */
   .grid {
-    grid-template-columns: 1fr;
-    gap: 24px;
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 8px;
+    padding-right: 20px; 
+  }
+
+  .grid::-webkit-scrollbar {
+    display: none;
   }
 
   .wrapperCard {
+    flex: 0 0 82%;
+    scroll-snap-align: start;
     padding: 20px;
   }
 
   .productCard {
-    height: 280px;
+    height: 260px;
     box-shadow: 0 12px 28px rgba(0,0,0,0.14);
   }
 
@@ -210,27 +178,10 @@
   }
 
   .productTitle {
-    font-size: 1.25rem;
+    font-size: 1.2rem;
   }
 
   .productTitle::after {
     opacity: 1;
-  }
-
-}
-
-/* ENTRY ANIMATION */
-.enterFromRight {
-  animation: slideInFromRight 0.6s ease forwards;
-}
-
-@keyframes slideInFromRight {
-  from {
-    opacity: 0;
-    transform: translateX(36px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
   }
 }

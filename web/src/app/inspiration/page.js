@@ -21,8 +21,8 @@ export default function InspirationPage() {
     return (
         <main>
             <MasonryGallery
-                title="Interior Inspiration"
-                subtitle="Explore our curated mix of premium surfaces across all home areas"
+                title="An Inspiration"
+                subtitle="Explore our curated mix of premium surfaces across your home areas"
                 items={mixedImages}
             />
             {/* Cards for specific departments will be added here next */}

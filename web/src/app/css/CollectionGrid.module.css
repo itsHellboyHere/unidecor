@@ -2,6 +2,7 @@
   background: #fbfbfb;
   padding: clamp(100px, 12vw, 160px) 0;
   position: relative;
+  z-index: 3;
 }
 
 .inner {

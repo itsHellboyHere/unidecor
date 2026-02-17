@@ -204,7 +204,7 @@ window.location.href = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
 
             <a href="mailto:info@unidecor.com" className={styles.ctaItem}>
               <Mail size={16} />
-              <span>info@unidecor.com</span>
+              <span>info@theunidecor.com</span>
             </a>
 
             <div className={styles.ctaItem}>

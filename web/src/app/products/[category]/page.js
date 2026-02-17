@@ -115,6 +115,16 @@ export default async function CategoryPage({ params, searchParams }) {
     }}
   />
 )}
+
+{/* COLLECTIONS → ONLY for non-terminal categories */}
+{!isTerminalCategory && collections.length > 0 && (
+  <CollectionGrid
+    kicker="Explore Collections"
+    title={`Discover ${categoryData.title}`}
+    items={collections}
+    baseSlug={`/products/${categoryData.slug.current}`}
+  />
+)}
       <div style={{ position: 'relative', zIndex: 2}}>
       <PageIntro
         kicker={`About ${categoryData.title}`}
@@ -129,15 +139,6 @@ export default async function CategoryPage({ params, searchParams }) {
         />
       )}
 
-{/* COLLECTIONS → ONLY for non-terminal categories */}
-{!isTerminalCategory && collections.length > 0 && (
-  <CollectionGrid
-    kicker="Explore Collections"
-    title={`Discover ${categoryData.title}`}
-    items={collections}
-    baseSlug={`/products/${categoryData.slug.current}`}
-  />
-)}
 
 
 </div>

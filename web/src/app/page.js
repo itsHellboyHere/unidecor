@@ -20,9 +20,10 @@ export default async function HomePage() {
       {/* {campaign && <CampaignBanner data={campaign}/>} */}
       <Hero />
       <UnidecorPhilosophy />
+       <FeaturedProducts />
       {/* <StatsStrip/> */}
       <MaterialPrinciples />
-      <FeaturedProducts />
+     
       <MaterialStories />
       {/* <TrustReviews/> */}
       <ExploreAttributes

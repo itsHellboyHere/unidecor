@@ -1,9 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import styles from "@/app/css/FeautredProducts.module.css";
-import { ArrowLeft, ArrowRight } from "lucide-react";
 
 const FEATURED_PRODUCTS = [
   {
@@ -12,92 +10,32 @@ const FEATURED_PRODUCTS = [
     image: "/featured/laminates.webp",
   },
   {
-    slug: "laminates/decorative-laminates",
-    title: "Decorative Laminates",
-    image: "/featured/decorative.webp",
+    slug: "paints",
+    title: "Paints",
+    image: "/featured/paints.webp",
   },
   {
-    slug: "plywood",
-    title: "Engineered Plywood",
-    image: "/featured/plywood.webp",
-  },
-  {
-    slug: "aminates/acrylic-laminates",
-    title: "Acrylic Laminates",
-    image: "/featured/wpc.webp",
-  },
-  {
-    slug: "wall-panel",
-    title: "Wall Panels",
-    image: "/featured/wall-panels.webp",
-  },
-  {
-    slug: "kitchen-panels",
-    title: "Kitchen Panels",
-    image: "/featured/kitchen-hardware.webp",
+    slug: "hardware",
+    title: "Hardware",
+    image: "/featured/hardware.jpg",
   },
 ];
 
-
-
 export default function FeaturedProducts() {
-  const [index, setIndex] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
-  const [animateKey, setAnimateKey] = useState(0); 
-  
-
-  useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth <= 780);
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
-  }, []);
-
-  const visibleCount = isMobile ? 1 : 3;
-  const maxIndex = FEATURED_PRODUCTS.length - visibleCount;
-
-  const visibleItems = FEATURED_PRODUCTS.slice(
-    index,
-    index + visibleCount
-  );
-
-  const goNext = () => {
-    setIndex(i => Math.min(i + visibleCount, maxIndex));
-    setAnimateKey(k => k + 1); 
-  };
-
-  const goPrev = () => {
-    setIndex(i => Math.max(i - visibleCount, 0));
-    setAnimateKey(k => k + 1); 
-  };
-
   return (
     <section className={styles.section}>
       <div className={styles.inner}>
-
-        <div className={styles.headerRow}>
-          <div className={styles.header}>
-            <span className={styles.kicker}>Our Range</span>
-            <h2 className={styles.title}>Curated Products</h2>
-          </div>
-
-          <div className={styles.navButtons}>
-            <button onClick={goPrev} disabled={index === 0}>
-              <ArrowLeft size={22} />
-            </button>
-            <button onClick={goNext} disabled={index >= maxIndex}>
-              <ArrowRight size={22} />
-            </button>
-          </div>
+        <div className={styles.header}>
+          <span className={styles.kicker}>Our Range</span>
+          <h2 className={styles.title}>Curated Products</h2>
         </div>
 
-        {/* GRID */}
-        <div className={styles.grid} key={animateKey}>
-          {visibleItems.map(item => (
+        <div className={styles.grid}>
+          {FEATURED_PRODUCTS.map(item => (
             <Link
               key={item.slug}
               href={`/products/${item.slug}`}
-              className={`${styles.wrapperCard} ${styles.enterFromRight}`}
+              className={styles.wrapperCard}
             >
               <div className={styles.productCard}>
                 <div
@@ -110,7 +48,6 @@ export default function FeaturedProducts() {
             </Link>
           ))}
         </div>
-
       </div>
     </section>
   );

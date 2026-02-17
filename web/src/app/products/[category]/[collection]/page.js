@@ -125,6 +125,15 @@ export default async function CollectionPage({ params, searchParams }) {
             }}
           />
         )}
+                {/* CHILD COLLECTIONS */}
+        {!isTerminalCollection && hasChildren && (
+          <CollectionGrid
+            kicker="Explore Range"
+            title={`Discover ${data.title}`}
+            items={data.children}
+            baseSlug={`/products/${data.category.slug.current}/${data.slug.current}`}
+          />
+        )}
       <div style={{ position: "relative", zIndex: 2 }}>
         {data.description && (
           <PageIntro
@@ -141,15 +150,7 @@ export default async function CollectionPage({ params, searchParams }) {
           />
         )}
 
-        {/* CHILD COLLECTIONS */}
-        {!isTerminalCollection && hasChildren && (
-          <CollectionGrid
-            kicker="Explore Range"
-            title={`Discover ${data.title}`}
-            items={data.children}
-            baseSlug={`/products/${data.category.slug.current}/${data.slug.current}`}
-          />
-        )}
+
 
 
       </div>
