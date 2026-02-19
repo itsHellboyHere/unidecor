@@ -3,211 +3,206 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import {
-    ShieldCheck,
-    FileText,
-    ChevronRight,
-    MoveLeft,
-    Ruler,
+  ShieldCheck,
+  ChevronRight,
+  MoveLeft,
+  Ruler
 } from "lucide-react";
 
 import styles from "@/app/product/css/ProductDescrption.module.css";
 
 export default function ProductDescription({ product }) {
-    const categorySlug = product.collection?.category?.slug?.current;
-    const collectionSlug = product.collection?.slug?.current;
+  const categorySlug = product.collection?.category?.slug?.current;
+  const collectionSlug = product.collection?.slug?.current;
 
-const isDirectCategory =
-  categorySlug && collectionSlug && categorySlug === collectionSlug;
+  const isDirectCategory =
+    categorySlug && collectionSlug && categorySlug === collectionSlug;
 
-const backHref =
-  isDirectCategory
-    ? `/products/${categorySlug}`
-    : categorySlug && collectionSlug
-      ? `/products/${categorySlug}/${collectionSlug}`
-      : categorySlug
-        ? `/products/${categorySlug}`
-        : "/products";
+  const backHref =
+    isDirectCategory
+      ? `/products/${categorySlug}`
+      : categorySlug && collectionSlug
+        ? `/products/${categorySlug}/${collectionSlug}`
+        : categorySlug
+          ? `/products/${categorySlug}`
+          : "/products";
 
-    return (
-        <main className={styles.wrapper}>
-            <div className={styles.container}>
+  const hasSpecs = product.specifications?.length > 0;
+  const hasFeatures = product.keyFeatures?.length > 0;
+  const hasHighlights = product.highlights?.length > 0;
+  const hasPacking = product.packing?.length > 0;
 
-                {/* TOP BAR */}
-                <nav className={styles.nav}>
-                    <Link href={backHref} className={styles.backLink}>
-                        <MoveLeft size={18} />
-                        <span>Back to Collection</span>
-                    </Link>
-                    <div className={styles.brandTag}>UNIDECOR</div>
-                </nav>
+  return (
+    <main className={styles.wrapper}>
+      <div className={styles.container}>
 
-                <div className={styles.layout}>
+        {/* NAV */}
+        <nav className={styles.nav}>
+          <Link href={backHref} className={styles.backLink}>
+            <MoveLeft size={18} />
+            <span>Back to Collection</span>
+          </Link>
+          <div className={styles.brandTag}>UNIDECOR</div>
+        </nav>
 
-                    {/* IMAGE */}
-                    <aside className={styles.visualSide}>
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6 }}
-                            className={styles.imageFrame}
-                        >
-                            {/* subtle geometric shape */}
-                            <div className={styles.shapeAccent} />
+        <div className={styles.layout}>
 
-                            {product.heroImage && (
-                                <img
-                                    src={product.heroImage.url}
-                                    alt={product.name}
-                                    className={styles.mainImg}
-                                />
-                            )}
+          {/* IMAGE */}
+          <aside className={styles.visualSide}>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className={styles.imageFrame}
+            >
+              {product.heroImage && (
+                <img
+                  src={product.heroImage.url}
+                  alt={product.name}
+                  className={styles.mainImg}
+                />
+              )}
+            </motion.div>
+          </aside>
 
-                            <div className={styles.glossOverlay} />
+          {/* CONTENT */}
+          <section className={styles.contentSide}>
 
-                            <div className={styles.batchNote}>
-                                <strong>Note</strong>
-                                <span>Actual shade may vary by batch.</span>
-                            </div>
-                        </motion.div>
-                    </aside>
+            <header className={styles.header}>
+              {product.collection?.title && (
+                <span className={styles.series}>
+                  {product.collection.title}
+                </span>
+              )}
 
-                    {/* CONTENT */}
-                    <section className={styles.contentSide}>
-                        <header className={styles.header}>
-                            {product.collection?.title && (
-                                <span className={styles.series}>
-                                    {product.collection.title}
-                                </span>
-                            )}
+              <h1 className={styles.title}>{product.name}</h1>
 
-                            <h1 className={styles.title}>{product.name}</h1>
+              {product.designCode && (
+                <span className={styles.code}>
+                  Code — {product.designCode}
+                </span>
+              )}
 
-                            {product.designCode && (
-                                <span className={styles.code}>
-                                    Design Code — {product.designCode}
-                                </span>
-                            )}
-                        </header>
-
-                        {/* DESCRIPTION */}
-                        {product.description?.length > 0 && (
-                            <div className={styles.description}>
-                                {product.description.map((block, i) => (
-                                    <p key={i}>{block.children?.[0]?.text}</p>
-                                ))}
-                            </div>
-                        )}
-
-
-                        {/* SIZE AND FINISH */}
-                        {(product.size || product.finish) && (
-                            <div className={styles.keySpecs}>
-                                {product.size && (
-                                    <div className={styles.specChip}>
-                                        <Ruler size={14} />
-                                        <span>
-                                            <strong>Size</strong>
-                                            {product.size}
-                                        </span>
-                                    </div>
-                                )}
-
-                                {product.finish && (
-                                    <div className={styles.specChip}>
-                                        <ShieldCheck size={14} />
-                                        <span>
-                                            <strong>Finish</strong>
-                                            {product.finish}
-                                        </span>
-                                    </div>
-                                )}
-                            </div>
-                        )}
-
-                        {/* SPECS */}
-                        {product.specifications?.length > 0 && (
-                            <div className={styles.specGrid}>
-                                {product.specifications.map((spec, i) => (
-                                    <Spec
-                                        key={i}
-                                        label={spec.label}
-                                        value={spec.value}
-                                    />
-                                ))}
-                            </div>
-                        )}
-                        {product.highlights?.length > 0 && (
-                            <div className={styles.highlightSection}>
-                                <h3 className={styles.subHeading}>Highlights</h3>
-                                <ul className={styles.highlightList}>
-                                    {product.highlights.map((item, i) => (
-                                        <li key={i}>{item}</li>
-                                    ))}
-                                </ul>
-                            </div>
-                        )}
-                        {product.coverage && (
-                            <div className={styles.coverageBlock}>
-                                <h3 className={styles.subHeading}>Coverage</h3>
-                                <p>{product.coverage}</p>
-                                {product.coverageNote && (
-                                    <small className={styles.coverageNote}>
-                                        {product.coverageNote}
-                                    </small>
-                                )}
-                            </div>
-                        )}
-                        {product.packing?.length > 0 && (
-                            <div className={styles.packingBlock}>
-                                <h3 className={styles.subHeading}>Available Packing</h3>
-                                <div className={styles.packingChips}>
-                                    {product.packing.map((size, i) => (
-                                        <span key={i} className={styles.packingChip}>
-                                            {size}
-                                        </span>
-                                    ))}
-                                </div>
-                            </div>
-                        )}
-                        {/* {product.application?.length > 0 && (
-  <div className={styles.applicationBlock}>
-    <h3 className={styles.subHeading}>Application</h3>
-    {product.application.map((block, i) => (
-      <p key={i}>{block.children?.[0]?.text}</p>
-    ))}
-  </div>
-)} */}
-                        {/* ACTIONS */}
-                        <div className={styles.actions}>
-                            <Link
-                                href={`/contact?type=product&slug=${product.slug.current}&title=${product.name}`}
-                                className={styles.primaryBtn}
-                            >
-                                Request Sample <ChevronRight size={16} />
-                            </Link>
-
-                            {/* <button className={styles.secondaryBtn}>
-                                <FileText size={16} />
-                                Technical Datasheet
-                            </button> */}
-                        </div>
-                    </section>
+              {product.mrp && (
+                <div className={styles.price}>
+                  ₹ {product.mrp.toLocaleString()}
                 </div>
+              )}
+            </header>
+
+            {/* DESCRIPTION */}
+            {product.description?.length > 0 && (
+              <div className={styles.description}>
+                {product.description.map((block, i) => (
+                  <p key={i}>{block.children?.[0]?.text}</p>
+                ))}
+              </div>
+            )}
+
+            {/* SIZE & FINISH CHIPS */}
+            {(product.size || product.finish) && (
+              <div className={styles.keySpecs}>
+                {product.size && (
+                  <Chip icon={<Ruler size={14} />} label="Size" value={product.size} />
+                )}
+
+                {product.finish && (
+                  <Chip icon={<ShieldCheck size={14} />} label="Finish" value={product.finish} />
+                )}
+              </div>
+            )}
+
+            {/* SPECIFICATIONS */}
+            {hasSpecs && (
+              <Section title="Specifications">
+                <div className={styles.specGrid}>
+                  {product.specifications.map((spec, i) => (
+                    <Spec key={i} label={spec.label} value={spec.value} />
+                  ))}
+                </div>
+              </Section>
+            )}
+
+            {/* KEY FEATURES */}
+            {hasFeatures && (
+              <Section title="Key Features">
+                <ul className={styles.featureList}>
+                  {product.keyFeatures.map((item, i) => (
+                    <li key={i}>{item}</li>
+                  ))}
+                </ul>
+              </Section>
+            )}
+
+            {/* HIGHLIGHTS */}
+            {hasHighlights && (
+              <Section title="Highlights">
+                <ul className={styles.featureList}>
+                  {product.highlights.map((item, i) => (
+                    <li key={i}>{item}</li>
+                  ))}
+                </ul>
+              </Section>
+            )}
+
+            {/* PACKING */}
+            {hasPacking && (
+              <Section title="Available Packing">
+                <div className={styles.packingChips}>
+                  {product.packing.map((size, i) => (
+                    <span key={i} className={styles.packingChip}>
+                      {size}
+                    </span>
+                  ))}
+                </div>
+              </Section>
+            )}
+
+            {/* ACTION */}
+            <div className={styles.actions}>
+              <Link
+                href={`/contact?type=product&slug=${product.slug.current}&title=${product.name}`}
+                className={styles.primaryBtn}
+              >
+                Request Sample <ChevronRight size={16} />
+              </Link>
             </div>
-        </main>
-    );
+
+          </section>
+        </div>
+      </div>
+    </main>
+  );
+}
+
+/* ---------- Helpers ---------- */
+
+function Section({ title, children }) {
+  return (
+    <div className={styles.section}>
+      <h3 className={styles.subHeading}>{title}</h3>
+      {children}
+    </div>
+  );
 }
 
 function Spec({ label, value }) {
-    return (
-        <div className={styles.specItem}>
-            <div className={styles.specIconWrap}>
-                <ShieldCheck size={14} />
-            </div>
-            <div className={styles.specText}>
-                <span className={styles.specLabel}>{label}</span>
-                <strong className={styles.specValue}>{value}</strong>
-            </div>
-        </div>
-    );
+  return (
+    <div className={styles.specItem}>
+      <span className={styles.specLabel}>{label}</span>
+      <strong className={styles.specValue}>{value}</strong>
+    </div>
+  );
+}
+
+function Chip({ icon, label, value }) {
+  return (
+    <div className={styles.specChip}>
+      {icon}
+      <div>
+        <small>{label}</small>
+        <strong>{value}</strong>
+      </div>
+    </div>
+  );
 }

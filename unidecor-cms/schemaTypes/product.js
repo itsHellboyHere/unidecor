@@ -24,7 +24,11 @@ export default {
       to: [{ type: "productCollection" }],
       validation: Rule => Rule.required(),
     },
-
+    {
+  name: "mrp",
+  title: "MRP",
+  type: "number",
+},
     {
       name: "images",
       title: "Product Images",
