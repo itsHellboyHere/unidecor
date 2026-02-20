@@ -251,36 +251,72 @@
   top: 10px;
 }
 
-/* SPEC GRID */
-.specGrid {
+
+/* =============================
+   SPECIFICATIONS
+============================= */
+
+.specTable {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px; 
+  margin-top: 10px;
 }
 
-.specItem {
+.specRow {
   display: flex;
+  align-items: flex-end; 
   justify-content: space-between;
-  align-items: baseline;
+  width: 100%;
 }
 
 .specLabel {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
   color: #888;
-  font-size: 14px;
-  flex: 1;
+  font-weight: 500;
+  white-space: nowrap;
 }
 
-.specItem::after {
-  content: "";
-  flex: 2;
-  border-bottom: 1px dotted #e0e0e0;
-  margin: 0 15px;
+
+.specDots {
+  flex-grow: 1;
+  border-bottom: 1px dotted #d1d1d1;
+  margin: 0 12px 4px 12px;
+  opacity: 0.6;
 }
 
 .specValue {
-  font-weight: 600;
   font-size: 14px;
+  font-weight: 600;
   color: #111;
+  text-align: right;
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+}
+
+/* Hover effect for the row */
+.specRow:hover .specLabel {
+  color: #111;
+  transition: color 0.3s ease;
+}
+
+.specRow:hover .specDots {
+  border-bottom-style: solid; 
+  border-bottom-color: #c5a059; 
+  opacity: 1;
+  transition: all 0.3s ease;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 480px) {
+  .specValue {
+    font-size: 13px;
+  }
+  .specLabel {
+    font-size: 10px;
+  }
 }
 
 /* PACKING */

@@ -5,8 +5,8 @@ import Link from "next/link";
 import { ChevronRight, MoveLeft, ShieldCheck, Ruler } from "lucide-react";
 import styles from "@/app/product/css/ProductDescrption.module.css";
 
-export default function ProductDescription({ product , relatedProducts }) {
-  console.log("product ",product);
+export default function ProductDescription({ product, relatedProducts }) {
+  console.log("product ", product);
   const hasVariants = product?.variants?.length > 0;
 
   const categorySlug = product.collection?.category?.slug?.current;
@@ -19,10 +19,10 @@ export default function ProductDescription({ product , relatedProducts }) {
     isDirectCategory
       ? `/products/${categorySlug}`
       : categorySlug && collectionSlug
-      ? `/products/${categorySlug}/${collectionSlug}`
-      : categorySlug
-      ? `/products/${categorySlug}`
-      : "/products";
+        ? `/products/${categorySlug}/${collectionSlug}`
+        : categorySlug
+          ? `/products/${categorySlug}`
+          : "/products";
 
   return (
     <main className={styles.wrapper}>
@@ -111,7 +111,12 @@ export default function ProductDescription({ product , relatedProducts }) {
                 ))}
               </div>
             )}
-
+            {!hasVariants && (product.size || product.finish) && (
+              <div className={styles.keySpecs}>
+                {product.size && <Chip icon={<Ruler size={14} />} label="Size" value={product.size} />}
+                {product.finish && <Chip icon={<ShieldCheck size={14} />} label="Finish" value={product.finish} />}
+              </div>
+            )}
             {product.coverage && (
               <div className={styles.coverage}>
                 <strong>Coverage:</strong> {product.coverage}
@@ -121,12 +126,7 @@ export default function ProductDescription({ product , relatedProducts }) {
               </div>
             )}
 
-            {!hasVariants && (product.size || product.finish) && (
-              <div className={styles.keySpecs}>
-                {product.size && <Chip icon={<Ruler size={14} />} label="Size" value={product.size} />}
-                {product.finish && <Chip icon={<ShieldCheck size={14} />} label="Finish" value={product.finish} />}
-              </div>
-            )}
+
 
             {product.highlights?.length > 0 && (
               <Section title="Highlights">
@@ -151,10 +151,18 @@ export default function ProductDescription({ product , relatedProducts }) {
             )}
 
             {product.specifications?.length > 0 && (
-              <Section title="Specifications">
-                <div className={styles.specGrid}>
+              <Section title="Technical Specifications">
+                <div className={styles.specTable}>
                   {product.specifications.map((spec, i) => (
-                    <Spec key={i} label={spec.label} value={spec.value} />
+                    <div key={i} className={styles.specRow}>
+                      <div className={styles.specLabel}>
+                        <span>{spec.label}</span>
+                      </div>
+                      <div className={styles.specDots}></div>
+                      <div className={styles.specValue}>
+                        {spec.value}
+                      </div>
+                    </div>
                   ))}
                 </div>
               </Section>
@@ -169,47 +177,47 @@ export default function ProductDescription({ product , relatedProducts }) {
               </Link>
             </div>
           </section>
-         
-        </div>
-         {relatedProducts?.length > 0 && (
-  <section className={styles.relatedSection}>
-    <div className={styles.relatedHeader}>
-      <h3 className={styles.relatedHeading}>You May Also Like</h3>
-      <div className={styles.headingLine}></div>
-    </div>
 
-    <div className={styles.relatedGrid}>
-      {relatedProducts.map((item) => (
-        <Link
-          key={item._id}
-          href={`/product/${item.slug.current}`}
-          className={styles.relatedCard}
-        >
-          <div className={styles.relatedImageWrapper}>
-            {item.heroImage && (
-              <img 
-                src={item.heroImage.url} 
-                alt={item.name} 
-                className={styles.relatedImg}
-              />
-            )}
-            <div className={styles.relatedOverlay}>
-              <span>View Details</span>
+        </div>
+        {relatedProducts?.length > 0 && (
+          <section className={styles.relatedSection}>
+            <div className={styles.relatedHeader}>
+              <h3 className={styles.relatedHeading}>You May Also Like</h3>
+              <div className={styles.headingLine}></div>
             </div>
-          </div>
-          <div className={styles.relatedInfo}>
-            <h4 className={styles.relatedTitle}>{item.name}</h4>
-            {item.designCode && (
-              <span className={styles.relatedCode}>
-                {item.designCode}
-              </span>
-            )}
-          </div>
-        </Link>
-      ))}
-    </div>
-  </section>
-)}
+
+            <div className={styles.relatedGrid}>
+              {relatedProducts.map((item) => (
+                <Link
+                  key={item._id}
+                  href={`/product/${item.slug.current}`}
+                  className={styles.relatedCard}
+                >
+                  <div className={styles.relatedImageWrapper}>
+                    {item.heroImage && (
+                      <img
+                        src={item.heroImage.url}
+                        alt={item.name}
+                        className={styles.relatedImg}
+                      />
+                    )}
+                    <div className={styles.relatedOverlay}>
+                      <span>View Details</span>
+                    </div>
+                  </div>
+                  <div className={styles.relatedInfo}>
+                    <h4 className={styles.relatedTitle}>{item.name}</h4>
+                    {item.designCode && (
+                      <span className={styles.relatedCode}>
+                        {item.designCode}
+                      </span>
+                    )}
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
       </div>
     </main>
   );
