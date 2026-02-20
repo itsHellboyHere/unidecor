@@ -33,7 +33,7 @@ export const productDetailQuery = `
     label,
     value
   },
-
+"collectionRef": collection._ref,
   collection->{
     _id,
     title,
@@ -44,7 +44,6 @@ export const productDetailQuery = `
       slug
     }
   },
-
   seo{
     title,
     description

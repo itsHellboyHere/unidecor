@@ -5,7 +5,8 @@ import Link from "next/link";
 import { ChevronRight, MoveLeft, ShieldCheck, Ruler } from "lucide-react";
 import styles from "@/app/product/css/ProductDescrption.module.css";
 
-export default function ProductDescription({ product }) {
+export default function ProductDescription({ product , relatedProducts }) {
+  console.log("product ",product);
   const hasVariants = product?.variants?.length > 0;
 
   const categorySlug = product.collection?.category?.slug?.current;
@@ -168,7 +169,47 @@ export default function ProductDescription({ product }) {
               </Link>
             </div>
           </section>
+         
         </div>
+         {relatedProducts?.length > 0 && (
+  <section className={styles.relatedSection}>
+    <div className={styles.relatedHeader}>
+      <h3 className={styles.relatedHeading}>You May Also Like</h3>
+      <div className={styles.headingLine}></div>
+    </div>
+
+    <div className={styles.relatedGrid}>
+      {relatedProducts.map((item) => (
+        <Link
+          key={item._id}
+          href={`/product/${item.slug.current}`}
+          className={styles.relatedCard}
+        >
+          <div className={styles.relatedImageWrapper}>
+            {item.heroImage && (
+              <img 
+                src={item.heroImage.url} 
+                alt={item.name} 
+                className={styles.relatedImg}
+              />
+            )}
+            <div className={styles.relatedOverlay}>
+              <span>View Details</span>
+            </div>
+          </div>
+          <div className={styles.relatedInfo}>
+            <h4 className={styles.relatedTitle}>{item.name}</h4>
+            {item.designCode && (
+              <span className={styles.relatedCode}>
+                {item.designCode}
+              </span>
+            )}
+          </div>
+        </Link>
+      ))}
+    </div>
+  </section>
+)}
       </div>
     </main>
   );

@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { sanityClient } from "@/app/lib/sanity.client";
 import { productDetailQuery } from "@/app/lib/queries/productDetailQuery";
 import ProductDescription from "@/app/product/components/ProductDescrption";
+import { relatedProductsQuery } from "@/app/lib/queries/realtedProductsQuery";
 
 
 
@@ -53,6 +54,15 @@ export default async function ProductPage({ params }) {
   });
 
   if (!product) notFound();
+  const relatedProducts = await sanityClient.fetch(
+    relatedProductsQuery,
+    {
+      collectionId: product.collectionRef,
+      slug,
+    }
+  );
 
-  return <ProductDescription product={product} />;
+  return <ProductDescription product={product} 
+  relatedProducts={relatedProducts}
+  />;
 }
