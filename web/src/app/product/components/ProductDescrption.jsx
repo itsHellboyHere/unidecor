@@ -2,16 +2,12 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import {
-  ShieldCheck,
-  ChevronRight,
-  MoveLeft,
-  Ruler
-} from "lucide-react";
-
+import { ChevronRight, MoveLeft, ShieldCheck, Ruler } from "lucide-react";
 import styles from "@/app/product/css/ProductDescrption.module.css";
 
 export default function ProductDescription({ product }) {
+  const hasVariants = product?.variants?.length > 0;
+
   const categorySlug = product.collection?.category?.slug?.current;
   const collectionSlug = product.collection?.slug?.current;
 
@@ -22,21 +18,14 @@ export default function ProductDescription({ product }) {
     isDirectCategory
       ? `/products/${categorySlug}`
       : categorySlug && collectionSlug
-        ? `/products/${categorySlug}/${collectionSlug}`
-        : categorySlug
-          ? `/products/${categorySlug}`
-          : "/products";
-
-  const hasSpecs = product.specifications?.length > 0;
-  const hasFeatures = product.keyFeatures?.length > 0;
-  const hasHighlights = product.highlights?.length > 0;
-  const hasPacking = product.packing?.length > 0;
+      ? `/products/${categorySlug}/${collectionSlug}`
+      : categorySlug
+      ? `/products/${categorySlug}`
+      : "/products";
 
   return (
     <main className={styles.wrapper}>
       <div className={styles.container}>
-
-        {/* NAV */}
         <nav className={styles.nav}>
           <Link href={backHref} className={styles.backLink}>
             <MoveLeft size={18} />
@@ -46,13 +35,11 @@ export default function ProductDescription({ product }) {
         </nav>
 
         <div className={styles.layout}>
-
-          {/* IMAGE */}
           <aside className={styles.visualSide}>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               className={styles.imageFrame}
             >
               {product.heroImage && (
@@ -65,9 +52,7 @@ export default function ProductDescription({ product }) {
             </motion.div>
           </aside>
 
-          {/* CONTENT */}
           <section className={styles.contentSide}>
-
             <header className={styles.header}>
               {product.collection?.title && (
                 <span className={styles.series}>
@@ -77,20 +62,47 @@ export default function ProductDescription({ product }) {
 
               <h1 className={styles.title}>{product.name}</h1>
 
-              {product.designCode && (
+              {!hasVariants && product.designCode && (
                 <span className={styles.code}>
-                  Code — {product.designCode}
+                  {product.designCode}
                 </span>
               )}
 
-              {product.mrp && (
+              {!hasVariants && product.mrp && (
                 <div className={styles.price}>
                   ₹ {product.mrp.toLocaleString()}
                 </div>
               )}
             </header>
 
-            {/* DESCRIPTION */}
+            {hasVariants && (
+              <div className={styles.variantTableWrapper}>
+                <h3 className={styles.tableHeading}>Available Variants</h3>
+                <div className={styles.tableScroll}>
+                  <table className={styles.variantTable}>
+                    <thead>
+                      <tr>
+                        <th>Size</th>
+                        <th>Product Code</th>
+                        <th>MRP</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {product.variants.map((variant, i) => (
+                        <tr key={i}>
+                          <td>{variant.size || "-"}</td>
+                          <td className={styles.sku}>{variant.productCode || "-"}</td>
+                          <td className={styles.tablePrice}>
+                            {variant.mrp ? `₹ ${variant.mrp.toLocaleString()}` : "-"}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
+
             {product.description?.length > 0 && (
               <div className={styles.description}>
                 {product.description.map((block, i) => (
@@ -99,21 +111,45 @@ export default function ProductDescription({ product }) {
               </div>
             )}
 
-            {/* SIZE & FINISH CHIPS */}
-            {(product.size || product.finish) && (
-              <div className={styles.keySpecs}>
-                {product.size && (
-                  <Chip icon={<Ruler size={14} />} label="Size" value={product.size} />
-                )}
-
-                {product.finish && (
-                  <Chip icon={<ShieldCheck size={14} />} label="Finish" value={product.finish} />
+            {product.coverage && (
+              <div className={styles.coverage}>
+                <strong>Coverage:</strong> {product.coverage}
+                {product.coverageNote && (
+                  <span className={styles.coverageNote}> ({product.coverageNote})</span>
                 )}
               </div>
             )}
 
-            {/* SPECIFICATIONS */}
-            {hasSpecs && (
+            {!hasVariants && (product.size || product.finish) && (
+              <div className={styles.keySpecs}>
+                {product.size && <Chip icon={<Ruler size={14} />} label="Size" value={product.size} />}
+                {product.finish && <Chip icon={<ShieldCheck size={14} />} label="Finish" value={product.finish} />}
+              </div>
+            )}
+
+            {product.highlights?.length > 0 && (
+              <Section title="Highlights">
+                <List items={product.highlights} />
+              </Section>
+            )}
+
+            {product.keyFeatures?.length > 0 && (
+              <Section title="Key Features">
+                <List items={product.keyFeatures} />
+              </Section>
+            )}
+
+            {product.packing?.length > 0 && (
+              <Section title="Packing">
+                <div className={styles.packingChips}>
+                  {product.packing.map((item, i) => (
+                    <span key={i} className={styles.packingChip}>{item}</span>
+                  ))}
+                </div>
+              </Section>
+            )}
+
+            {product.specifications?.length > 0 && (
               <Section title="Specifications">
                 <div className={styles.specGrid}>
                   {product.specifications.map((spec, i) => (
@@ -123,59 +159,20 @@ export default function ProductDescription({ product }) {
               </Section>
             )}
 
-            {/* KEY FEATURES */}
-            {hasFeatures && (
-              <Section title="Key Features">
-                <ul className={styles.featureList}>
-                  {product.keyFeatures.map((item, i) => (
-                    <li key={i}>{item}</li>
-                  ))}
-                </ul>
-              </Section>
-            )}
-
-            {/* HIGHLIGHTS */}
-            {hasHighlights && (
-              <Section title="Highlights">
-                <ul className={styles.featureList}>
-                  {product.highlights.map((item, i) => (
-                    <li key={i}>{item}</li>
-                  ))}
-                </ul>
-              </Section>
-            )}
-
-            {/* PACKING */}
-            {hasPacking && (
-              <Section title="Available Packing">
-                <div className={styles.packingChips}>
-                  {product.packing.map((size, i) => (
-                    <span key={i} className={styles.packingChip}>
-                      {size}
-                    </span>
-                  ))}
-                </div>
-              </Section>
-            )}
-
-            {/* ACTION */}
             <div className={styles.actions}>
               <Link
                 href={`/contact?type=product&slug=${product.slug.current}&title=${product.name}`}
                 className={styles.primaryBtn}
               >
-                Request Sample <ChevronRight size={16} />
+                Inquire for Sample <ChevronRight size={16} />
               </Link>
             </div>
-
           </section>
         </div>
       </div>
     </main>
   );
 }
-
-/* ---------- Helpers ---------- */
 
 function Section({ title, children }) {
   return (
@@ -192,6 +189,16 @@ function Spec({ label, value }) {
       <span className={styles.specLabel}>{label}</span>
       <strong className={styles.specValue}>{value}</strong>
     </div>
+  );
+}
+
+function List({ items }) {
+  return (
+    <ul className={styles.featureList}>
+      {items.map((item, i) => (
+        <li key={i}>{item}</li>
+      ))}
+    </ul>
   );
 }
 

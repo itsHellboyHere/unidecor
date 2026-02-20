@@ -3,9 +3,18 @@ export const productDetailQuery = `
   _id,
   name,
   slug,
+
   designCode,
   size,
   finish,
+  mrp,
+
+  variants[]{
+    label,
+    productCode,
+    size,
+    mrp
+  },
 
   description,
   highlights,

@@ -1,9 +1,9 @@
 "use client";
 
-import { memo } from "react";
+import { memo, useState, useRef, useEffect } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { X } from "lucide-react";
+import { X, ChevronDown } from "lucide-react";
 import styles from "@/app/css/FilterBar.module.css";
 
 const FILTER_KEYS = {
@@ -16,6 +16,21 @@ function FilterBar({ filters }) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  
+  // Track open state for multiple dropdowns
+  const [activeDropdown, setActiveDropdown] = useState(null);
+  const containerRef = useRef(null);
+
+  // Close dropdowns when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (containerRef.current && !containerRef.current.contains(event.target)) {
+        setActiveDropdown(null);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const toggleFilter = (group, value) => {
     const params = new URLSearchParams(searchParams.toString());
@@ -28,44 +43,85 @@ function FilterBar({ filters }) {
       params.set(key, value);
     }
     router.push(`${pathname}?${params.toString()}`, { scroll: false });
+    setActiveDropdown(null); // Close dropdown after selection
   };
 
   const hasFilters = Array.from(searchParams.entries()).length > 0;
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} ref={containerRef}>
       <div className={styles.glassWrapper}>
         <div className={styles.filterGroups}>
           {Object.entries(filters).map(([group, values]) => {
             const key = FILTER_KEYS[group];
             const activeValue = key ? searchParams.get(key) : null;
+            const isDropdownType = group === "Design Code" || group === "Size";
 
             return (
               <div key={group} className={styles.group}>
                 <span className={styles.label}>{group}</span>
-                <div className={styles.options}>
-                  {values.map(value => {
-                    const isActive = activeValue === value;
-                    return (
-                      <button
-                        key={value}
-                        type="button"
-                        className={`${styles.pill} ${isActive ? styles.active : ""}`}
-                        onClick={() => toggleFilter(group, value)}
-                      >
-                        {/* Ensure text is wrapped and z-indexed */}
-                        <span className={styles.pillText}>{value}</span>
-                        {isActive && (
-                          <motion.div
-                            layoutId="activeGlow"
-                            className={styles.glow}
-                            transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                          />
-                        )}
-                      </button>
-                    );
-                  })}
-                </div>
+                
+                {isDropdownType ? (
+                  /* DROPDOWN RENDER (Size & Design Code) */
+                  <div className={styles.dropdownContainer}>
+                    <button 
+                      type="button"
+                      className={`${styles.dropdownTrigger} ${activeValue ? styles.activeTrigger : ""}`}
+                      onClick={() => setActiveDropdown(activeDropdown === group ? null : group)}
+                    >
+                      <span className={styles.triggerText}>{activeValue || `Select ${group}`}</span>
+                      <ChevronDown 
+                        size={14} 
+                        className={activeDropdown === group ? styles.rotate : ""} 
+                      />
+                    </button>
+
+                    <AnimatePresence>
+                      {activeDropdown === group && (
+                        <motion.div 
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: 10 }}
+                          className={styles.dropdownMenu}
+                        >
+                          {values.map(value => (
+                            <button
+                              key={value}
+                              className={`${styles.dropdownItem} ${activeValue === value ? styles.activeItem : ""}`}
+                              onClick={() => toggleFilter(group, value)}
+                            >
+                              {value}
+                            </button>
+                          ))}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                ) : (
+                  /* PILL RENDER (Finish) */
+                  <div className={styles.options}>
+                    {values.map(value => {
+                      const isActive = activeValue === value;
+                      return (
+                        <button
+                          key={value}
+                          type="button"
+                          className={`${styles.pill} ${isActive ? styles.active : ""}`}
+                          onClick={() => toggleFilter(group, value)}
+                        >
+                          <span className={styles.pillText}>{value}</span>
+                          {isActive && (
+                            <motion.div
+                              layoutId="activeGlow"
+                              className={styles.glow}
+                              transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                            />
+                          )}
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
               </div>
             );
           })}
@@ -74,9 +130,9 @@ function FilterBar({ filters }) {
         <AnimatePresence>
           {hasFilters && (
             <motion.button
-              initial={{ opacity: 0, x: 10 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 10 }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
               className={styles.clearBtn}
               onClick={() => {
                 router.replace(pathname, { scroll: false });

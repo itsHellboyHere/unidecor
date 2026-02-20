@@ -89,7 +89,40 @@ export default {
     { name: "coverageNote", type: "text" },
     { name: "packing", type: "array", of: [{ type: "string" }] },
     { name: "application", type: "array", of: [{ type: "block" }] },
+    // hardware specific
 
+{
+      name: "variants",
+      title: "Product Variants (Hardware Only)",
+      type: "array",
+      of: [
+        {
+          type: "object",
+          fields: [
+            {
+              name: "label",
+              title: "Variant Label (Example: 10 inch / 12 inch)",
+              type: "string",
+            },
+            {
+              name: "productCode",
+              title: "Product Code (SKU)",
+              type: "string",
+            },
+            {
+              name: "size",
+              title: "Size",
+              type: "string",
+            },
+            {
+              name: "mrp",
+              title: "MRP",
+              type: "number",
+            },
+          ],
+        },
+      ],
+    },
     {
       name: "seo",
       type: "object",
