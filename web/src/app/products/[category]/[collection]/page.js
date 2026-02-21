@@ -116,7 +116,7 @@ export default async function CollectionPage({ params, searchParams }) {
         {/* PRODUCTS + FILTERS */}
         {isTerminalCollection && (
           <ProductsSection
-            title={`${data.title} Products`}
+            title={`${data.title}`}
             products={products}
             filters={{
               Finish: filters?.finishes,

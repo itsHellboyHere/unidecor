@@ -6,7 +6,7 @@ import { ChevronRight, MoveLeft, ShieldCheck, Ruler } from "lucide-react";
 import styles from "@/app/product/css/ProductDescrption.module.css";
 
 export default function ProductDescription({ product, relatedProducts }) {
-  console.log("product ", product);
+  // console.log("product ", product);
   const hasVariants = product?.variants?.length > 0;
 
   const categorySlug = product.collection?.category?.slug?.current;
@@ -23,6 +23,8 @@ export default function ProductDescription({ product, relatedProducts }) {
         : categorySlug
           ? `/products/${categorySlug}`
           : "/products";
+
+
 
   return (
     <main className={styles.wrapper}>

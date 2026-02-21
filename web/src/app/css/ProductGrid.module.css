@@ -13,10 +13,10 @@
 }
 
 .heading {
-  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
   font-weight: 300; 
   color: #111;
-  margin-bottom: 80px;
+  margin-bottom: 35px;
   letter-spacing: -0.04em;
   text-align: center;
 }
@@ -154,12 +154,12 @@
   }
 
   .name { font-size: 1.1rem; }
-  .metaOverlay { opacity: 1; transform: none; } /* Always show on mobile */
+  .metaOverlay { opacity: 1; transform: none; } 
 }
 
 @media (max-width: 480px) {
   .grid { 
-    grid-template-columns: repeat(2, 1fr); /* Keep 2 cols for "Gallery" feel */
+    grid-template-columns: repeat(2, 1fr);
     gap: 15px; 
   }
   .grid > div:nth-child(even) { transform: translateY(20px); }

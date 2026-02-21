@@ -54,14 +54,25 @@ export default async function ProductPage({ params }) {
   });
 
   if (!product) notFound();
-  const relatedProducts = await sanityClient.fetch(
+
+  function shuffleArray(array) {
+  const arr = [...array];
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+  const allRelated = await sanityClient.fetch(
     relatedProductsQuery,
     {
       collectionId: product.collectionRef,
       slug,
     }
   );
-
+  const relatedProducts = shuffleArray(allRelated).slice(0,4);
+  
   return <ProductDescription product={product} 
   relatedProducts={relatedProducts}
   />;
