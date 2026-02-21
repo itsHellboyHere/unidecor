@@ -202,7 +202,7 @@ window.location.href = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
               <span>+91 85273 55586</span>
             </a>
 
-            <a href="mailto:info@unidecor.com" className={styles.ctaItem}>
+            <a href="mailto:info@theunidecor.com" className={styles.ctaItem}>
               <Mail size={16} />
               <span>info@theunidecor.com</span>
             </a>
