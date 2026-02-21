@@ -12,6 +12,7 @@ import UnidecorPhilosophy from "./components/UnidecorePhilosophy";
 import HomeCTA from "@/app/components/HomeCTA";
 import campaignQuery from "./lib/queries/campaignBanner";
 import { sanityClient } from "./lib/sanity.client";
+import LocationMap from "./components/LocationMap";
 export default async function HomePage() {
   const campaign = await sanityClient.fetch(campaignQuery);
 
@@ -32,13 +33,14 @@ export default async function HomePage() {
           { label: "Laminates", href: "/products/laminates", type: "category" },
           { label: "Wall Panel", href: "/products/wall-panel", type: "category" },
           { label: "Decorative Laminates", href: "/products/laminates/decorative-laminates", type: "collection" },
-          { label: "Matte Finish", href: "/products/plywood?finish=Matte", type: "filter" },
+          { label: "Interior Paints", href: "/products/paints/interior-paints", type: "collection" },
           { label: "Louver", href: "/products/wall-panel/louver-panel", type: "filter" },
+          { label: "Kitchen Hardware", href: "/products/hardware/kitchen-hardware", type: "collection" },
         ]}
       />
 
       <HomeCTA />
-
+        <LocationMap/>
     </main>
   )
 }
