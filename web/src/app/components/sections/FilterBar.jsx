@@ -17,7 +17,7 @@ function FilterBar({ filters }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   
-  // Track open state for multiple dropdowns
+  // Track open state for dropdowns
   const [activeDropdown, setActiveDropdown] = useState(null);
   const containerRef = useRef(null);
 
@@ -55,73 +55,47 @@ function FilterBar({ filters }) {
           {Object.entries(filters).map(([group, values]) => {
             const key = FILTER_KEYS[group];
             const activeValue = key ? searchParams.get(key) : null;
-            const isDropdownType = group === "Design Code" || group === "Size";
 
             return (
               <div key={group} className={styles.group}>
                 <span className={styles.label}>{group}</span>
                 
-                {isDropdownType ? (
-                  /* DROPDOWN RENDER (Size & Design Code) */
-                  <div className={styles.dropdownContainer}>
-                    <button 
-                      type="button"
-                      className={`${styles.dropdownTrigger} ${activeValue ? styles.activeTrigger : ""}`}
-                      onClick={() => setActiveDropdown(activeDropdown === group ? null : group)}
-                    >
-                      <span className={styles.triggerText}>{activeValue || `Select ${group}`}</span>
-                      <ChevronDown 
-                        size={14} 
-                        className={activeDropdown === group ? styles.rotate : ""} 
-                      />
-                    </button>
+                <div className={styles.dropdownContainer}>
+                  <button 
+                    type="button"
+                    className={`${styles.dropdownTrigger} ${activeValue ? styles.activeTrigger : ""}`}
+                    onClick={() => setActiveDropdown(activeDropdown === group ? null : group)}
+                  >
+                    <span className={styles.triggerText}>
+                      {activeValue || `Select ${group}`}
+                    </span>
+                    <ChevronDown 
+                      size={14} 
+                      className={activeDropdown === group ? styles.rotate : ""} 
+                    />
+                  </button>
 
-                    <AnimatePresence>
-                      {activeDropdown === group && (
-                        <motion.div 
-                          initial={{ opacity: 0, y: 10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: 10 }}
-                          className={styles.dropdownMenu}
-                        >
-                          {values.map(value => (
-                            <button
-                              key={value}
-                              className={`${styles.dropdownItem} ${activeValue === value ? styles.activeItem : ""}`}
-                              onClick={() => toggleFilter(group, value)}
-                            >
-                              {value}
-                            </button>
-                          ))}
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                ) : (
-                  /* PILL RENDER (Finish) */
-                  <div className={styles.options}>
-                    {values.map(value => {
-                      const isActive = activeValue === value;
-                      return (
-                        <button
-                          key={value}
-                          type="button"
-                          className={`${styles.pill} ${isActive ? styles.active : ""}`}
-                          onClick={() => toggleFilter(group, value)}
-                        >
-                          <span className={styles.pillText}>{value}</span>
-                          {isActive && (
-                            <motion.div
-                              layoutId="activeGlow"
-                              className={styles.glow}
-                              transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                            />
-                          )}
-                        </button>
-                      );
-                    })}
-                  </div>
-                )}
+                  <AnimatePresence>
+                    {activeDropdown === group && (
+                      <motion.div 
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 10 }}
+                        className={styles.dropdownMenu}
+                      >
+                        {values.map(value => (
+                          <button
+                            key={value}
+                            className={`${styles.dropdownItem} ${activeValue === value ? styles.activeItem : ""}`}
+                            onClick={() => toggleFilter(group, value)}
+                          >
+                            {value}
+                          </button>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
               </div>
             );
           })}
