@@ -57,7 +57,7 @@ ${formData.get("message")}
 
   const encodedMessage = encodeURIComponent(message);
 
-const whatsappNumber = "917004671676";
+const whatsappNumber = "8527355586";
 window.location.href = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
 
     e.target.reset();
