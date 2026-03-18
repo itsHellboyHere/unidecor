@@ -62,7 +62,7 @@ export default function NavbarClient({ data }) {
       <nav className={`${styles.nav} ${scrolled ? styles.scrolled : ""}`}>
         <div className={styles.inner}>
           <Link href="/" className={styles.logo}>
-            <img src="/logo.png" alt="Unidecor" />
+            <img src="/logo-footer.png" alt="Unidecor" />
           </Link>
 
           {/* ── DESKTOP MENU ── */}
@@ -199,7 +199,7 @@ export default function NavbarClient({ data }) {
         {/* Header — logo is now a clickable Link */}
         <div className={styles.mobileTop}>
           <Link href="/" className={styles.mobileLogoLink} onClick={() => setMobileOpen(false)}>
-            <img src="/logo.png" alt="Unidecor" className={styles.mobileLogo} />
+            <img src="/logo-footer.png" alt="Unidecor" className={styles.mobileLogo} />
           </Link>
           <button className={styles.mobileCloseBtn} onClick={() => setMobileOpen(false)} aria-label="Close menu">
             <Plus size={22} style={{ transform: "rotate(45deg)" }} />
