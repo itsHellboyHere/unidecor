@@ -3,7 +3,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ChevronDown, Menu, X, ChevronRight } from "lucide-react";
+import { ChevronDown, ChevronRight, Plus, ArrowUpRight } from "lucide-react";
 import styles from "@/app/css/Navbar.module.css";
 
 export default function NavbarClient({ data }) {
@@ -11,25 +11,27 @@ export default function NavbarClient({ data }) {
   const { products = [], inspiration = [] } = data || {};
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
-
   const [mobileOpen, setMobileOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
-  const [activeProduct, setActiveProduct] = useState(null); // Level 2
-  const [activeSubProduct, setActiveSubProduct] = useState(null); // Level 3
+  const [activeProduct, setActiveProduct] = useState(null);
+  const [activeSubProduct, setActiveSubProduct] = useState(null);
   const [openInspiration, setOpenInspiration] = useState(false);
+  const [hovered, setHovered] = useState(null);
+
   const isActive = (href) => {
     if (href === "/") return pathname === "/";
     return pathname.startsWith(href);
   };
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    window.addEventListener("scroll", onScroll);
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
 
   useEffect(() => {
@@ -40,7 +42,6 @@ export default function NavbarClient({ data }) {
         setActiveProduct(null);
         setActiveSubProduct(null);
         setOpenInspiration(false);
-        document.body.style.overflow = "";
       }
     };
     window.addEventListener("resize", handleResize);
@@ -64,44 +65,59 @@ export default function NavbarClient({ data }) {
             <img src="/logo.png" alt="Unidecor" />
           </Link>
 
+          {/* ── DESKTOP MENU ── */}
           <ul className={styles.menu}>
             <li>
-              <Link
-                href="/"
-                className={isActive("/") ? styles.activeLink : ""}
-              >
+              <Link href="/" className={`${styles.navLink} ${isActive("/") ? styles.activeLink : ""}`}>
                 Home
               </Link>
             </li>
 
-            {/* PRODUCTS DESKTOP */}
-            <li className={styles.dropdown}>
-              <button
-                className={`${styles.trigger} ${isActive("/products") ? styles.activeLink : ""
-                  }`}
-              >
-                Products <ChevronDown size={14} />
+            {/* PRODUCTS */}
+            <li
+              className={styles.dropItem}
+              onMouseEnter={() => setHovered("products")}
+              onMouseLeave={() => setHovered(null)}
+            >
+              <button className={`${styles.navLink} ${styles.trigger} ${isActive("/products") ? styles.activeLink : ""}`}>
+                Products
+                <ChevronDown size={13} className={`${styles.chev} ${hovered === "products" ? styles.chevUp : ""}`} />
               </button>
 
-              <div className={styles.dropdownBox}>
-                {products.map((lvl1) => (
-                  <div key={lvl1._id} className={styles.subDropdown}>
-                    <Link href={`/products/${lvl1.slug.current}`} className={styles.subTrigger}>
-                      {lvl1.title} {lvl1.children?.length > 0 && <ChevronRight size={12} className={styles.sideArrow} />}
+              <div className={`${styles.dropPanel} ${hovered === "products" ? styles.dropShow : ""}`}>
+                {products.map((lvl1, i) => (
+                  <div key={lvl1._id} className={styles.lvl1Wrap} style={{ "--i": i }}>
+                    <Link
+                      href={`/products/${lvl1.slug.current}`}
+                      className={styles.lvl1Link}
+                      onClick={() => setHovered(null)}
+                    >
+                      <span>{lvl1.title}</span>
+                      {lvl1.children?.length > 0 && <ChevronRight size={11} className={styles.rowArrow} />}
                     </Link>
 
                     {lvl1.children?.length > 0 && (
-                      <div className={styles.subDropdownBox}>
+                      <div className={styles.lvl2Panel}>
                         {lvl1.children.map((lvl2) => (
-                          <div key={lvl2._id} className={styles.subDropdownLevel3}>
-                            <Link href={`/products/${lvl1.slug.current}/${lvl2.slug.current}`} className={styles.subTrigger}>
-                              {lvl2.title} {lvl2.children?.length > 0 && <ChevronRight size={12} className={styles.sideArrow} />}
+                          <div key={lvl2._id} className={styles.lvl2Wrap}>
+                            <Link
+                              href={`/products/${lvl1.slug.current}/${lvl2.slug.current}`}
+                              className={styles.lvl2Link}
+                              onClick={() => setHovered(null)}
+                            >
+                              <span>{lvl2.title}</span>
+                              {lvl2.children?.length > 0 && <ChevronRight size={11} className={styles.rowArrow} />}
                             </Link>
 
                             {lvl2.children?.length > 0 && (
-                              <div className={styles.subDropdownBoxLevel3}>
+                              <div className={styles.lvl3Panel}>
                                 {lvl2.children.map((lvl3) => (
-                                  <Link key={lvl3._id} href={`/products/${lvl1.slug.current}/${lvl2.slug.current}/${lvl3.slug.current}`}>
+                                  <Link
+                                    key={lvl3._id}
+                                    href={`/products/${lvl1.slug.current}/${lvl2.slug.current}/${lvl3.slug.current}`}
+                                    className={styles.lvl3Link}
+                                    onClick={() => setHovered(null)}
+                                  >
                                     {lvl3.title}
                                   </Link>
                                 ))}
@@ -116,34 +132,44 @@ export default function NavbarClient({ data }) {
               </div>
             </li>
 
-            <li className={styles.dropdown}>
-              {/* DESKTOP INSPIRATION - CHANGED TO LINK */}
+            {/* INSPIRATION */}
+            <li
+              className={styles.dropItem}
+              onMouseEnter={() => setHovered("inspiration")}
+              onMouseLeave={() => setHovered(null)}
+            >
               <Link
                 href="/inspiration"
-                className={`${styles.trigger} ${isActive("/inspiration") ? styles.activeLink : ""}`}
+                className={`${styles.navLink} ${styles.trigger} ${isActive("/inspiration") ? styles.activeLink : ""}`}
               >
-                Inspiration <ChevronDown size={14} />
+                Inspiration
+                <ChevronDown size={13} className={`${styles.chev} ${hovered === "inspiration" ? styles.chevUp : ""}`} />
               </Link>
-              <div className={`${styles.dropdownBox} ${styles.inspirationBox}`}>
-                {inspiration.map((item) => (
-                  <Link key={item._id} href={`/inspiration/${item.slug.current}`}>{item.title}</Link>
+
+              <div className={`${styles.dropPanel} ${styles.inspPanel} ${hovered === "inspiration" ? styles.dropShow : ""}`}>
+                {inspiration.map((item, i) => (
+                  <Link
+                    key={item._id}
+                    href={`/inspiration/${item.slug.current}`}
+                    className={styles.inspLink}
+                    style={{ "--i": i }}
+                    onClick={() => setHovered(null)}
+                  >
+                    <span>{item.title}</span>
+                    <ArrowUpRight size={13} className={styles.inspArrow} />
+                  </Link>
                 ))}
               </div>
             </li>
+
             <li>
-              <Link
-                href="/about-us"
-                className={isActive("/about-us") ? styles.activeLink : ""}
-              >
+              <Link href="/about-us" className={`${styles.navLink} ${isActive("/about-us") ? styles.activeLink : ""}`}>
                 Our Identity
               </Link>
             </li>
 
             <li>
-              <Link
-                href="/downloads"
-                className={isActive("/downloads") ? styles.activeLink : ""}
-              >
+              <Link href="/downloads" className={`${styles.navLink} ${isActive("/downloads") ? styles.activeLink : ""}`}>
                 Downloads
               </Link>
             </li>
@@ -151,207 +177,177 @@ export default function NavbarClient({ data }) {
             <li>
               <Link
                 href="/contact"
-                className={isActive("/contact") ? styles.activeLink : ""}
+                className={`${styles.navLink} ${styles.contactLink} ${isActive("/contact") ? styles.contactActive : ""}`}
               >
                 Contact
               </Link>
             </li>
           </ul>
 
-          <button className={styles.mobileBtn} onClick={() => setMobileOpen(true)}>
-            <Menu size={26} />
+          {/* HAMBURGER */}
+          <button className={styles.burgerBtn} onClick={() => setMobileOpen(true)} aria-label="Open menu">
+            <span className={styles.burgerLine} />
+            <span className={styles.burgerLine} />
+            <span className={`${styles.burgerLine} ${styles.burgerShort}`} />
           </button>
         </div>
       </nav>
 
-      {mobileOpen && (
-        <div className={styles.mobilePanel}>
-          <div className={styles.mobileHeader}>
-            <img src="/logo.png" alt="Unidecor" className={styles.mobileLogo} />
-            <button onClick={() => setMobileOpen(false)}>
-              <X size={22} />
-            </button>
-          </div>
+      {/* ── MOBILE FULL-SCREEN PANEL ── */}
+      <div className={`${styles.mobilePanel} ${mobileOpen ? styles.mobileOpen : ""}`}>
 
-          <div className={styles.mobileMenu}>
-            <button
-              className={styles.mobileLinkBtn}
-              onClick={() => navigateMobile("/")}
-            >
+        {/* Header — logo is now a clickable Link */}
+        <div className={styles.mobileTop}>
+          <Link href="/" className={styles.mobileLogoLink} onClick={() => setMobileOpen(false)}>
+            <img src="/logo.png" alt="Unidecor" className={styles.mobileLogo} />
+          </Link>
+          <button className={styles.mobileCloseBtn} onClick={() => setMobileOpen(false)} aria-label="Close menu">
+            <Plus size={22} style={{ transform: "rotate(45deg)" }} />
+          </button>
+        </div>
+
+        <nav className={styles.mobileNav}>
+
+          {/* HOME */}
+          <div className={styles.mobileRow}>
+            <button className={styles.mobileItem} onClick={() => navigateMobile("/")}>
               Home
             </button>
+            <ArrowUpRight size={17} className={styles.mobileStaticArrow} />
+          </div>
 
-            {/* PRODUCTS */}
+          {/* PRODUCTS */}
+          <div className={styles.mobileGroup}>
             <button
-              className={styles.mobileTrigger}
+              className={`${styles.mobileItem} ${styles.mobileItemToggle}`}
               onClick={() => setProductsOpen(!productsOpen)}
             >
-              Products
-              <ChevronDown
-                size={18}
-                className={productsOpen ? styles.rotate : ""}
-              />
+              <span>Products</span>
+              <ChevronDown size={18} className={`${styles.mobileChev} ${productsOpen ? styles.mobileChevOpen : ""}`} />
             </button>
 
-            {productsOpen && (
-              <div className={styles.mobileSub}>
-                {products.map((lvl1) => {
-                  const hasChildren = lvl1.children?.length > 0;
-                  const categoryUrl = `/products/${lvl1.slug.current}`;
+            <div className={`${styles.mobileCollapse} ${productsOpen ? styles.collapseOpen : ""}`}>
+              {products.map((lvl1) => (
+                <div key={lvl1._id} className={styles.mobileLvl1Wrap}>
+                  <div className={styles.mobileSubRow}>
+                    <button
+                      className={styles.mobileLvl1Btn}
+                      onClick={() => navigateMobile(`/products/${lvl1.slug.current}`)}
+                    >
+                      {lvl1.title}
+                    </button>
+                    {lvl1.children?.length > 0 && (
+                      <button
+                        className={styles.mobileExpandBtn}
+                        onClick={() => setActiveProduct(activeProduct === lvl1._id ? null : lvl1._id)}
+                      >
+                        <ChevronRight
+                          size={15}
+                          className={`${styles.expandChev} ${activeProduct === lvl1._id ? styles.expandOpen : ""}`}
+                        />
+                      </button>
+                    )}
+                  </div>
 
-                  return (
-                    <div key={lvl1._id}>
-                      <div className={styles.mobileRow}>
-                        <button
-                          className={styles.mobileLinkBtn}
-                          onClick={() => navigateMobile(categoryUrl)}
-                        >
-                          {lvl1.title}
-                        </button>
+                  {activeProduct === lvl1._id && (
+                    <div className={styles.mobileLvl2Wrap}>
+                      {lvl1.children.map((lvl2) => (
+                        <div key={lvl2._id}>
+                          <div className={styles.mobileSubRow}>
+                            <button
+                              className={styles.mobileLvl2Btn}
+                              onClick={() => navigateMobile(`/products/${lvl1.slug.current}/${lvl2.slug.current}`)}
+                            >
+                              {lvl2.title}
+                            </button>
+                            {lvl2.children?.length > 0 && (
+                              <button
+                                className={styles.mobileExpandBtn}
+                                onClick={() => setActiveSubProduct(activeSubProduct === lvl2._id ? null : lvl2._id)}
+                              >
+                                <ChevronRight
+                                  size={14}
+                                  className={`${styles.expandChev} ${activeSubProduct === lvl2._id ? styles.expandOpen : ""}`}
+                                />
+                              </button>
+                            )}
+                          </div>
 
-                        {hasChildren && (
-                          <button
-                            className={styles.chevronBtn}
-                            onClick={() =>
-                              setActiveProduct(
-                                activeProduct === lvl1._id ? null : lvl1._id
-                              )
-                            }
-                          >
-                            <ChevronDown
-                              size={16}
-                              className={
-                                activeProduct === lvl1._id ? styles.rotate : ""
-                              }
-                            />
-                          </button>
-                        )}
-                      </div>
-
-                      {activeProduct === lvl1._id && hasChildren && (
-                        <div className={styles.mobileSubInner}>
-                          {lvl1.children.map((lvl2) => {
-                            const hasLevel3 = lvl2.children?.length > 0;
-                            const lvl2Url = `${categoryUrl}/${lvl2.slug.current}`;
-
-                            return (
-                              <div key={lvl2._id}>
-                                <div className={styles.mobileRow}>
-                                  <button
-                                    className={styles.mobileLinkBtn}
-                                    style={{ fontSize: "14px" }}
-                                    onClick={() => navigateMobile(lvl2Url)}
-                                  >
-                                    {lvl2.title}
-                                  </button>
-
-                                  {hasLevel3 && (
-                                    <button
-                                      className={styles.chevronBtn}
-                                      onClick={() =>
-                                        setActiveSubProduct(
-                                          activeSubProduct === lvl2._id
-                                            ? null
-                                            : lvl2._id
-                                        )
-                                      }
-                                    >
-                                      <ChevronDown
-                                        size={14}
-                                        className={
-                                          activeSubProduct === lvl2._id
-                                            ? styles.rotate
-                                            : ""
-                                        }
-                                      />
-                                    </button>
-                                  )}
-                                </div>
-
-                                {activeSubProduct === lvl2._id && hasLevel3 && (
-                                  <div className={styles.mobileLevel3}>
-                                    {lvl2.children.map((lvl3) => (
-                                      <button
-                                        key={lvl3._id}
-                                        className={styles.mobileLinkBtn}
-                                        onClick={() =>
-                                          navigateMobile(
-                                            `${lvl2Url}/${lvl3.slug.current}`
-                                          )
-                                        }
-                                      >
-                                        {lvl3.title}
-                                      </button>
-                                    ))}
-                                  </div>
-                                )}
-                              </div>
-                            );
-                          })}
+                          {activeSubProduct === lvl2._id && (
+                            <div className={styles.mobileLvl3Wrap}>
+                              {lvl2.children.map((lvl3) => (
+                                <button
+                                  key={lvl3._id}
+                                  className={styles.mobileLvl3Btn}
+                                  onClick={() => navigateMobile(`/products/${lvl1.slug.current}/${lvl2.slug.current}/${lvl3.slug.current}`)}
+                                >
+                                  {lvl3.title}
+                                </button>
+                              ))}
+                            </div>
+                          )}
                         </div>
-                      )}
+                      ))}
                     </div>
-                  );
-                })}
-              </div>
-            )}
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
 
-            {/* INSPIRATION MOBILE - UPDATED SPLIT ROW */}
-            <div className={styles.mobileRowMain}>
+          {/* INSPIRATION */}
+          <div className={styles.mobileGroup}>
+            <div className={styles.mobileItemSplit}>
               <button
-                className={styles.mobileTriggerText}
+                className={`${styles.mobileItem} ${styles.mobileItemFlex}`}
                 onClick={() => navigateMobile("/inspiration")}
               >
                 Inspiration
               </button>
               <button
-                className={styles.chevronBtnMain}
+                className={styles.mobileExpandBtn}
                 onClick={() => setOpenInspiration(!openInspiration)}
               >
-                <ChevronDown
-                  size={18}
-                  className={openInspiration ? styles.rotate : ""}
-                />
+                <ChevronDown size={18} className={`${styles.mobileChev} ${openInspiration ? styles.mobileChevOpen : ""}`} />
               </button>
             </div>
 
-            {openInspiration && (
-              <div className={styles.mobileSub}>
-                {inspiration.map((item) => (
+            <div className={`${styles.mobileCollapse} ${openInspiration ? styles.collapseOpen : ""}`}>
+              {inspiration.map((item) => (
+                <div key={item._id} className={styles.mobileSubRow}>
                   <button
-                    key={item._id}
-                    className={styles.mobileLinkBtn}
-                    onClick={() =>
-                      navigateMobile(`/inspiration/${item.slug.current}`)
-                    }
+                    className={styles.mobileLvl1Btn}
+                    onClick={() => navigateMobile(`/inspiration/${item.slug.current}`)}
                   >
                     {item.title}
                   </button>
-                ))}
-              </div>
-            )}
-
-            <button
-              className={styles.mobileLinkBtn}
-              onClick={() => navigateMobile("/about-us")}
-            >
-              Our Identity
-            </button>
-            <button
-              className={styles.mobileLinkBtn}
-              onClick={() => navigateMobile("/downloads")}
-            >
-              Downloads
-            </button>
-            <button
-              className={styles.mobileLinkBtn}
-              onClick={() => navigateMobile("/contact")}
-            >
-              Contact
-            </button>
+                </div>
+              ))}
+            </div>
           </div>
+
+          <div className={styles.mobileRow}>
+            <button className={styles.mobileItem} onClick={() => navigateMobile("/about-us")}>Our Identity</button>
+            <ArrowUpRight size={17} className={styles.mobileStaticArrow} />
+          </div>
+
+          <div className={styles.mobileRow}>
+            <button className={styles.mobileItem} onClick={() => navigateMobile("/downloads")}>Downloads</button>
+            <ArrowUpRight size={17} className={styles.mobileStaticArrow} />
+          </div>
+
+          <div className={styles.mobileRow}>
+            <button className={styles.mobileItem} onClick={() => navigateMobile("/contact")}>Contact</button>
+            <ArrowUpRight size={17} className={styles.mobileStaticArrow} />
+          </div>
+        </nav>
+
+        <div className={styles.mobileFoot}>
+          <span>Premium Interior Surfaces</span>
+          <span className={styles.mobileFootDot} />
+          <span>Unidecor</span>
         </div>
-      )}
+      </div>
     </>
   );
 }
