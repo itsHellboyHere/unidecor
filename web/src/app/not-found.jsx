@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { MoveLeft, Grid, Layers, Box } from "lucide-react";
+import { MoveLeft, Grid, Layers, Box, PaintBucket } from "lucide-react";
 import styles from "@/app/css/NotFound.module.css";
+import { FaKickstarter } from "react-icons/fa";
 
 export default function NotFound() {
   return (
@@ -45,11 +46,11 @@ export default function NotFound() {
               <Link href="/products/laminates/acrylic-laminates">
                 <Layers size={16} /> <span>Acrylics</span>
               </Link>
-              <Link href="/products/wall-panel/louver-panel">
-                <Grid size={16} /> <span>Louvers</span>
+              <Link href="/products/hardware/kitchen-hardware">
+                <FaKickstarter size={16} /> <span>Kitchen</span>
               </Link>
-              <Link href="/products/laminates/pvc-laminates">
-                <Box size={16} /> <span>PVC</span>
+              <Link href="/products/paints">
+                <PaintBucket size={16} /> <span>Paints</span>
               </Link>
             </div>
           </div>

@@ -18,7 +18,7 @@ export default async function HomePage() {
 
   return (
     <main>
-      {/* {campaign && <CampaignBanner data={campaign}/>} */}
+      {campaign && <CampaignBanner data={campaign}/>}
       <Hero />
       <UnidecorPhilosophy />
        <FeaturedProducts />
