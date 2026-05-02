@@ -1,0 +1,191 @@
+/* app/downloads/Downloads.module.css */
+
+.page {
+  min-height: 80vh;
+  background: var(--bg-soft);
+  padding-bottom: 120px;
+}
+
+/* ── Header ─────────────────────────────── */
+.header {
+  background: var(--bg);
+  text-align: center;
+  padding: 80px 24px 60px;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.kicker {
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+
+.heading {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 300;
+  letter-spacing: -0.04em;
+  color: var(--text-main);
+  margin-bottom: 16px;
+}
+
+.sub {
+  font-size: 1rem;
+  color: var(--text-muted);
+  max-width: 480px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* ── Grid ────────────────────────────────── */
+.inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 32px 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.empty {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 1rem;
+  padding: 80px 0;
+}
+
+/* ── Card ────────────────────────────────── */
+.card {
+  background: var(--bg);
+  border: 1px solid var(--border-soft);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+  transform: translateY(-4px);
+}
+
+/* ── Cover ───────────────────────────────── */
+.cover {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  background: #f0f0ef;
+  overflow: hidden;
+}
+
+.coverImg {
+  object-fit: cover;
+  transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card:hover .coverImg {
+  transform: scale(1.04);
+}
+
+.coverOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.15) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.coverFallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e8e8e6;
+}
+
+.coverFallback span {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: #aaa;
+}
+
+/* ── Info ────────────────────────────────── */
+.info {
+  padding: 24px 24px 16px;
+  flex: 1;
+}
+
+.brand {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.title {
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: var(--text-main);
+  line-height: 1.3;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* ── Download Button ─────────────────────── */
+.downloadBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 0 24px 24px;
+  padding: 13px 20px;
+  background: var(--text-main);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid var(--text-main);
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.downloadBtn:hover {
+  background: transparent;
+  color: var(--text-main);
+}
+
+/* ── Responsive ──────────────────────────── */
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+}
+
+@media (max-width: 600px) {
+  .inner {
+    padding: 40px 20px 0;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .header {
+    padding: 60px 20px 40px;
+  }
+}
