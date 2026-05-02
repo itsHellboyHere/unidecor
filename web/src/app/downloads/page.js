@@ -9,6 +9,8 @@ export const metadata = {
   description: "Download product catalogues and brochures from Unidecor, HexaLam and more.",
 };
 
+export const revalidate = 0;
+
 export default async function DownloadsPage() {
   const catalogues = await sanityClient.fetch(catalogueQuery);
 
