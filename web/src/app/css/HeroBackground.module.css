@@ -1,0 +1,201 @@
+/* HeroBackground.module.css */
+
+.root {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: #1a1a1a;
+}
+
+/* ── Base wash ───────────────────────────── */
+.baseWash {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #2D1F14 0%, #0D1A1A 100%);
+}
+
+/* ── Blob left — warm amber ──────────────── */
+.blobLeft {
+  position: absolute;
+  width: 60%;
+  height: 120%;
+  left: -15%;
+  top: -10%;
+  border-radius: 50%;
+  background: radial-gradient(circle, #C4A882 0%, transparent 70%);
+  opacity: 0.65;
+  mix-blend-mode: screen;
+}
+
+/* ── Blob right — sea green ──────────────── */
+.blobRight {
+  position: absolute;
+  width: 65%;
+  height: 120%;
+  right: -15%;
+  top: 10%;
+  border-radius: 50%;
+  background: radial-gradient(circle, #4A7C6F 0%, transparent 70%);
+  opacity: 0.6;
+  mix-blend-mode: screen;
+}
+
+/* ── Center pour ─────────────────────────── */
+.centerPour {
+  position: absolute;
+  width: 18%;
+  height: 100%;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    to bottom,
+    #E8D5C0 0%,
+    #C4A882 50%,
+    transparent 100%
+  );
+  opacity: 0.75;
+  mix-blend-mode: screen;
+}
+
+/* ── Splashes ────────────────────────────── */
+.navyBlue {
+  position: absolute;
+  width: 25%;
+  height: 60%;
+  right: 5%;
+  bottom: 5%;
+  border-radius: 50%;
+  background: radial-gradient(circle, #2D3A5C 0%, transparent 70%);
+  mix-blend-mode: screen;
+}
+
+.golden {
+  position: absolute;
+  width: 20%;
+  height: 45%;
+  left: 32%;
+  top: 5%;
+  border-radius: 50%;
+  background: radial-gradient(circle, #C4956A 0%, transparent 70%);
+  mix-blend-mode: screen;
+}
+
+.dustyPink {
+  position: absolute;
+  width: 28%;
+  height: 55%;
+  left: 5%;
+  bottom: 10%;
+  border-radius: 50%;
+  background: radial-gradient(circle, #D4A5A5 0%, transparent 70%);
+  mix-blend-mode: screen;
+}
+
+.sageGreen {
+  position: absolute;
+  width: 22%;
+  height: 45%;
+  right: 8%;
+  top: 5%;
+  border-radius: 50%;
+  background: radial-gradient(circle, #7A9E87 0%, transparent 70%);
+  mix-blend-mode: screen;
+}
+
+.cherryRed {
+  position: absolute;
+  width: 15%;
+  height: 35%;
+  left: 55%;
+  bottom: 5%;
+  border-radius: 50%;
+  background: radial-gradient(circle, #A0404A 0%, transparent 70%);
+  mix-blend-mode: screen;
+}
+
+.marbleWhite {
+  position: absolute;
+  width: 30%;
+  height: 55%;
+  left: 45%;
+  top: 0%;
+  border-radius: 50%;
+  background: radial-gradient(circle, #F0EBE3 0%, transparent 70%);
+  mix-blend-mode: screen;
+}
+
+/* ── Marble veins ────────────────────────── */
+.vein1 {
+  position: absolute;
+  top: 25%;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(255,255,255,0.25) 20%,
+    rgba(255,255,255,0.15) 60%,
+    transparent 100%
+  );
+  transform: rotate(-3deg);
+  transform-origin: left center;
+}
+
+.vein2 {
+  position: absolute;
+  top: 55%;
+  left: 0;
+  width: 80%;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(255,255,255,0.15) 30%,
+    rgba(255,255,255,0.08) 70%,
+    transparent 100%
+  );
+  transform: rotate(2deg);
+  transform-origin: left center;
+}
+
+.vein3 {
+  position: absolute;
+  top: 75%;
+  left: 30%;
+  width: 70%;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(232,213,192,0.2) 40%,
+    transparent 100%
+  );
+  transform: rotate(-1.5deg);
+  transform-origin: left center;
+}
+
+/* ── Top light ───────────────────────────── */
+.lightTop {
+  position: absolute;
+  width: 60%;
+  height: 60%;
+  left: 50%;
+  top: -30%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.18) 0%, transparent 70%);
+  mix-blend-mode: screen;
+}
+
+/* ── Overlay — keeps text readable ──────── */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(0,0,0,0.55),
+    rgba(0,0,0,0.2)
+  );
+}
