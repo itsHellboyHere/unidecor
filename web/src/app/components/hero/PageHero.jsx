@@ -10,10 +10,19 @@ export default function PageHero({
   subheading,
   size = "large",
 }) {
-const heroImageUrl = image ? urlFor(image).width(1920).height(1080).url() : null;
+  const heroImageUrl = image
+    ? urlFor(image).width(1920).height(1080).url()
+    : null;
+
+  // Eyebrow — first word of heading, rest is title
+  const words = heading ? heading.split(" ") : [];
+  const eyebrow = words[0] || "";
+  const title = words.slice(1).join(" ") || heading;
 
   return (
     <section className={`${styles.hero} ${styles[size]}`}>
+
+      {/* Background Image */}
       {heroImageUrl && (
         <Image
           src={heroImageUrl}
@@ -24,12 +33,46 @@ const heroImageUrl = image ? urlFor(image).width(1920).height(1080).url() : null
         />
       )}
 
-      <div className={styles.overlay} />
+      {/* Layered overlays for depth */}
+      <div className={styles.overlayBase} />
+      <div className={styles.overlayVignette} />
+      <div className={styles.overlayBottom} />
 
+      {/* Content */}
       <div className={styles.content}>
-        <h1>{heading}</h1>
-        {subheading && <p>{subheading}</p>}
+
+        {/* Left vertical accent line */}
+        <div className={styles.accentLine} />
+
+        <div className={styles.textBlock}>
+
+          {/* Eyebrow */}
+          {eyebrow && (
+            <span className={styles.eyebrow}>
+              <span className={styles.eyebrowDash} />
+              {eyebrow}
+            </span>
+          )}
+
+          {/* Title */}
+          <h1 className={styles.title}>
+            {title}
+          </h1>
+
+          {/* Gold divider line */}
+          <div className={styles.divider} />
+
+          {/* Subtitle */}
+          {subheading && (
+            <p className={styles.subtitle}>{subheading}</p>
+          )}
+
+        </div>
       </div>
+
+      {/* Grain texture overlay */}
+      <div className={styles.grain} />
+
     </section>
   );
 }

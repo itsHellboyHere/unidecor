@@ -1,87 +1,263 @@
+/* ============================================================
+   PageHero.module.css
+   Sticky pull-up · Left-anchored · Luxury editorial
+   ============================================================ */
+
+/* ── Hero Shell ── */
 .hero {
   position: sticky;
   top: var(--navbar-height);
   width: 100%;
-  /* padding-top: 80px; */
   overflow: hidden;
   color: #fff;
   display: flex;
-  align-items: center;
- /* padding-top: 72px; */
- z-index: 1;
-  
-  
-}
-/* .hero::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 120px;
-  background: linear-gradient(
-    to bottom,
-    rgba(0,0,0,0.45),
-    rgba(0,0,0,0)
-  );
+  align-items: flex-end;           /* text anchored to bottom */
   z-index: 1;
-} */
+}
 
-/* HEIGHT VARIANTS */
-.large { height: 64vh; }
-.medium { height: 48vh; }
-.compact { height: 36vh; }
+/* ── Size Variants ── */
+.large  { height: 68vh; }
+.medium { height: 50vh; }
+.compact { height: 38vh; }
 
-/* IMAGE */
+/* ── Background Image ── */
 .image {
   object-fit: cover;
-  transform: scale(1.05);
-  animation: zoomOut 1.2s ease forwards;
+  object-position: center;
+  transform: scale(1.06);
+  animation: zoomOut 1.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  will-change: transform;
 }
 
-/* OVERLAY */
-.overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.38);
-}
-
-/* CONTENT */
-.content {
-  position: relative;
-  max-width: 1320px;
-  padding: 0 36px;
-  margin: 0 auto;
-  animation: fadeUp .8s ease forwards;
-}
-
-.content h1 {
-  font-family: var(--font-cinzel);
-  font-size: clamp(36px, 4vw, 56px);
-  font-weight: 600;
-  line-height: 1.1;
-}
-
-.content p {
-  margin-top: 12px;
-  max-width: 620px;
-  font-size: 16px;
-  line-height: 1.6;
-  opacity: .9;
-}
-
-/* ANIMATIONS */
 @keyframes zoomOut {
   to { transform: scale(1); }
+}
+
+/* ── Overlays ── */
+
+/* Base dark tint */
+.overlayBase {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.28);
+  z-index: 1;
+}
+
+/* Vignette — darkens edges */
+.overlayVignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 40%,
+    rgba(0, 0, 0, 0.45) 100%
+  );
+  z-index: 2;
+}
+
+/* Bottom gradient — text legibility */
+.overlayBottom {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.72) 0%,
+    rgba(0, 0, 0, 0.18) 45%,
+    transparent 100%
+  );
+  z-index: 3;
+}
+
+/* ── Grain texture ── */
+.grain {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  opacity: 0.03;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 128px 128px;
+}
+
+/* ── Content ── */
+.content {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 48px 52px;
+  display: flex;
+  align-items: flex-end;
+  gap: 24px;
+  animation: fadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  opacity: 0;
 }
 
 @keyframes fadeUp {
   from {
     opacity: 0;
-    transform: translateY(14px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* ── Left Accent Line ── */
+.accentLine {
+  flex-shrink: 0;
+  width: 1.5px;
+  height: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    #b08d57,
+    transparent
+  );
+  animation: lineGrow 1s 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  align-self: stretch;
+  min-height: 80px;
+}
+
+@keyframes lineGrow {
+  from { height: 0; opacity: 0; }
+  to   { height: 100%; opacity: 1; }
+}
+
+/* ── Text Block ── */
+.textBlock {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Eyebrow ── */
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-primary);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  opacity: 0;
+  color: #b08d57;
+  animation: fadeIn 0.6s 0.3s ease forwards;
+  margin-bottom: 14px;
+}
+
+.eyebrowDash {
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: #b08d57;
+  flex-shrink: 0;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+/* ── Title ── */
+.title {
+  font-family: var(--font-display, var(--font-accent));
+  font-size: clamp(2.8rem, 5.5vw, 6rem);
+  font-weight: 700;
+  font-style: italic;
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  margin: 0;
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 1.0) 0%,
+    rgba(255, 255, 255, 0.55) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  opacity: 0;
+  animation: slideUp 0.8s 0.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Gold Divider ── */
+.divider {
+  width: 0;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    #b08d57,
+    rgba(176, 141, 87, 0)
+  );
+  margin: 18px 0;
+  animation: dividerGrow 0.8s 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes dividerGrow {
+  to { width: 80px; }
+}
+
+/* ── Subtitle ── */
+.subtitle {
+  font-family: var(--font-primary);
+  font-size: 0.95rem;
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.7;
+  opacity: 0;
+  max-width: 480px;
+  letter-spacing: 0.01em;
+  color: rgba(255, 255, 255, 0.75);
+  animation: fadeIn 0.8s 0.6s ease forwards;
+}
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 768px) {
+  .large  { height: 60vh; }
+  .medium { height: 46vh; }
+  .compact { height: 34vh; }
+
+  .content {
+    padding: 0 24px 36px;
+    gap: 16px;
+  }
+
+  .accentLine {
+    min-height: 60px;
+  }
+
+  .eyebrow {
+    font-size: 0.6rem;
+    letter-spacing: 0.22em;
+    margin-bottom: 10px;
+  }
+
+  .title {
+    font-size: clamp(2rem, 8vw, 3.2rem);
+    line-height: 1.0;
+  }
+
+  .divider {
+    margin: 14px 0;
+  }
+
+  .subtitle {
+    font-size: 0.85rem;
+    max-width: 100%;
   }
 }

@@ -1,0 +1,81 @@
+/* PageLoader.module.css */
+
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #0d0d0d;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  transition: opacity 0.7s ease, visibility 0.7s ease;
+  opacity: 1;
+  visibility: visible;
+}
+
+.loader.hide {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* ── Logo ── */
+.logoWrap {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.char {
+  font-family: var(--font-display, "Cormorant Garamond", serif);
+  font-weight: 700;
+  font-size: clamp(2.2rem, 6vw, 4.5rem);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1px #1a5c3a;        /* green outline */
+  opacity: 0;
+  transform: translateY(12px);
+  animation: charIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Gold fill on alternate letters — matches logo style */
+.char:nth-child(odd) {
+  -webkit-text-stroke: 1px #b08d57;        /* gold outline */
+}
+
+@keyframes charIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Bottom progress line ── */
+.line {
+  width: 0%;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    #b08d57,
+    transparent
+  );
+  animation: lineGrow 2.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes lineGrow {
+  to {
+    width: 160px;
+  }
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  .char {
+    font-size: clamp(1.8rem, 9vw, 3rem);
+    letter-spacing: 0.08em;
+  }
+}

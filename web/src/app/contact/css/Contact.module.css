@@ -294,3 +294,227 @@
     top: auto;
   }
 }
+
+
+/* ============================================================
+   APPEND TO BOTTOM OF Contact.module.css
+   Hero + Map additions — existing styles untouched
+   ============================================================ */
+
+/* ── Contact Hero ── */
+.hero {
+  position: relative;
+  height: 38vh;
+  min-height: 280px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  color: #fff;
+}
+
+.heroBg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.05);
+  animation: contactZoom 1.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes contactZoom {
+  to { transform: scale(1); }
+}
+
+.heroOverlayBase {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 1;
+}
+
+.heroOverlayBottom {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.7) 0%,
+    rgba(0, 0, 0, 0.1) 50%,
+    transparent 100%
+  );
+  z-index: 2;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 3;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 40px 44px;
+  animation: contactFadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  opacity: 0;
+}
+
+@keyframes contactFadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.heroEyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-primary);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #bfac8f;
+  margin-bottom: 12px;
+}
+
+.heroEyebrowDash {
+  display: inline-block;
+  width: 20px;
+  height: 1px;
+  background: #b08d57;
+  flex-shrink: 0;
+}
+
+.heroTitle {
+  font-family: var(--font-primary, var(--font-accent));
+  font-size: clamp(5.5rem, 5.5vw, 5.2rem);
+  font-weight: 1000;
+  font-style: normal;
+  line-height: 1.0;
+  color: #fff;
+  -webkit-text-fill-color: #fff;      /* override gradient */
+  background: none;
+  -webkit-background-clip: unset;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.5);
+  margin: 0;
+}
+
+.heroDivider {
+  width: 48px;
+  height: 1px;
+  background: linear-gradient(to right, #b08d57, transparent);
+  margin: 14px 0;
+}
+
+.heroSubtitle {
+  font-family: var(--font-primary);
+  font-size: 0.9rem;
+  font-weight: 300;
+  font-style: italic;
+  opacity: 0.7;
+  line-height: 1.6;
+}
+
+/* ── Map Section ── */
+.mapSection {
+  background: #f9f9f8;
+  padding: 80px 0 100px;
+}
+
+.mapInner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.mapHeader {
+  margin-bottom: 32px;
+}
+
+.mapEyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-primary);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #b08d57;
+  margin-bottom: 10px;
+}
+
+.mapEyebrowDash {
+  display: inline-block;
+  width: 20px;
+  height: 1px;
+  background: #b08d57;
+  flex-shrink: 0;
+}
+
+.mapTitle {
+  font-family: var(--font-display, var(--font-accent));
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 700;
+  font-style: italic;
+  color: var(--text-main);
+  line-height: 1.0;
+  margin-bottom: 10px;
+}
+
+.mapAddress {
+  font-family: var(--font-primary);
+  font-size: 0.88rem;
+  font-weight: 300;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.mapWrap {
+  position: relative;
+  width: 100%;
+  height: 420px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--border-soft);
+}
+
+.mapOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  cursor: pointer;
+}
+
+.mapIframe {
+  width: 100%;
+  height: 100%;
+  display: block;
+  filter: grayscale(10%) contrast(1.02);
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  .hero {
+    height: 44vh;
+    min-height: 260px;
+  }
+
+  .heroContent {
+    padding: 0 24px 36px;
+  }
+
+  .heroTitle {
+    font-size: clamp(1.8rem, 7vw, 2.8rem);
+  }
+
+  .mapSection {
+    padding: 56px 0 72px;
+  }
+
+  .mapInner {
+    padding: 0 20px;
+  }
+
+  .mapWrap {
+    height: 300px;
+    border-radius: 14px;
+  }
+}

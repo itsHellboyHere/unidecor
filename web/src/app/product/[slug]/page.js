@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { sanityClient } from "@/app/lib/sanity.client";
 import { productDetailQuery } from "@/app/lib/queries/productDetailQuery";
-import ProductDescription from "@/app/product/components/ProductDescrption";
+import ProductDescription from "../components/ProductDescription";
 import { relatedProductsQuery } from "@/app/lib/queries/realtedProductsQuery";
 
 

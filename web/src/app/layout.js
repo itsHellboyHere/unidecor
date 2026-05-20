@@ -1,5 +1,5 @@
 // src/app/layout.js
-import { Manrope, Playfair_Display } from "next/font/google";
+import { Manrope, Playfair_Display,Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar.server";
 import WhatsAppFloat from "./components/WhatsAppFloat";
@@ -12,7 +12,14 @@ import CustomCursor from "./components/CustomCursor";
 const manrope = Manrope({
   subsets: ["latin"],
   variable: "--font-primary",
-  weight: ["300", "400", "500", "600"],
+   weight: ["300", "400", "500", "600", "700", "800"],
+});
+
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  variable: "--font-display",
+  weight: ["300", "400", "500", "600", "700"],
+  style: ["normal", "italic"],
 });
 
 const playfair = Playfair_Display({
@@ -69,7 +76,7 @@ export default async function RootLayout({ children }) {
   const navigation = await getNavbarData();
   return (
     <html lang="en">
-      <body className={`${manrope.variable} ${playfair.variable}`}>
+      <body className={`${manrope.variable} ${playfair.variable} ${cormorant.variable}`}>
    
        <Navbar />
        {/* <CampaignBanner/> */}

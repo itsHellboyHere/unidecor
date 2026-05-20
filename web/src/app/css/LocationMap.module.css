@@ -1,154 +1,242 @@
+/* ============================================================
+   LocationMap.module.css — Unidecor
+   ============================================================ */
+
 .section {
-  padding: 80px 0; /* Slightly reduced for better flow */
   background: #fff;
-  border-top: 1px solid #eee;
-  position: relative;
-  z-index: 2;
+  padding: 100px 0;
 }
 
 .inner {
-  max-width: 1440px;
+  max-width: 1320px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 36px;
 }
 
+/* ── Container ── */
 .container {
   display: grid;
-  grid-template-columns: 1fr 1.5fr; 
-  background: #fbfbfb;
-  border-radius: 4px;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 0;
+  border-radius: 24px;
   overflow: hidden;
-  border: 1px solid #eee;
-  min-height: 520px; 
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--border-soft);
+  min-height: 520px;
 }
 
+/* ── Info Side ── */
 .infoSide {
-  padding: 50px;
+  padding: 56px 52px;
+  background: #fff;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  gap: 36px;
 }
 
+/* Tag / Eyebrow */
 .tag {
-  font-size: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-primary);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
-  letter-spacing: 0.15em;
-  color: #888;
-  font-weight: 700;
-  display: block;
-  margin-bottom: 12px;
+  color: #b08d57;
+  margin-bottom: 14px;
 }
 
+.tagDash {
+  display: inline-block;
+  width: 20px;
+  height: 1px;
+  background: #b08d57;
+  flex-shrink: 0;
+}
+
+/* Title */
 .title {
-  font-size: 2.5rem;
-  font-weight: 300;
-  letter-spacing: -0.02em;
-  margin-bottom: 24px;
-  color: #111;
+  font-family: var(--font-display, var(--font-accent));
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 700;
+  font-style: italic;
+  line-height: 1.0;
+  color: var(--text-main);
+  margin-bottom: 0;
 }
 
+/* Gold divider */
+.divider {
+  width: 48px;
+  height: 1px;
+  background: linear-gradient(to right, #b08d57, transparent);
+  margin: 18px 0;
+}
+
+/* Description */
 .description {
-  color: #666;
-  line-height: 1.6;
-  font-size: 1.1rem;
-  margin-bottom: 48px;
-  max-width: 400px;
+  font-family: var(--font-primary);
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--text-muted);
+  max-width: 340px;
 }
 
+/* ── Details ── */
 .details {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.detailRow {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 24px;
-  margin-bottom: 40px;
-}
-.detailItem:first-child {
-  grid-column: span 2;
 }
 
-.detailItem label {
-  display: block;
-  font-size: 9px;
-  font-weight: 800;
+.detailItem {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label {
+  font-family: var(--font-primary);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #111;
-  margin-bottom: 8px;
-  letter-spacing: 0.05em;
+  color: #b08d57;
 }
 
-.detailItem address, .detailItem p {
+.address {
   font-style: normal;
-  font-size: 15px;
-  line-height: 1.5;
-  color: #444;
+  font-family: var(--font-primary);
+  font-size: 0.88rem;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--text-main);
 }
 
-.directionsBtn {
-  width: fit-content;
-  padding: 16px 32px;
-  background: #111;
-  color: #fff;
-  text-decoration: none;
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  transition: all 0.3s ease;
-  text-align: center;
+.detailItem p {
+  font-family: var(--font-primary);
+  font-size: 0.88rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--text-main);
 }
 
-.directionsBtn:hover {
-  background: #333;
+.closed {
+  color: var(--text-muted) !important;
 }
 
-.mapSide {
-  position: relative;
-  background: #eee;
-  min-height: 100%;
-}
-
-.iframe {
-  filter: grayscale(0.2) contrast(1.1);
-  width: 100%;
-  height: 100%;
-}
-
+/* Contact links */
 .contactLink {
+  color: var(--text-main);
   text-decoration: none;
-  color: #444;
-  transition: color 0.3s ease;
-  display: inline-block;
+  transition: color 0.2s ease;
+  font-size: 0.88rem;
 }
 
 .contactLink:hover {
-  color: #111; 
-  text-decoration: underline;
-  text-underline-offset: 4px;
+  color: #b08d57;
 }
 
-/* Responsive */
-@media (max-width: 1024px) {
-  .container { 
-    grid-template-columns: 1fr; 
-    min-height: auto;
+/* ── Directions Button ── */
+.directionsBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  width: fit-content;
+  padding: 13px 28px;
+  background: var(--text-main);
+  color: #fff;
+  font-family: var(--font-primary);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 100px;
+  transition: background 0.3s ease, transform 0.3s ease;
+  margin-top: auto;
+}
+
+.directionsBtn:hover {
+  background: #b08d57;
+  transform: translateX(4px);
+}
+
+/* ── Map Side ── */
+.mapSide {
+  position: relative;
+  min-height: 480px;
+}
+
+/* Clickable overlay — intercepts map clicks to open Maps app */
+.mapOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  cursor: pointer;
+}
+
+.iframe {
+  width: 100%;
+  height: 100%;
+  display: block;
+  filter: grayscale(15%) contrast(1.02);
+}
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 900px) {
+  .section {
+    padding: 64px 0;
   }
-  .infoSide { padding: 40px; }
-  .mapSide { height: 350px; }
-  .details { grid-template-columns: 1fr; }
-}
 
-@media (max-width: 768px) {
-  .section { padding: 40px 0; }
-  .inner { padding: 0 16px; }
-  .title { font-size: 1.8rem; }
-  .description { margin-bottom: 32px; font-size: 1rem; }
-  .infoSide { padding: 32px 24px; }
-  .mapSide { height: 300px; } 
-  
+  .inner {
+    padding: 0 20px;
+  }
+
+  .container {
+    grid-template-columns: 1fr;
+    border-radius: 18px;
+    min-height: unset;
+  }
+
+  .infoSide {
+    padding: 36px 28px;
+    gap: 24px;
+  }
+
+  .detailRow {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .description {
+    max-width: 100%;
+  }
+
+  .mapSide {
+    min-height: 300px;
+  }
+
   .directionsBtn {
-    width: 100%; 
+    width: 100%;
+    justify-content: center;
   }
-  .contactLink {
-    padding: 8px 0; 
-    font-weight: 500;
+}
+
+@media (max-width: 480px) {
+  .detailRow {
+    grid-template-columns: 1fr;
   }
 }
